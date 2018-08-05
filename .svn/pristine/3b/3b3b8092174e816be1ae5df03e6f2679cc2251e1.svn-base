@@ -1,0 +1,259 @@
+<div class="login" ng-controller="loginCtr">
+
+	<!--登录注册页面-->
+
+	<div id="" ng-show="showLogin=='1'">
+		<div class="" style="position: absolute;top: 50px;left: 80px;">
+			<img src="img/ktgc/icon-pc1x.png" style="float: left;margin-top: 5px;"/>
+			<div class="" style="float: left;font-size: 36px;color: #fff;margin-left: 15px;">课堂教学观测与评价系统</div>
+		</div>
+		<img src="img/login/bg2.jpg" alt="" style="position: absolute;top:50%;transform:translate(0,-50%);left:15%;" />
+		<div class="positionC">
+			<p class="loginTitle" style="opacity: 0;filter:alpha(opacity=0);">课堂教学观测与评价系统</p>
+			<div class="loginContent" ng-show="forget=='1'">
+				<ul>
+					<li class="active" ng-click="loginAsign('登录')" ng-class="{active:loginasign=='登录'}">登录</li>
+					<li ng-click="loginAsign('注册')" ng-class="{active:loginasign=='注册'}">注册</li>
+				</ul>
+				<div class="" ng-show="loginasign=='登录'"ng-keydown="keySearch($event)">
+					<p class="user" style="opacity: 0;filter:alpha(opacity=0);">用户名</p>
+					<div id="" style="position: relative;">
+						<input type="text" name="" placeholder="请输入手机号" maxlength="110" class="userName" ng-model="userName" ng-change="userNameChange()" />
+						<img src="img/login/user.png" style="top: 6px;left:55px;position: absolute;">
+					</div>
+					<p class="pass pass1" style="opacity: 0;filter:alpha(opacity=0);">密码</p>
+					<div id="" style="position: relative;">
+						<input type="password" name="" placeholder="请输入{{keywords}}" class="password" ng-model="userPassword"  ng-change="passwordNameChange1()"/>
+						<img src="img/login/pass.png" style="top: 7px;left:55px;position: absolute;">
+					</div>
+					<div class="loginCheck">
+						<!--<div class="loginCheck1 loginCheckY" ng-click="getCode($event,name)">验证码登录</div>-->
+						<div class="loginCheck1 loginCheckY" style="position: relative;"><input id="jzmm" type="checkbox" name="" value="" style="vertical-align: middle;" /><label for="jzmm" style="margin-left:10px;color: #838C95;position: absolute;top: 2px;">记住密码</label></div>
+						<div class="loginCheck2" ng-click="forgetFunc()">忘记密码</div>
+					</div>
+					<div class="loginFooter" ng-click="loginbtn6()">立即{{loginasign}}</div>
+					<div class="getCode getCode1">
+						获取验证码
+					</div>
+					<p class="errorContent21" style="position: absolute;top:258px;left:75px;width: 300px;font-size:12px;color: red;display: none;">密码长度6-16位，支持数字，字母，字符</p>
+					<p class="errorContent111" style="position: absolute;top:175px;left:220px;width: 200px;font-size:12px;color: red;display: none;">手机号不正确</p>
+					<img src="img/login/error.png" style="top: 140px;left:255px;position: absolute;width: 32px;height: 32px;display: none;">
+					<img src="img/login/error.png" style="top: 220px;left:255px;position: absolute;width: 32px;height: 32px;display: none;">
+					<p class="errorContent" style="position: absolute;top:255px;left:180px;width: 200px;font-size:12px;color: red;display: none;">用户名或密码不正确</p>
+				</div>
+				<div class="" ng-show="loginasign=='注册'"ng-keydown="keySearch1($event)">
+					<p class="user" style="opacity: 0;filter:alpha(opacity=0);">手机号</p>
+					<div id="" style="position: relative;">
+						<input type="text" name="" placeholder="请输入手机号" maxlength="11" class="userName" ng-model="phoneName" ng-change="phoneNameChange()"
+						/>
+						<img src="img/login/user.png" style="top: 6px;left:55px;position: absolute;">
+					</div>
+					<p class="pass" style="opacity: 0;filter:alpha(opacity=0);">验证码</p>
+					<div id="" style="position: relative;">
+						<input type="text" name="" placeholder="请输入验证码" maxlength="6" class="password"  onKeyUp="value=value.replace(/[^\d]/g,'')" ng-model="verificationCode" />
+						<img src="img/login/code.png" style="top: 5px;left:55px;position: absolute;">
+					</div>
+					<p class="pass" style="opacity: 0;filter:alpha(opacity=0);">密码</p>
+					<div id="" style="position: relative;">
+						<input type="password" name="" placeholder="请输入密码" class="password" ng-model="passwordName" ng-change="passwordNameChange()"
+						/>
+						<img src="img/login/pass.png" style="top: 7px;left:55px;position: absolute;">
+					</div>
+					<div class="loginCheck">
+						<!--<div class="loginCheck1">账号登录</div>-->
+
+					</div>
+					<div class="loginFooter" ng-click="loginbtn2()">立即{{loginasign}}</div>
+					<p class="errorContent1" style="position: absolute;top:175px;left:220px;width: 200px;font-size:12px;color: red;display: none;">手机号不正确</p>
+					<p class="errorContent3" style="position: absolute;top:255px;left:205px;width: 200px;font-size:12px;color: red;display: none;">验证码不正确</p>
+					<p class="errorContent2" style="position: absolute;top:335px;left:75px;width: 300px;font-size:12px;color: red;display: none;">密码长度6-16位，支持数字，字母，字符</p>
+					<div class="getCode getCodeSet" style="display: block;" ng-click="registerCode()">
+						获取验证码
+					</div>
+
+					<!--<img src="img/login/pass.png" style="top: 311px;left:55px;position: absolute;">-->
+				</div>
+
+				<div class="loginLine"></div>
+				<div class="loginNav">
+					<!--<a href="javascript:">关于我们</a> &nbsp;&nbsp;| &nbsp;&nbsp;-->
+					<a href="javascript:">联系我们</a>
+				</div>
+
+			</div>
+			
+			<!--忘记密码-->
+			<div class="loginContent" ng-show="forget=='2'">
+				<ul>
+					<li class="active" style="width: 100%;">忘记密码</li>
+				</ul>
+				<div ng-show="forgetFinish=='1'">
+					<p class="user" style="opacity: 0;filter:alpha(opacity=0);">手机号</p>
+					<div id="" style="position: relative;">
+						<input type="text" name="" placeholder="请输入手机号" maxlength="11" class="userName" ng-model="phoneNameForget" ng-change="phoneNameChangeForget()"
+						/>
+						<img src="img/login/user.png" style="top: 6px;left:55px;position: absolute;">
+					</div>
+					<p class="pass" style="opacity: 0;filter:alpha(opacity=0);">验证码</p>
+					<div id="" style="position: relative;">
+						<input type="text" name="" placeholder="请输入验证码" maxlength="6" class="password"  onKeyUp="value=value.replace(/[^\d]/g,'')" ng-model="verificationCodeForget" />
+						<img src="img/login/code.png" style="top: 5px;left:55px;position: absolute;">
+					</div>
+					<p class="pass" style="opacity: 0;filter:alpha(opacity=0);">密码</p>
+					<div id="" style="position: relative;">
+						<input type="password" name="" placeholder="请输入新密码" class="password" ng-model="passwordNameForget" ng-change="passwordNameChangeForget()"
+						/>
+						<img src="img/login/pass.png" style="top: 7px;left:55px;position: absolute;">
+					</div>
+					<div class="loginCheck">
+					</div>
+					<div class="loginFooter">
+						<div class="loginFooterF1" ng-click="loginFooterF1()">放弃</div>
+						<div class="loginFooterF2" ng-click="loginFooterF2()">重置密码</div>
+					</div>
+					<p class="errorContent1_1" style="position: absolute;top:175px;left:220px;width: 200px;font-size:12px;color: red;display: none;">手机号不正确</p>
+					<p class="errorContent3_1" style="position: absolute;top:255px;left:205px;width: 200px;font-size:12px;color: red;display: none;">验证码不正确</p>
+					<p class="errorContent2_1" style="position: absolute;top:335px;left:75px;width: 300px;font-size:12px;color: red;display: none;">密码长度6-16位，支持数字，字母，字符</p>
+					<div class="getCode getCodeSet1" style="display: block;" ng-click="registerCode1()">
+						获取验证码
+					</div>					
+				</div>
+				<div class="" ng-show="forgetFinish=='2'" style="height: 300px;position: relative;width: 100%;">
+					<img src="img/login/register1.png" style="display: block;margin: 0 auto;margin-top: 100px;"/>
+					<p style="width: 100%;text-align: center;font-size: 16px;margin-top: 10px;">密码重置成功！</p>
+					<div class="loginFooter" style="position: absolute;bottom: 0;width: 100%;" ng-click="returnDelu()">返回登录</div>
+				</div>
+				
+				<div style="width: 100%;height: 5px;position: absolute;background: #FFB430;top: 90px;transition: left 1s;left: 0;"></div>
+			</div>
+			
+			<div class="loginNav">
+				<!--<a href="javascript:">关于我们</a> &nbsp;&nbsp;| &nbsp;&nbsp;-->
+				<a href="javascript:">联系我们</a>
+			</div>			
+		</div>
+
+		<div class="loginTitle2">
+			©2018 江西省教师质量监测、评估与服务协同创新中心
+		</div>
+		<div class="loginTitle3">
+			九次方大数据集团技术支持
+		</div>
+	</div>
+
+	<!--注册填完信息1-->
+	<div class="register" ng-show="showLogin=='2'">
+		<div class="registerTitle1">
+			注册成功
+		</div>
+		<img src="img/login/register1.png" style="margin: 5% auto;display: block;" />
+		<p class="registerP1">为了获得更好的使用体验，需要您进一步完善个人信息！</p>
+		<div class="registerBtn1" ng-click="loginbtn3()">立即完善</div>
+		<div class="loginNav">
+			<!--<a href="javascript:;">关于我们</a> &nbsp;&nbsp;| &nbsp;&nbsp;-->
+			<a href="javascript:;">联系我们</a>
+		</div>
+	</div>
+
+	<!--注册填完信息2-->
+	<div class="register1" ng-show="showLogin=='3'">
+		<div class="registerTitle1">
+			信息完善
+		</div>
+		<div class="teacherCheck">
+			<!--<div class="department" ng-click="teacherCheck('2')" ng-class="{active:teachercheck=='2'}">
+				<img src="img/login/black_ground.png" style="display: block;margin: 0 auto;margin-top:10px;" />
+				<p class="">管理部门</p>
+			</div>-->
+			<div class="teacher active" style="margin: 0 auto;" ng-click="teacherCheck('1')" ng-class="{active:teachercheck=='1'}">
+				<img src="img/login/black_person.png" style="display: block;margin: 0 auto;margin-top:10px;" />
+				<p class="">老师</p>
+			</div>
+
+		</div>
+
+		<div class="form1" ng-show="teachercheck=='1'">
+			<div  style="max-height:382px;overflow:auto;">
+				<form action="" method="post">
+					<label for="">姓名</label>
+					<br>
+					<input type="text" name="name" id="name" placeholder="您的真实姓名" maxlength="20"/>
+					<br>
+					<div style="overflow: hidden; margin-top: 10px;">
+							<div class="blank-icon fr"></div>
+						<div  style="float: right;">
+							<label for="">学校</label>
+							<br>
+							<select name=""  ng-model="schoolInit" ng-init="schoolInit='请选择学校'">
+								<option value="请选择学校">请选择学校</option>
+								<option value="{{item.code}}" ng-repeat="item in schoolData">{{item.name}}</option>
+							</select>
+
+						</div>
+						<div  style="float: left;">
+							<label for="">区域</label>
+							<br>
+							<div class="selUp selUp2" ng-click="selUp2()">学校所在区域</div>
+							<div class="selUpDailog selUpDailog2" ng-show="selUpDailog2==true">
+								<div class="selUpDailogImg"></div>
+								<div class="selUpDailogScroll" id="selUpDailogScroll1">
+									<div class="toProvince" data="{{provinceLength}}" dataId="{{item.cityCode}}" ng-repeat="item in provinceList" ng-click="provinceClick($index,$event)"
+									    ng-class="{active:blueClick{{$index}}==true}" class="province{{$index}}">
+										{{item.cityName}}
+									</div>
+								</div>
+							</div>
+							<div class="jsTop jsTop1" ng-show="showHide==true" style="top:{{boxTop}}px;left:{{boxLeft}}px;">
+								<div class="toProvince" data="{{cityLength}}" dataId="{{item.cityCode}}" ng-class="{active:blueClickc{{$index}}==true}" ng-repeat="item in cityList"
+								    ng-click="cityClick($index,$event)">
+									{{item.cityName}}
+								</div>
+							</div>
+
+							<div class="jsTop jsTop2" ng-show="showHide1==true" style="top:{{boxTop}}px;left:{{boxLeft1}}px;">
+								<div class="toProvince" data="{{areaLength}}" dataId="{{item.cityCode}}" ng-class="{active:blueClicka{{$index}}==true}" ng-repeat="item in areaList"
+								    ng-click="areaClick($index,$event)">
+									{{item.cityName}}
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="sub1" ng-click="dailogCheck()">
+				完成
+			</div>
+		</div>
+
+		<div class="loginNav">
+			<!--<a href="javascript:;">关于我们</a> &nbsp;&nbsp;| &nbsp;&nbsp;-->
+			<a href="javascript:;">联系我们</a>
+		</div>
+	</div>
+
+	<!--注册填完信息3-->
+	<div class="register" ng-show="showLogin=='4'">
+		<div class="registerTitle1">
+			注册完成
+		</div>
+
+		<p class="registerP1" style="margin-top: 120px;">个人信息已完善成功，请等待审核！</p>
+		<div class="registerBtn1" ng-click="loginbtn5()">返回登录页</div>
+	</div>
+
+	<!--弹出窗-->
+	<div class="dailogUp" ng-show="dailogcheck==true">
+		<div class="dailogUpContent">
+			<p>未保存角色信息填写，是否确认切换角色</p>
+			<p>重新填写身份信息？</p>
+			<div class="dailogUpBtn">
+				<div class="dailogUpBtn2" ng-click="loginbtn4()">放弃切换</div>
+				<div class="dailogUpBtn1" ng-click="checkAdmin()">确认切换</div>
+			</div>
+			<div class="dailogClose" ng-click="closeDailog()">
+
+			</div>
+		</div>
+	</div>
+
+</div>

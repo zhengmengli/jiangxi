@@ -1,0 +1,30 @@
+{
+    "status":1,
+    "info":"",
+    "data":[
+        {
+            "id":1,
+            "code":"gw",
+            "name":"小学",
+            "provinceCode":"1",
+            "cityCode":"1",
+			"districtCode":"1"
+        },
+        {
+            "id":2,
+            "code":"gw",
+            "name":"高级中学",
+            "provinceCode":"1",
+            "cityCode":"1",
+			"districtCode":"1"
+ 		},
+        {
+            "id":3,
+            "code":"gw",
+            "name":"初级中学",
+            "provinceCode":"1",
+            "cityCode":"1",
+			"districtCode":"1"
+ 		}
+    ]
+}

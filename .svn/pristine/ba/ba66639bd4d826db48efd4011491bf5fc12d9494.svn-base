@@ -1,0 +1,51 @@
+.pjbg,.pjbg table{
+	width: 100%;
+}
+.selUpDailogCheck .active{
+	background: #1E70E9;
+}
+.selUpDailogCheck div .active{
+	color: #fff;
+}
+
+.pjbg table tr td{
+	/*width:10%;*/
+	height: 60px;
+	border:none;
+	font-family: PingFangSC-Semibold;
+	font-size: 14px;
+	color: #434549;
+	letter-spacing: 0;
+	text-align: center;
+}
+.pjbg table tr{
+	border: 1px solid #eee;
+	height: 60px;
+}
+
+.pjbg table tr:nth-child(odd){
+	background: #F0F1F1;
+}
+/*.pjbg table thead .active{
+	background: url(../img/pjbg/ld.png)no-repeat 87% center;
+}*/
+.pjbgFooter{
+	width: 100%;
+	background: #fff;
+	min-height: 200px;
+}
+.jsTop{
+	position:absolute;
+	z-index:99999;
+	width: 150px;
+	height: 150px;
+	background: #fff;
+	border: 1px solid #DDDEE1;
+	overflow: auto;
+	/*box-shadow: ;*/
+}
+.jsTop .active{
+	background: #1E70E9;
+	color: #fff;	
+}
+

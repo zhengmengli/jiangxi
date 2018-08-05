@@ -1,0 +1,18 @@
+<div  class="home" style="min-height: 100%;background: #fff;" ng-controller="aboutUsCtr">
+    <div class="top">
+        <div class="tabset">
+            <div class="add-title">关于我们</div>
+            <div class="add-btn orange position" ng-click="goBack()">返回</div>
+        </div>
+    </div>
+    <div class="contain1">
+    	<div class="add-class">
+			
+			<img src="img/mainBg.png" style="display:block;width: 474px;height: 189px;margin: 100px auto;"/>
+			<p style="font-size: 20px;font-weight: bold;">关于我们</p>
+			<p style="font-size: 16px;margin-top: 10px;">课堂观测是江西省质量检测、评估与服务协调创新中心针对中小学教学行为、教学质量进行全面测评的一套测评系统。</p>
+    	</div>
+    </div>
+    <div ng-include="'html/blocks/footer.html'" class="foot">
+    </div>
+</div>

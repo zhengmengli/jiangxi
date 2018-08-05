@@ -1,0 +1,18 @@
+.contain1{
+	padding-left: 26%;	
+	padding-right: 26%;	
+	padding-top: 40px;
+}
+.add-class .inpFont{
+	line-height: 35px;
+	margin-right:10px;
+	margin-left:15px;
+}
+.add-class .inpFont1{
+	margin-bottom: -20px;
+}
+.add-class .form-box{
+	height:40px;
+	display:inline-block;
+	margin:10px 0;
+}

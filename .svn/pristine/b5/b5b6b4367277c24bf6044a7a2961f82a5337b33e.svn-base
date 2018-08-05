@@ -1,0 +1,195 @@
+<div class="main add-class" style="background:#fff;" ng-controller="addLectureCtrl">
+    <div class="top">
+        <div class="tabset">
+            <div class="add-title">新增听课</div>
+            <div class="add-btn orange position" ng-click="goBack()">返回</div>
+        </div>
+    </div>
+    <div class="middle-contain" style="position:relative;border-top:1px solid white;background: #fff;">
+        <div>
+            <div class="input-box" style="margin-top: 50px;">
+                <ul>
+                    <!--<li>
+                        <span>标题</span>
+                        <input type="text" placeholder="输入课堂标题" maxlength="20" ng-model="addLectureTitle">
+                    </li>-->
+                    <li>
+                        <span style="float: left;margin-top: 5px;">区域</span>
+                        <!--<select name="" id="" placeholder="听课老师学校所属区域" ng-model="name1" ng-init="name1='听课老师学校所属区域'">
+                            <option value="听课老师学校所属区域">听课老师学校所属区域</option> 
+                            <option value="360102">东湖区</option>
+                        </select>-->
+                            <div class="selUp selUp2" style="display: inline-block;width: 260px;color: #a09898;height: 36px;line-height: 36px;" ng-click="selUp2()">讲课老师学校所属区域</div>
+                            <div class="selUpDailog3 selUpDailog2" style="top: 120px;" ng-show="selUpDailog2==true">
+                                <div class="selUpDailogImg"></div>
+                                <div class="selUpDailogScroll" id="selUpDailogScroll1">
+                                    <div class="toProvince" data="{{provinceLength}}" dataId="{{item.cityCode}}" ng-repeat="item in provinceList" ng-click="provinceClick($index,$event)"
+                                        ng-class="{active:blueClick{{$index}}==true}" class="province{{$index}}">
+                                        {{item.cityName}}
+                                    </div>
+                                </div>
+
+
+                            </div>
+                            <div class="jsTop3 jsTop1" ng-show="showHide==true" style="top:120px;left:{{boxLeft}}px;">
+                                <div class="toProvince" data="{{cityLength}}" dataId="{{item.cityCode}}" ng-class="{active:blueClickc{{$index}}==true}" ng-repeat="item in cityList"
+                                    ng-click="cityClick($index,$event)">
+                                    {{item.cityName}}
+                                </div>
+                            </div>
+
+                            <div class="jsTop3 jsTop2" ng-show="showHide1==true" style="top:120px;left:{{boxLeft1}}px;">
+                                <div class="toProvince" data="{{areaLength}}" dataId="{{item.cityCode}}" ng-class="{active:blueClicka{{$index}}==true}" ng-repeat="item in areaList"
+                                    ng-click="areaClick($index,$event)">
+                                    {{item.cityName}}
+                                </div>
+                            </div>                        
+                    </li>
+                    <li>
+                        <span style="float: left;margin-top: 5px;">学校</span>
+                        <select name="" id="" placeholder="讲课老师所属学校" ng-model="name2" ng-change="listenerTeacher()" ng-init="name2=''">
+                            <option value="">讲课老师所属学校</option>
+                            <option value="{{item.code}}" ng-repeat="item in schoolData">{{item.name}}</option>
+                            <!--<option value="s002">南昌市东湖区一中</option>-->
+                            <!--<option value="s003">南昌市西湖区一中</option>-->
+                        </select>
+                    </li>
+                    
+                    <li>
+                        <span  style="float: left;height: 36px;line-height: 36px;margin-left:-33px;">讲课老师</span>
+                        <select name="" id="" placeholder="讲课老师姓名" ng-model="name3" ng-init="name3='讲课老师姓名'" ng-change="teachInfor()">
+                            <option value="讲课老师姓名">讲课老师姓名</option>
+                            <option value="{{item.id}}" ng-repeat="item in teacherList">{{item.name}}</option>
+                        </select>
+                    </li>
+                    
+                    
+                    <li>
+                        <div class="layui-form" style="width: 100%;">
+                          <div class="layui-form-item">
+                            <div class="layui-inline" style="width: 100%;">
+                              <div class="layui-input-inline"  style="width: 100%;">
+                                <span  style="float: left;height: 36px;line-height: 36px;margin-left:-33px;">讲课日期</span>
+                                <input style="float: left;" type="text" class="layui-input time-input" id="test5" placeholder="" readonly="readonly">
+                                
+                              </div>
+                            </div>
+                           </div>
+                       </div>                               
+                    </li>                     
+                    
+                    <li>
+                        <span  style="float: left;height: 36px;line-height: 36px;margin-left:-33px;">讲课日程</span>
+                        <select name="" id="" class="classCheT" placeholder="讲课日程" ng-model="name4" ng-init="name4='讲课日程'" ng-change="getConet()">
+                            <option value="讲课日程">讲课日程</option>
+                            <option value="{{item.id}}" dataId="{{item.startTime}}" dataCode1="{{item.classCode}}" dataCode2="{{item.gradeCode}}" dataCode3="{{item.periodCode}}" dataCode4="{{item.lessonCode}}" dataCode5="{{item.subjectCode}}" 
+                            dataCode6="{{item.teacherId}}" dataCode7="{{item.id}}" ng-repeat="item in infomationData">{{item.subjectName}}/{{item.periodName}}/{{item.lessonName}}/{{item.startTime}}</option>
+                        </select>
+                    </li> 
+                        <!--<li>
+                            <span>学段</span>
+                            <select name="" id="" placeholder="上课学段" ng-model="name4" ng-init="name4='上课学段'" ng-change="lessonType('2')">
+                                <option value="上课学段">上课学段</option>
+                                <option value="1">高中段</option>
+                                <option value="2">初中段</option>
+                                <option value="3">小学高年级</option>
+                                <option value="4">小学中年级</option>
+                                <option value="5">小学低年级</option>
+                            </select>
+                        </li>
+                        <li>
+                            <span>年级</span>
+                            <select name="" id="" placeholder="上课年级" ng-model="name5" ng-init="name5='上课年级'">
+                                <option value="上课年级">上课年级</option>
+                                <option value="{{item.code}}" ng-repeat="item in classCheck">{{item.grade}}</option>
+                            </select>
+                        </li>
+                        <li>
+                            <span>班级</span>
+                            <select name="" id="" placeholder="上课班级" ng-model="name6" ng-init="name6='上课班级'">
+                                <option value="上课班级">上课班级</option>
+                                <option value="1">(1)班</option>
+                                <option value="2">(2)班</option>
+                                <option value="3">(3)班</option>
+                                <option value="4">(4)班</option>
+                                <option value="5">(5)班</option>
+                                <option value="6">(6)班</option>
+                                <option value="7">(7)班</option>
+                                <option value="8">(8)班</option>
+                                <option value="9">(9)班</option>
+                            </select>
+                        </li>
+                        <li>
+                            <li>
+
+                                <span>学科</span>
+                                <select name="" id="" placeholder="上课学科"  ng-model="name7" ng-init="name7='上课学科'" ng-change="lessonType()">
+                                    <option value="上课学科">上课学科</option>
+                                    <option value="1">语文</option>
+                                    <option value="2">数学</option>
+                                    <option value="3">英语</option>
+                                    <option value="4">政治</option>
+                                    <option value="5">历史</option>
+                                    <option value="6">地理</option>
+                                    <option value="7">物理</option>
+                                    <option value="8">化学</option>
+                                    <option value="9">生物</option>
+                                </select>
+                            </li>
+                            <li>
+                                <span>课型</span>
+                                <select name="" id="" placeholder="上课课型" ng-model="name8" ng-init="name8='上课课型'" >
+                                    <option value="上课课型">上课课型</option>
+                                    <option value="{{item.code}}" ng-repeat="item in lessonList">{{item.name}}</option>
+                                </select>
+                            </li>
+                            <li>
+                                <div class="layui-form" style="width: 100%;">
+                                  <div class="layui-form-item">
+                                    <div class="layui-inline" style="width: 100%;">
+                                      <div class="layui-input-inline"  style="width: 100%;">
+                                        <span  style="float: left;height: 36px;line-height: 36px;">日期</span>
+                                        <input style="float: left;" type="text" class="layui-input time-input" id="test5" placeholder="" readonly="readonly">
+                                        
+                                      </div>
+                                    </div>
+                                   </div>
+                               </div>                               
+                            </li>-->
+                            <!--<li>
+                                <div class="layui-form" style="width: 100%;">
+                                  <div class="layui-form-item">
+                                    <div class="layui-inline" style="width: 100%;">
+                                      <div class="layui-input-inline"  style="width: 100%;">
+                                        <span  style="float: left;height: 36px;line-height: 36px;margin-left:-33px;">上课时间</span>
+                                        <input style="float: left;" type="text" class="layui-input time-input" id="test9" placeholder="上课时间" readonly="readonly">
+                                        
+                                      </div>
+                                    </div>
+                                   </div>
+                               </div>                               
+                            </li>
+                            <li>
+                                <div class="layui-form" style="width: 100%;">
+                                  <div class="layui-form-item">
+                                    <div class="layui-inline" style="width: 100%;">
+                                      <div class="layui-input-inline"  style="width: 100%;">
+                                        <span  style="float: left;height: 36px;line-height: 36px;margin-left:-33px;">下课时间</span>
+                                        <input style="float: left;" type="text" class="layui-input time-input" id="test10" placeholder="下课时间" readonly="readonly">
+                                        
+                                      </div>
+                                    </div>
+                                   </div>
+                               </div>                               
+                            </li>-->
+                </ul>
+            </div>
+            <div class="next-content clearfix" style="margin-top: 30px;">
+                    <div class="next-btn blue" ng-click="finish1()">开始听课</div>
+                <div style="display:none" class="next-btn green" ng-click="finish()">预先保存</div>
+            </div>
+        </div>
+    </div>
+    <div ng-include="'html/blocks/footer.html'">
+    </div>
+</div>

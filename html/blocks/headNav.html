@@ -1,0 +1,43 @@
+<div class="head-nav clearfix" ng-controller="topBarCtrl">
+    <div class="left fl">
+        <div class="circle"></div>
+        <div class="logo-name">课堂教学观测与评价系统</div>
+    </div>
+    <ul class="fl topnav">
+    	<li ng-click="topChangeTab(1)">我的讲课</li>
+    	<li ng-click="topChangeTab(2)">我的听课</li>
+    </ul>
+    <div class="fr" style="position: relative;" ng-mouseleave="outNone()">
+        <div class="user-info clearfix" style="cursor: pointer;" ng-click="showUserMenu()">
+            <div class="user-img"></div>
+            <div class="fr">
+                <div style="font-size:14px;line-height:40px;margin-top: 15px;">{{namep}}</div>
+                <!--<div style="font-size:13px;line-height:20px;">系统管理员</div>-->
+            </div>
+        </div>
+        <div class="logout" ng-click="showUserMenu1()">
+        <div class="tuichu"ng-click="exit()"><i class="iconfont icon-tuichu"></i></div>
+        </div>
+	    <div class="user-menu" ng-show="showMenu" style="position: absolute;">
+	        <div style="position:relative;top: -15px;">
+	        	<div class="" style="width: 100%;height: 30px;background: transparent;">
+	        		<div class="arrow-t" style="top: -8px;"></div>
+	        	</div>
+	            <ul>
+	                <li ng-click="onePage()">基本信息</li>
+	                <li ng-click="twoPage()">班级信息</li>
+	                <li ng-click="threePage()">修改密码</li>
+	                <li ng-click="fourthPage()">关于我们</li>
+	                <!--<li ng-click="fivePage()">更新版本</li>
+	                <li ng-click="sixPage()">分享</li>-->
+	            </ul>
+	            <!--<div class="exit" ng-click="exit()">退出</div>-->
+	        </div>
+	    </div>  
+	    <div class="user-menu" style="position: absolute;right:12px;">
+	        <div style="position:relative;top: -20px;">
+	        </div>
+	    </div> 	    
+    </div>
+
+</div>

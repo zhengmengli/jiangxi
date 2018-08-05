@@ -1,0 +1,93 @@
+<div min-height class="main" ng-controller="pjbgCtr1">
+    <div class="pjbg">
+        <table border="" cellspacing="" cellpadding="" ng-init="pjData()">
+        	<thead>
+        		<tr style="background: #fff;">
+        			<td class="td{{$index}}" style="width: {{item.width}};font-weight: bold;cursor: pointer;font-size: 16px;" ng-repeat="item in theadList" ng-class="{active:item.trImg==true}" ng-click="boxShow($event,$index)"><span class="tdSpan{{$index}}">{{item.name}}</span>
+ 						<div class="selUpDailog" ng-show="selUpDailog{{$index+1}}==true" style="position: absolute;top: 150px;padding: 0;"> 
+ 							<div class="selUpDailogImg1"></div> 
+ 							<div class="selUpDailogCheck" ng-show="selUpDailogCheck1 == true"> 
+ 								<div class="selUpDailogScroll"> 
+ 									<div class="toProvince" data="{{provinceLength}}" dataId="{{item.cityCode}}" ng-repeat="item in provinceList" ng-click="provinceClick($index,$event)" ng-class="{active:blueClick{{$index}}==true}" class="province{{$index}}"> 
+ 										{{item.cityName}} 
+ 									</div>								 
+ 								</div> 
+ 							</div> 
+ 							<div class="jsTop jsTop1" ng-show="showHide==true" style="top:0px;left:200px;"> 
+ 								<div class="toProvince" data="{{cityLength}}" dataId="{{item.cityCode}}" ng-class="{active:blueClickc{{$index}}==true}" ng-repeat="item in cityList" ng-click="cityClick($index,$event)"> 
+ 									{{item.cityName}} 
+ 								</div> 
+ 						    </div> 
+						
+ 							<div class="jsTop jsTop2" ng-show="showHide1==true" style="top:0px;left:{{boxLeft1}}px;"> 
+ 									<div class="toProvince" data="{{areaLength}}" dataId="{{item.cityCode}}" ng-class="{active:blueClicka{{$index}}==true}" ng-repeat="item in areaList" ng-click="areaClick($index,$event)" > 
+ 										{{item.cityName}} 
+ 									</div> 
+ 							</div> 
+ 							<div class="selUpDailogCheck" ng-show="selUpDailogCheck2 == true"> 
+ 								<div class="elUpDailogFont" ng-click="btnClick6($event,$index)"> 
+ 									全部 
+ 								</div> 
+ 								<div class="elUpDailogFont" ng-click="btnClick6($event,$index)"> 
+ 									近三天 
+ 								</div> 
+ 								<div class="elUpDailogFont" ng-click="btnClick6($event,$index)"> 
+ 									近一周 
+ 								</div> 
+ 							</div> 
+ 							
+ 							<div class="selUpDailogCheck" ng-show="selUpDailogCheck3 == true"> 
+ 								<div class="elUpDailogFont" ng-click="btnClick3($event,$parent.$index)" ng-repeat="itemt in schoolData"> 
+ 									{{itemt.name}} 
+ 								</div> 
+ 							</div>  
+ 							<div class="selUpDailogCheck" ng-show="selUpDailogCheck4 == true" style="height: 150px;overflow: auto;"> 
+ 								<div class="elUpDailogFont" ng-click="btnClick4($event,$parent.$index)" ng-repeat="itemt in periodList3"> 
+ 									{{itemt.name}} 
+ 								</div> 
+ 							</div> 
+ 							
+ 							<div class="selUpDailogCheck" ng-show="selUpDailogCheck5 == true" style="height: 150px;overflow: auto;"> 
+ 								<div class="elUpDailogFont" ng-click="btnClick5($event,$parent.$index)" ng-repeat="itemt in periodList4"> 
+ 									{{itemt.name}} 
+ 								</div> 
+ 							</div> 
+ 						</div>        			 
+        			</td>
+
+        		</tr>
+        	</thead>
+        	
+        	<tr ng-repeat="item in tbodyList">
+        		<td>{{$index+1}}</td>
+        		<td>{{item.areaCode}}</td>
+        		<td>{{item.schoolName}}</td>
+        		<td>{{item.periodCode}}</td>
+        		<td>{{item.name}}</td>
+        		<td>{{item.teachLs}}</td>
+<!--         		<td>{{item.name7}}</td> -->
+        		<td>{{item.teachTime}}</td>
+        		<td>{{item.score}}</td>
+        		<td>
+        			<img class="imgD{{$index+1}}" src="img/pjbg/look.png" ng-mouseover="mouseDailog($index)" style="margin-right: 5px;cursor: pointer;" ng-click="toCpbg($index,item.teachId,item.listenTeacherId)"/>
+<!--         			<img src="img/pjbg/dele.png" style="margin-left: 5px;cursor: pointer;"/> -->
+					<div class="selUpDailogCheck selUpDailogCheckt{{$index}}"  style="display:none;height: 150px;overflow: auto;position: absolute;width:160px;background: #fff;box-shadow: #eee 1px 1px 30px;"> 
+						<div class="elUpDailogFont" style="text-align: center;" ng-click="comeIn(item.teachId,itemt.id,'2')" ng-repeat="itemt in item.arr"> 
+							{{itemt.name}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{itemt.score}}
+						</div> 
+					</div> 					
+        		</td>
+        	</tr>
+
+        </table>
+        
+        <div class="pjbgFooter">
+		    <div class="pager" style="float:right;margin-right:5%;">
+	              <pager page-count="pageCountError" current-page="errorPage"
+	               on-page-change="onPageError()"></pager>
+	        </div>        	
+        </div>
+
+        
+    </div>
+</div>

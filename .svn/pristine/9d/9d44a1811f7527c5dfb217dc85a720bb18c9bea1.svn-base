@@ -1,0 +1,176 @@
+.zbglTitle{
+	width: 100%;
+	height: 100%;
+	line-height: 65px;
+	text-align: center;
+	font-size: 18px;
+	color: #434549;	
+	font-weight: bold;
+}
+.zbLeft{
+	float: left;
+	width: 16%;
+	height:92%;
+	border: 1px solid #C9C9C9;
+	padding: 10px;
+}
+.zbLeftTitle{
+	width: 100%;
+	height: 40px;
+	font-weight: bold;
+	font-size: 16px;
+	line-height: 40px;
+	border-bottom: 1px solid #C9C9C9;
+	background: url(../img/zbgl/dele.png)no-repeat 96% center;
+}
+.zbCenter{
+	float: left;
+	width: 65%;
+	height:92%;
+	border: 1px solid #C9C9C9;
+	padding: 10px;	
+	margin-left:2%;
+}
+.zbCenterTitle{
+	width: 100%;
+	height: 40px;
+	font-weight: bold;
+	font-size: 16px;
+	line-height: 40px;
+	border-bottom: 1px solid #C9C9C9;
+	text-align: center;	
+}
+.zbCenterLeft{
+	float: left;
+	width: 28%;	
+	position: relative;
+}
+
+.zbCenterLeftTitle{
+	width: 100%;
+	height: 40px;
+	font-weight: bold;
+	font-size: 16px;
+	line-height: 40px;
+	border-bottom: 1px solid #C9C9C9;	
+}
+.gcCheck,.gcCheck1,.gcCheck2,.gcCheck4,.gcCheck5{
+	width: 100%;
+	height: 40px;
+	padding-top: 8px;
+	border-bottom: 1px solid #f1f1f1;
+	padding-left: 25px;
+	position: relative;
+}
+.gcCheck label,.gcCheck1 label,.gcCheck2 label,.gcCheck4 label,.gcCheck5 label{
+	font-size: 14px;
+	color: #838C95;
+}
+.addOne{
+	width: 20px;
+	text-align: center;
+	font-size: 30px;
+	color: #1E70E9;
+	font-weight: bold;
+	cursor: pointer;
+}
+.zbCenterLeft2,.zbCenterLeft3,.zbCenterLeft4{
+	margin-left: 6%;
+}
+.zbRight{
+	position: absolute;
+	width: 16%;
+	height:92%;
+	padding: 10px;
+	right: 0;
+}
+.zbCenterLeft5{
+	width: 100%;
+}
+.detailDaiTitle{
+	width: 224px;
+	height: 33px;
+	margin-top: 40px;
+	margin-bottom: 40px;
+	margin-left: 20px;
+	background: url(../img/login/register2.png)no-repeat center;
+	background-size: 100% 100%;
+	text-align: center;
+	line-height: 33px;
+	font-size: 16px;
+	color: #FFFFFF;
+}
+#zbglDailog{
+	padding-left: 180px;
+	padding-right: 60px;
+}
+#zbglDailog4{
+	padding-left: 180px;
+	padding-right: 60px;
+}
+#zbglDailog5{
+	padding-left: 140px;
+	padding-right: 60px;
+}
+.dalogLabel{
+	font-size: 14px;
+	color: #838C95;
+	padding: 0;
+	margin: 0;
+	height: 30px;
+	line-height: 30px;
+}
+.dailogInp{
+	width: 260px;
+	height: 32px;
+	display: inline-block;
+}
+.otherFont{
+	font-size: 12px;
+	color: #BBBEC4;
+}
+.detailBtn1,.detailBtn1a{
+	width: 110px;
+	height: 36px;
+	border-radius: 18px;
+	line-height: 36px;
+	text-align: center;
+	font-size: 14px;
+	color: #FFFFFF;
+	letter-spacing: 2px;
+	display: inline-block;
+	background: #1E70E9;
+	margin-left: 20px;
+	cursor: pointer;
+}
+.detailBtn2{
+	background: #FFB430;
+	width: 110px;
+	height: 36px;
+	border-radius: 18px;
+	line-height: 36px;
+	text-align: center;
+	font-size: 14px;
+	color: #FFFFFF;
+	letter-spacing: 2px;
+	display: inline-block;
+	cursor: pointer;
+}
+
+#zbglDailog1,#zbglDailog2,#zbglDailog3,#zbglDailog6{
+	padding-left: 130px;
+}
+body .layui-form-checked[lay-skin=primary] i{
+	background-color: #fff;
+	color: #1e70e9;
+	font-weight: bold;
+}
+.zbCenterLeft label{
+	padding-right: 20px;
+	cursor: pointer;
+}
+/*#asop .active{
+	background:#1E70E9;
+	
+} */
+

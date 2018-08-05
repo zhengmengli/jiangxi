@@ -1,0 +1,72 @@
+<div  class="home" style="min-height: 100%;" ng-controller="basicCtr">
+	<div class="main-top">
+		<div class="title"><span class="t1">个人信息</span>/<span class="t2">基本信息</span></div>
+		<div class="add-btn orange position" ng-click="goBack()">返回</div>
+	</div>
+	<div class="main-content">
+		<div class="top">
+			<div class="tabset">
+				<div class="add-title">基本信息</div>
+			</div>
+		</div>
+		<div class="add-class">
+			<div class="head-box">
+
+			</div>
+			<div class="form-box fl">
+				<p class="inpFont fl">姓名</p>
+				<input type="text" placeholder="输入姓名" ng-model="name" maxlength="20">
+			</div>
+			<div class="form-box">
+				<p class="inpFont fl">性别</p>
+				<select name="">
+					<option value="">请选择性别</option>
+					<option value="0">男</option>
+					<option value="1">女</option>
+				</select>
+			</div>
+			<div class="form-box fl">
+				<p class="inpFont fl" >学校</p>
+				<select name="" ng-model="schoolInit" ng-init="schoolInit=''">
+					<option value="">请选择学校</option>
+					<option value="{{item.code}}" ng-repeat="item in schoolData">{{item.name}}</option>
+				</select>
+			</div>
+			<div class="form-box">
+				<p  class="inpFont fl">区域</p>
+				<div class="selUp selUp2" ng-click="selUp2()" style="width: 260px;height: 36px;line-height: 36px;color: #a09898;">学校所在区域</div>
+				<div class="selUpDailog3 selUpDailog2" style="top: 260px;" ng-show="selUpDailog2==true">
+					<div class="selUpDailogImg"></div>
+					<div class="selUpDailogScroll">
+						<div class="toProvince" data="{{provinceLength}}" dataId="{{item.cityCode}}" ng-repeat="item in provinceList" ng-click="provinceClick($index,$event)"
+							 ng-class="{active:blueClick{{$index}}==true}" class="province{{$index}}">
+							{{item.cityName}}
+						</div>
+					</div>
+				</div>
+				<div class="jsTop3 jsTop1" ng-show="showHide==true" style="top:{{boxTop}}px;left:{{boxLeft}}px;">
+					<div class="toProvince" data="{{cityLength}}" dataId="{{item.cityCode}}" ng-class="{active:blueClickc{{$index}}==true}" ng-repeat="item in cityList"
+						 ng-click="cityClick($index,$event)">
+						{{item.cityName}}
+					</div>
+				</div>
+
+				<div class="jsTop3 jsTop2" ng-show="showHide1==true" style="top:{{boxTop}}px;left:{{boxLeft1}}px;">
+					<div class="toProvince" data="{{areaLength}}" dataId="{{item.cityCode}}" ng-class="{active:blueClicka{{$index}}==true}" ng-repeat="item in areaList"
+						 ng-click="areaClick($index,$event)">
+						{{item.cityName}}
+					</div>
+				</div>
+			</div>
+
+			<!--列表-->
+
+			<div class="next-btn blue" style="margin: 40px auto;display: block;text-align: center;" ng-click="finish()">
+				完成
+			</div>
+
+		</div>
+		<div ng-include="'html/blocks/footer.html'" class="foot"></div>
+	</div>
+
+</div>

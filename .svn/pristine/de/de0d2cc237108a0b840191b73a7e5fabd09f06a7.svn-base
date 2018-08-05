@@ -1,0 +1,40 @@
+<div  class="home" style="min-height: 100%;background: #fff;display: flex;flex-flow: column;">
+    <h5 style="height: 50px;color: #424242;text-align: center;line-height: 50px;font-size: 18px;border-bottom: 1px solid #F0F1F1;">课堂教学观测与评价系统</h5>
+    <div class="indexContain" style="padding:30px 50px 100px;">
+    	<h3 style="margin-bottom:20px;">系统简介</h3>
+    	<div style="position:relative;">
+    		<p style="color: #8e8e8e;margin-bottom: 5px;font-size: 14px;">结合超循环理论、生态学规律与美国梅丽尔教授的五星教学模式演化生成了“N段·四环·五星”教学模型，该教学模型的确立</p>
+    		<p  style="color: #8e8e8e;margin-bottom: 5px;font-size: 14px;">为各个学科评价指标体系的分解奠定了扎实的理论基础。模型将课堂教学分为N个阶段进行划分，每阶段包含一个完整</p>
+    		<p style="color: #8e8e8e;font-size: 14px;">的“学”、“思”、“行”、“省”构成，循环推进。“五星”可作为整体评价整堂课的依据。</p>
+    		<div>
+    			<img style="position: absolute;top: -10px;width: 150px;right: 0;" src="img/index/logo2.png">
+    			<img style="position: absolute;top: -10px;width: 150px;right: 176px;"src="img/index/logo1.png"></div>
+    		<p style="margin-top: 20px;">
+    			<img src="img/index/circle.png" style="position: relative;top: 0px;margin-right: 2px;left: -3px;width:15px;">
+    			<span style="font-weight:bold;">中心宗旨 — 育卓越教师，促赣崛起</span>
+    		</p>
+    		<p style="margin-top: 6px;">
+    			<img src="img/index/circle.png" style="position: relative;top: 0px;margin-right: 2px;left: -3px;width:15px;">
+    			<span style="font-weight:bold;">中心风尚 — 己立立人，己达达人</span>
+    		</p>
+    	</div>
+    	<h3 style="margin: 20px 0 15px;">N段·四环·五星</h3>
+    	<p  style="color: #8e8e8e;margin-bottom: 5px;font-size: 14px;line-height: 27px;">结合超循环理论、生态学规律与美国梅丽尔教授的五星教学模式演化生成了“N段·四环·五星”教学模型，该教学模型的确立为各个学科评价指标体系的分解奠定了扎实的理论基础。模型将课堂教学分为N个阶段进行划分，每阶段包含一个完整的“学”、“思”、“行”、“省”构成，循环推进。“五星”可作为整体评价整堂课的依据。</p>
+    	<div style=" margin-top: 25px;">
+    		<div style="display: inline-block;width: 340px;height:241px;text-align: center;">
+	    		<div style="background:url(img/index/n.png) no-repeat;background-size: 100% 100%;width: 100%;height: 100%;"></div>
+	    		<div style="margin-top: 15px;color: #8e8e8e;">（将课堂教学分为N个阶段进行划分）</div>
+	    	</div>
+    		<div style="display: inline-block;width: 340px;height:241px;text-align: center;    margin-left: 30px;">
+	    		<div style="background:url(img/index/4.png) no-repeat;background-size: 100% 100%;width: 100%;height: 100%;"></div>
+	    		<div style="margin-top: 15px;color: #8e8e8e;">（“学”、“思”、“行”、“省”）</div>
+	    	</div>
+	    	<div style="display: inline-block;width: 340px;height:241px;text-align: center;    margin-left: 30px;">
+	    		<div style="background:url(img/index/5.png) no-repeat;background-size: 100% 100%;width: 100%;height: 100%;"></div>
+	    		<div style="margin-top: 15px;color: #8e8e8e;">（“五星”可作为整体评价整堂课的依据）</div>
+	    	</div>
+    	</div>
+    </div>
+    <div ng-include="'html/blocks/footer.html'" class="foot">
+    </div>
+</div>

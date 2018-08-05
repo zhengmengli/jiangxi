@@ -1,0 +1,43 @@
+<div  class="home" style="min-height: 100%;background: #fff;" ng-controller="detailPasswordCtr">
+    <div class="top">
+        <div class="tabset">
+            <div class="add-title">修改密码</div>
+            <div class="add-btn orange position" ng-click="goBack()">返回</div>
+        </div>
+    </div>
+    <div class="contain1">
+    	<div class="add-class">
+
+			<div class="" style="margin-bottom: 10px;width: 260px;margin: 0 auto;">
+
+	    		<p class="inpFont">原密码</p>
+	    		<input type="text" placeholder="原密码" ng-model="name1" ng-change="passwordNameChange2()">
+	    		<span class="errorContent12" style="color: red;display: none;">密码长度6-16位，支持数字，字母，字符</span>
+	    		<br><br>	
+		
+			</div>	
+			<div class="" style="margin-bottom: 10px;width: 260px;margin: 0 auto;">
+
+	    		<p class="inpFont">新密码</p>
+	    		<input type="text" placeholder="新密码" ng-model="name2" ng-change="passwordNameChange()">
+	    		<span class="errorContent2" style="color: red;display: none;">密码长度6-16位，支持数字，字母，字符</span>
+	    		<br><br>	
+		
+			</div>	
+			<div class="" style="margin-bottom: 10px;width: 260px;margin: 0 auto;">
+
+	    		<p class="inpFont">确认新密码</p>
+	    		<input type="text" placeholder="确认新密码" ng-model="name3" ng-change="passwordNameChange1()">
+	    		<span class="errorContent21" style="color: red;display: none;">新密码不一致</span>
+	    		<br><br>	
+		
+			</div>				
+			<div class="next-btn blue" style="margin: 100px auto;display: block;text-align: center;" ng-click="finish()">
+				完成
+			</div>
+			
+    	</div>
+    </div>
+    <div ng-include="'html/blocks/footer.html'" class="foot">
+    </div>
+</div>

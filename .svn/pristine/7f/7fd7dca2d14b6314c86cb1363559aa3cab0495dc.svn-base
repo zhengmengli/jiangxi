@@ -1,0 +1,390 @@
+<div class="login" ng-controller="loginCtr">
+
+	<!--登录注册页面-->
+	
+	<div class="head-nav clearfix" ng-controller="topBarCtrl" ng-show="showLogin=='5'">
+	    <div class="left fl">
+	        <div class="circle"></div>
+	        <div class="logo-name">课堂教学观测与评价系统</div>
+	    </div>
+	    <ul class="fl topnav">
+	    	<li ng-click="noshtg()">我的讲课</li>
+	    	<li ng-click="noshtg()">我的听课</li>
+	    </ul>
+	    <div class="fr" style="position: relative;" ng-mouseleave="outNone()">
+	        <div class="user-info clearfix" style="cursor: pointer;" ng-click="showUserMenu()">
+	            <div class="user-img"></div>
+	            <div class="fr">
+	                <div style="font-size:14px;line-height:40px;margin-top: 15px;">{{namep}}</div>
+	            </div>
+	        </div>
+	        <div class="logout">
+	        	<div class="tuichu" ng-click="backLogin()"><i class="iconfont icon-tuichu"></i></div>
+	        </div>
+		    <div class="user-menu" ng-show="showMenu" style="position: absolute;">
+		        <div style="position:relative;top: -15px;">
+		        	<div class="" style="width: 100%;height: 30px;background: transparent;">
+		        		<div class="arrow-t" style="top: -8px;"></div>
+		        	</div>
+		            <ul>
+		                <li ng-click="noshtg()">基本信息</li>
+		                <li ng-click="noshtg()">班级信息</li>
+		                <li ng-click="noshtg()">修改密码</li>
+		                <li ng-click="noshtg()">关于我们</li>
+		            </ul>
+		        </div>
+		    </div>  
+		    <div class="user-menu" style="position: absolute;right:12px;">
+		        <div style="position:relative;top: -20px;">
+		        </div>
+		    </div> 	    
+	    </div>
+
+	</div>
+
+	<div class="regHead" ng-show="showLogin !='1' && showLogin !='5'">
+		<img src="img/ktgc/icon-pc1x.png" width="34" style="float: left;margin-top: 19px;"/>
+		<span>注册中心</span>
+		<div ng-click="backLogin()"><i class="iconfont icon-undo"></i>放弃操作</div>
+	</div>
+
+	<div class="login1" ng-show="showLogin=='1'">
+		<div class="" style="position: absolute;top: 50px;left: 80px;">
+			<img src="img/ktgc/icon-pc1x.png" style="float: left;margin-top: 5px;"/>
+			<div class="" style="float: left;font-size: 36px;color: #fff;margin-left: 15px;">课堂教学观测与评价系统</div>
+		</div>
+		<img src="img/login/bg2.jpg" alt="" class="loginamLogo" style="position: absolute;top:50%;transform:translate(0,-50%);left:15%;" />
+		<div class="positionC">
+			
+			<div class="loginContent" ng-show="forget=='1'">
+				<!-- <ul>
+					<li class="active" ng-click="loginAsign('登录')" ng-class="{active:loginasign=='登录'}">登录</li>
+					<li ng-click="loginAsign('注册')" ng-class="{active:loginasign=='注册'}">注册</li>
+				</ul> -->
+
+				<div class="" ng-show="loginasign=='登录'"ng-keydown="keySearch($event)">
+					<div class="loginTit">
+						<span class="loginTitL">用户登录</span>
+						<span class="loginTitR">没有账号？<a href="javascript:;" ng-click="loginAsign('注册')">注册</a></span>
+					</div>
+					<div class="zwh"></div>
+					<div id="" style="position: relative;">
+						<input type="text" name="" placeholder="请输入手机号或邮箱" class="userName" ng-model="userName" ng-change="userNameChange()" />
+						<i class="iconfont icon-mine_fill" style="top: 26px;left:13px;position: absolute;font-size:30px;color:#d8e0e9"></i>
+					</div>
+					<div id="" style="position: relative;">
+						<input type="password" name="" placeholder="请输入{{keywords}}" class="password" ng-model="userPassword"  ng-change="passwordNameChange1()"/>
+						<i class="iconfont icon-lock_fill" style="top: 26px;left:13px;position: absolute;font-size:30px;color:#d8e0e9"></i>
+					</div>
+					<div class="loginCheck">
+						<div id="jzmm" class="loginCheck1 loginCheckY" style="position: relative;">
+							<i class="iconfont icon-32duoxuanweixuanzhong"></i>
+							记住密码
+						</div>
+						<span class="loginCheck2" ng-click="forgetFunc()">忘记密码</span>
+					</div>
+					<div class="loginFooter" ng-click="loginbtn6()">{{loginasign}}</div>
+					
+					<div class="callus"><i class="line1"></i><i class="line2"></i><span>联系我们</span></div>
+
+					<p class="errorContent21" style="position: absolute;top:203px;left:75px;width: 300px;font-size:12px;color: red;display: none;">密码长度6-16位，支持数字，字母，字符</p>
+					<p class="errorContent111" style="position: absolute;top:142px;left:157px;width: 200px;font-size:12px;color: red;display: none;">手机号或邮箱不正确</p>
+					<img src="img/login/error.png" style="top: 141px;left:149px;position: absolute;width: 32px;height: 32px;display: none;">
+					<img src="img/login/error.png" style="top: 230px;left:255px;position: absolute;width: 32px;height: 32px;display: none;">
+					<p class="errorContent" style="position: absolute;top:248px;left:134px;width: 200px;font-size:12px;color: red;display: none;">用户名或密码不正确</p>
+					<div class="examineTel">您的账号<span></span>正在审核中<i class="iconfont icon-guanbi" ng-click="examineTelClose()"></i></div>
+				</div>
+				<div class="" ng-show="loginasign=='注册'"ng-keydown="keySearch1($event)">
+					<div class="loginTit">
+						<span class="loginTitL">用户注册</span>
+						<span class="loginTitR">已有账号？<a href="javascript:;" ng-click="loginAsign('登录')">登录</a></span>
+					</div>
+					<div id="" style="position: relative;">
+						<input type="text" name="" placeholder="请输入手机号或邮箱" class="userName" ng-model="phoneName" ng-change="phoneNameChange()"
+						/>
+						<i class="iconfont icon-mine_fill" style="top: 26px;left:13px;position: absolute;font-size:30px;color:#d8e0e9"></i>
+					</div>
+					<div id="" style="position: relative;">
+						<input type="text" name="" placeholder="请输入验证码" maxlength="6" class="password yzm"  onKeyUp="value=value.replace(/[^\d]/g,'')" ng-model="verificationCode" />
+						<i class="iconfont icon-emiyanzhengma" style="top: 26px;left:13px;position: absolute;font-size:30px;color:#d8e0e9"></i>
+					</div>
+					<div id="" style="position: relative;">
+						<input type="password" name="" placeholder="请输入密码" class="password" ng-model="passwordName" ng-change="passwordNameChange()"
+						/>
+						<i class="iconfont icon-lock_fill" style="top: 26px;left:13px;position: absolute;font-size:30px;color:#d8e0e9"></i>
+					</div>
+					
+					<div class="loginFooter" style="margin-top:30px;" ng-click="loginbtn2()">{{loginasign}}</div>
+					<div class="callus"><i class="line1"></i><i class="line2"></i><span>联系我们</span></div>
+					<p class="errorContent1" style="position: absolute;top:132px;left:154px;width: 200px;font-size:12px;color: red;display: none;">手机号或邮箱不正确</p>
+					<p class="errorContent3" style="position: absolute;top:194px;left:154px;width: 200px;font-size:12px;color: red;display: none;">验证码不正确</p>
+					<p class="errorContent2" style="position: absolute;top:256px;left:75px;width: 300px;font-size:12px;color: red;display: none;">密码长度6-16位，支持数字，字母，字符</p>
+					<div class="getCode getCodeSet" style="display: block;" ng-click="registerCode()">
+						获取验证码
+					</div>
+
+				</div>
+
+			</div>
+			
+			<!--忘记密码-->
+			<div class="loginContent" ng-show="forget=='2'">
+				
+				<div ng-show="forgetFinish=='1'">
+					<div class="loginTit">
+						<span class="loginTitL">找回密码</span>
+						<span class="loginTitR"><a href="javascript:;" ng-click="loginFooterF1()"> < 返回登录</a></span>
+					</div>
+					<div id="" style="position: relative;">
+						<input type="text" name="" placeholder="请输入手机号" maxlength="11" class="userName" ng-model="phoneNameForget" ng-change="phoneNameChangeForget()"
+						/>
+						<i class="iconfont icon-mine_fill" style="top: 26px;left:13px;position: absolute;font-size:30px;color:#d8e0e9"></i>
+					</div>
+					<div id="" style="position: relative;">
+						<input type="text" name="" placeholder="请输入验证码" maxlength="6" class="password yzm"  onKeyUp="value=value.replace(/[^\d]/g,'')" ng-model="verificationCodeForget" />
+						<i class="iconfont icon-emiyanzhengma" style="top: 26px;left:13px;position: absolute;font-size:30px;color:#d8e0e9"></i>
+					</div>
+					<div id="" style="position: relative;">
+						<input type="password" name="" placeholder="请输入新密码" class="password" ng-model="passwordNameForget" ng-change="passwordNameChangeForget()"
+						/>
+						<i class="iconfont icon-lock_fill" style="top: 26px;left:13px;position: absolute;font-size:30px;color:#d8e0e9"></i>
+					</div>
+					
+					<div class="loginFooter" style="margin-top:30px;" ng-click="loginFooterF2()">重置密码</div>
+					<!-- <div class="loginFooter" style="margin-top:30px;">
+						<div class="loginFooterF1" ng-click="loginFooterF1()">放弃</div>
+						<div class="loginFooterF2" ng-click="loginFooterF2()">重置密码</div>
+					</div> -->
+					<div class="callus"><i class="line1"></i><i class="line2"></i><span>联系我们</span></div>
+					<p class="errorContent1_1" style="position: absolute;top:132px;left:151px;width: 200px;font-size:12px;color: red;display: none;">手机号不正确</p>
+					<p class="errorContent3_1" style="position: absolute;top:193px;left:151px;width: 200px;font-size:12px;color: red;display: none;">验证码不正确</p>
+					<p class="errorContent2_1" style="position: absolute;top:256px;left:86px;width: 300px;font-size:12px;color: red;display: none;">密码长度6-16位，支持数字，字母，字符</p>
+					<div class="getCode getCodeSet1" style="display: block;" ng-click="registerCode1()">
+						获取验证码
+					</div>					
+				</div>
+				<div class="" ng-show="forgetFinish=='2'" style="height: 300px;position: relative;width: 100%;">
+					<img src="img/login/register1.png" style="display: block;margin: 0 auto;margin-top: 100px;"/>
+					<p style="width: 100%;text-align: center;font-size: 16px;margin-top: 10px;">密码重置成功！</p>
+					<div class="loginFooter" style="position: absolute;bottom: 0;width: 100%;" ng-click="returnDelu()">返回登录</div>
+				</div>
+				
+			</div>
+					
+		</div>
+
+		<div class="loginTitle2">
+			©2018 江西省教师质量监测、评估与服务协同创新中心
+		</div>
+		<div class="loginTitle3">
+		</div>
+	</div>
+
+	<!--注册填完信息1-->
+	<div class="register" ng-show="showLogin=='2'">
+		<div class="registerTitle11">
+			恭喜！注册成功
+		</div>
+		<img src="img/login/register11.png" width="320" style="margin: 10px auto;display: block;" />
+		<p class="registerP1">为了获得更好的使用体验，需要您进一步完善个人信息！</p>
+		<div class="registerBtn1" ng-click="loginbtn3()">完善信息</div>
+		<!-- <div class="loginNav">
+			<a href="javascript:;">关于我们</a> &nbsp;&nbsp;| &nbsp;&nbsp;
+			<a href="javascript:;">联系我们</a>
+		</div> -->
+	</div>
+
+	<!--注册填完信息2-->
+	<div class="register1" ng-show="showLogin=='3'">
+		<div class="registerTitle11">
+			信息完善
+		</div>
+		<!-- <div class="teacherCheck">
+			<div class="department" ng-click="teacherCheck('2')" ng-class="{active:teachercheck=='2'}">
+				<img src="img/login/black_ground.png" style="display: block;margin: 0 auto;margin-top:10px;" />
+				<p class="">管理部门</p>
+			</div>
+			<div class="teacher active" style="margin: 30px auto 0;" ng-click="teacherCheck('1')" ng-class="{active:teachercheck=='1'}">
+				<img src="img/login/black_person.png" style="display: block;margin: 0 auto;margin-top:10px;" />
+				<p class="">老师</p>
+			</div>
+		
+		
+		</div> -->
+		<div class="xxtx"><img src="img/login/user_img.png" width="120"></div>
+		<div class="form1" ng-show="teachercheck=='1'">
+			<div  style="max-height:382px;overflow:auto;">
+				<form action="" method="post">
+					<div style="overflow: hidden; margin-top: 10px;">
+						<div class="blank-icon fr"></div>
+						<div  style="float: left;">
+							<label for="">姓名</label>
+							<input type="text" name="name" id="name" placeholder="您的真实姓名" maxlength="20"/>
+						</div>
+						<div  style="float: right;">
+							<label for="">性别</label>
+							<select name=""  ng-model="sex" ng-init="sex='请选择性别'">
+								<option value="请选择性别">请选择性别</option>
+								<option value="0">男</option>
+								<option value="1">女</option>
+							</select>
+
+						</div>
+
+					</div>
+					<div style="overflow: hidden; margin-top: 10px;">
+							<div class="blank-icon fr"></div>
+						<div  style="float: right;">
+							<label for="">学校</label>
+							<select name=""  ng-model="schoolInit" ng-init="schoolInit='请选择学校'">
+								<option value="请选择学校">请选择学校</option>
+								<option value="{{item.code}}" ng-repeat="item in schoolData">{{item.name}}</option>
+							</select>
+
+						</div>
+						<div  style="float: left;">
+							<label for="" style="float: left;margin-top:5px;margin-right:5px;">区域</label>
+							<div style="float: left;" class="selUp selUp2" ng-click="selUp2()">学校所在区域</div>
+							<div class="selUpDailog selUpDailog2" ng-show="selUpDailog2==true">
+								<div class="selUpDailogImg"></div>
+								<div class="selUpDailogScroll" id="selUpDailogScroll1">
+									<div class="toProvince" data="{{provinceLength}}" dataId="{{item.cityCode}}" ng-repeat="item in provinceList" ng-click="provinceClick($index,$event)"
+									    ng-class="{active:blueClick{{$index}}==true}" class="province{{$index}}">
+										{{item.cityName}}
+									</div>
+								</div>
+							</div>
+							<div class="jsTop jsTop1" ng-show="showHide==true" style="top:{{boxTop}}px;left:{{boxLeft}}px;">
+								<div class="toProvince" data="{{cityLength}}" dataId="{{item.cityCode}}" ng-class="{active:blueClickc{{$index}}==true}" ng-repeat="item in cityList"
+								    ng-click="cityClick($index,$event)">
+									{{item.cityName}}
+								</div>
+							</div>
+
+							<div class="jsTop jsTop2" ng-show="showHide1==true" style="top:{{boxTop}}px;left:{{boxLeft1}}px;">
+								<div class="toProvince" data="{{areaLength}}" dataId="{{item.cityCode}}" ng-class="{active:blueClicka{{$index}}==true}" ng-repeat="item in areaList"
+								    ng-click="areaClick($index,$event)">
+									{{item.cityName}}
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="registerBtn1" ng-click="dailogCheck()">
+				完成
+			</div>
+		</div>
+
+	</div>
+
+	<!--注册填完信息3-->
+	<div class="register" ng-show="showLogin=='4'">
+		<div class="registerTitle11">
+			完善成功
+		</div>
+		<div><img src="img/login/register12.png" width="370" style="margin: 40px auto 10px;display: block;" /></div>
+		<p class="registerP1" style="margin-top:20px;">个人信息已完善成功，请等待审核！</p>
+		<div class="registerBtn1" ng-click="loginbtn5()">返回登录页</div>
+	</div>
+
+	<!--审核未通过-->
+	<div class="register1" ng-show="showLogin=='5'">
+		<div class="shwtg">您的信息未通过审核，请认真核对并重新提交审核。错误提示：姓名与学校不匹配<i class="iconfont icon-guanbi" ng-click="examineTelClose()"></i></div>
+		<div class="shjxz">信息审核中，请等待1-2个工作日！<i class="iconfont icon-guanbi" ng-click="examineTelClose()"></i></div>
+		<div class="registerTitle11">
+			信息完善
+		</div>
+		<!-- <div class="teacherCheck">
+			<div class="department" ng-click="teacherCheck('2')" ng-class="{active:teachercheck=='2'}">
+				<img src="img/login/black_ground.png" style="display: block;margin: 0 auto;margin-top:10px;" />
+				<p class="">管理部门</p>
+			</div>
+			<div class="teacher active" style="margin: 30px auto 0;" ng-click="teacherCheck('1')" ng-class="{active:teachercheck=='1'}">
+				<img src="img/login/black_person.png" style="display: block;margin: 0 auto;margin-top:10px;" />
+				<p class="">老师</p>
+			</div>
+		
+		</div> -->
+		<div class="xxtx"><img src="img/login/user_img.png" width="120"></div>
+		<div class="form1" ng-show="teachercheck=='1'">
+			<div  style="max-height:382px;">
+				<form action="" method="post">
+					<div style="overflow: hidden; margin-top: 10px;">
+						<div class="blank-icon fr"></div>
+						<div  style="float: left;">
+							<label for="">姓名</label>
+							<input type="text" name="name" id="name2" placeholder="您的真实姓名" maxlength="20"/>
+						</div>
+						<div  style="float: right;">
+							<label for="">性别</label>
+							<select name=""  ng-model="sex" ng-init="sex='请选择性别'">
+								<option value="请选择性别">请选择性别</option>
+								<option value="0">男</option>
+								<option value="1">女</option>
+							</select>
+						</div>
+						
+					</div>
+					<div style="margin-top: 10px;">
+							<div class="blank-icon fr"></div>
+						<div  style="float: right;">
+							<label for="">学校</label>
+							<select name=""  ng-model="schoolInit" ng-init="schoolInit='请选择学校'">
+								<option value="请选择学校">请选择学校</option>
+								<option value="{{item.code}}" ng-repeat="item in schoolData">{{item.name}}</option>
+							</select>
+
+						</div>
+						<div  style="float: left;position:relative;">
+							<label for="" style="float: left;margin-top:5px;margin-right:5px;">区域</label>
+							<div style="float: left;" class="selUp selUp2" ng-click="selUp2()">学校所在区域</div>
+							<div class="selUpDailog selUpDailog2" ng-show="selUpDailog2==true" style="top:37px;left:33px;">
+								<div class="selUpDailogImg"></div>
+								<div class="selUpDailogScroll" id="selUpDailogScroll1">
+									<div class="toProvince" data="{{provinceLength}}" dataId="{{item.cityCode}}" ng-repeat="item in provinceList" ng-click="provinceClick($index,$event)"
+									    ng-class="{active:blueClick{{$index}}==true}" class="province{{$index}}">
+										{{item.cityName}}
+									</div>
+								</div>
+							</div>
+							<div class="jsTop jsTop1" ng-show="showHide==true" style="top:{{boxTop}}px;left:{{boxLeft}}px;">
+								<div class="toProvince" data="{{cityLength}}" dataId="{{item.cityCode}}" ng-class="{active:blueClickc{{$index}}==true}" ng-repeat="item in cityList"
+								    ng-click="cityClick($index,$event)">
+									{{item.cityName}}
+								</div>
+							</div>
+
+							<div class="jsTop jsTop2" ng-show="showHide1==true" style="top:{{boxTop}}px;left:{{boxLeft1}}px;">
+								<div class="toProvince" data="{{areaLength}}" dataId="{{item.cityCode}}" ng-class="{active:blueClicka{{$index}}==true}" ng-repeat="item in areaList"
+								    ng-click="areaClick($index,$event)">
+									{{item.cityName}}
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div class="clearfix"></div>
+			<div class="registerBtn1" ng-click="dailogCheck()">
+				再次提交
+			</div>
+		</div>
+	</div>
+
+	<!--弹出窗-->
+	<div class="dailogUp" ng-show="dailogcheck==true">
+		<div class="dailogUpContent">
+			<p>未保存角色信息填写，是否确认切换角色</p>
+			<p>重新填写身份信息？</p>
+			<div class="dailogUpBtn">
+				<div class="dailogUpBtn2" ng-click="loginbtn4()">放弃切换</div>
+				<div class="dailogUpBtn1" ng-click="checkAdmin()">确认切换</div>
+			</div>
+			<div class="dailogClose" ng-click="closeDailog()">
+
+			</div>
+		</div>
+	</div>
+
+</div>

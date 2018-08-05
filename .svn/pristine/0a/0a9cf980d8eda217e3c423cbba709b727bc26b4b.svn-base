@@ -1,0 +1,270 @@
+<div  class="home" style="min-height: 100%;background: #fff;" ng-controller="classInfoCtr">
+    <div class="top">
+        <div class="tabset">
+            <div class="add-title">班级信息</div>
+            <div class="add-btn orange position" ng-click="goBack()">返回</div>
+        </div>
+    </div>
+    <div class="contain1" style="padding-left: 15%;padding-right: 15%;">
+    	<div class="add-class">
+			<div class="" style="overflow: hidden;clear: both;margin-bottom: 10px;">
+				<div id="" style="float: left;">
+					<p class="inpFont1" >班级</p>
+					<select ng-init="myClassSelected = infor[0]" ng-change="changeClass()" ng-model="myClassSelected" ng-options="item.periodName+'/'+item.gradeName+'/'+item.className for item in infor">
+					</select>&nbsp;&nbsp;
+					<div class="next-btn blue" style="cursor:pointer;margin:50px auto;border-radius:15px;background:#1E70E9;color:#fff;text-align: center;height: 30px;line-height: 30px;width: 80px;" ng-click="editClass()" >
+			        	编辑
+		        	</div>&nbsp;&nbsp;
+		        	<div class="next-btn blue" style="cursor:pointer;margin:50px auto;border-radius:15px;background:#1E70E9;color:#fff;text-align: center;height: 30px;line-height: 30px;width: 80px;" ng-click="delClass()" >
+				                删除
+			        </div>	
+				</div>	
+			</div>
+			<div class="" style="overflow: hidden;clear: both;margin-bottom: 10px;">
+				<div id="" style="float: left;">
+		    		<p class="inpFont">学生人数</p>
+		    		<input style="width: 170px;" type="text" readonly="readonly" placeholder="学生人数" ng-change="allNum()" onKeyUp="value=value.replace(/[^\d]/g,'')" ng-model="myClassSelected.total"><br><br>	
+				</div>
+				<div id="" style="float: left;margin-left: 33px;">
+		    		<p class="inpFont">男生人数</p>
+		    		<input style="width: 170px;" type="text" readonly="readonly" placeholder="男生人数" ng-change="maleNum()" onKeyUp="value=value.replace(/[^\d]/g,'')" ng-model="myClassSelected.male"><br><br>	
+				</div>	
+				<div id="" style="float: left;margin-left: 33px;">
+		    		<p class="inpFont">女生人数</p>
+		    		<input style="width: 170px;" type="text" readonly="readonly" placeholder="女生人数" ng-change="femaleNum()" onKeyUp="value=value.replace(/[^\d]/g,'')" ng-model="myClassSelected.female"><br><br>	
+				</div>					
+			</div>
+			<p style="margin-bottom: 20px;">座位形式</p>
+			<div style="width: 100px;" ng-model="currSeatStyle.src" >
+				<img src="{{currSeatStyle.src}}"  style="height: 100px;width: 100px;"/>
+				<p style="width: 100%;text-align: center;height: 40px;line-height: 40px;">
+					{{currSeatStyle.name}}
+				</p>
+			</div>	
+							
+			<div class="next-btn blue" style="cursor:pointer;margin:50px auto;border-radius:15px;background:#1E70E9;color:#fff;text-align: center;height: 30px;line-height: 30px;width: 80px;" ng-click="addClass()">
+				增加班级
+			</div>	
+	
+    	</div>
+    </div>
+    <div ng-include="'html/blocks/footer.html'" class="foot"></div>
+    <div id="zbglDailog" style="padding: 0;display:{{show}}">
+	    	<div class="detailDaiTitle" style="margin: 50px auto;">编辑班级</div>
+			<div class="" style="overflow: hidden;clear: both;margin-bottom: 10px;margin-left: 64px;">
+				<div id="" style="float: left;margin-left: 10px;">
+					<span style="display: inline-block;">
+				        <span class="inpFont" style="display:block;width:200px;margin-bottom:4px;">学段</span>
+	                     <select class="selzb"  placeholder="执教学段" ng-change="lessonType('1')" ng-model="myClassSelected.periodCode" >
+	                        <option value="">请选择学段</option>
+		                	<option value="1">高中段</option>
+		                	<option value="2">初中段</option>
+		                	<option value="3">小学高段</option>
+		                	<option value="4">小学低段</option>
+	                     </select>
+                     </span>
+                     <span style="display: inline-block;">
+						<!--  <span class="inpFont" style="display:block;margin-bottom:4px;">年级</span>
+	                    <select class="selzb" placeholder="请选择年级" ng-model="myClassSelected.gradeCode" >
+	                        <option value="">请选择年级</option>
+	                        <option value="1">一年级</option>
+	                        <optioien value="2">二年级</option>
+	                        <option value="3">三年级</option>
+	                        <option value="4">四年级</option>
+	                        <option value="5">五年级</option>
+	                        <option value="6">六年级</option>
+	                    </select>
+	                    -->
+	                   <span class="inpFont" style="display:block;margin-bottom:4px;">年级</span>
+                        <select class="selzb" name="" id="" placeholder="执教年级" ng-change="gradeType('1')" ng-model="myClassSelected.gradeCode" ng-init="myClassSelected.gradeCode=''">
+                            <option value="">执教年级</option>
+                            <option value="{{item.code}}" ng-repeat="item in classCheck">{{item.grade}}</option>
+                        </select>
+                    </span>
+                    <span style="display: inline-block;margin-left: 22px;">
+						<span class="inpFont" style="display:block;margin-bottom:4px;">班级</span>
+	                    <select name="" id="" class="selzb" placeholder="请选择班级" ng-model="myClassSelected.classCode">
+	                        <option value="">请选择班级</option>
+	                        <option value="1">(1)班</option>
+	                        <option value="2">(2)班</option>
+	                        <option value="3">(3)班</option>
+	                        <option value="4">(4)班</option>
+	                        <option value="5">(5)班</option>
+	                        <option value="6">(6)班</option>
+	                        <option value="7">(7)班</option>
+	                        <option value="8">(8)班</option>
+	                        <option value="9">(9)班</option>
+	                        <option value="10">(10)班</option>
+	                        <option value="11">(11)班</option>
+	                        <option value="12">(12)班</option>
+	                        <option value="13">(13)班</option>
+	                        <option value="14">(14)班</option>
+	                        <option value="15">(15)班</option>
+	                    </select>
+	                   </span>
+				</div>
+				<div id="" style="float: left;margin-top:20px;margin-left: 10px;">
+					<span style="display: inline-block;">
+			    		<span class="inpFont" style="display:block;margin-bottom:4px;">学生</span>
+			    		<input class="selzb" type="text" placeholder="学生" ng-change="allNum()" onKeyUp="value=value.replace(/[^\d]/g,'')" ng-model="myClassSelected.total">
+			    	</span>
+			    	<span style="display: inline-block;margin-left: 22px;">
+			    		<span class="inpFont" style="display:block;margin-bottom:4px;">男生</span>
+			    		<input class="selzb" type="text" placeholder="男生" ng-change="maleNum()" onKeyUp="value=value.replace(/[^\d]/g,'')" ng-model="myClassSelected.male">
+		    		</span>
+		    		<span style="display: inline-block;margin-left: 22px;">
+			    		<span class="inpFont" style="display:block;margin-bottom:4px;">女生</span>
+			    		<input class="selzb" type="text" placeholder="女生" ng-change="femaleNum()" onKeyUp="value=value.replace(/[^\d]/g,'')" ng-model="myClassSelected.female">
+			    	</span>
+				</div>
+				<div class="" style="overflow: hidden;clear: both;margin-bottom: 10px;margin-left: 120px;"/>
+				
+			</div>	
+			<p style="margin:20px 0 0 75px;">座位形式</p>
+			<div id="editSeat" style="overflow: hidden;margin-left: 64px;margin-top: 10px;">
+				<div id=""  style="padding: 10px;border: 1px solid #F0F1F1;float: left;margin-right: 12px;    text-align: center;">
+					<img src="img/new/desk1.png" style="width: 60px;height: 60px;" ng-click="updSeatStyle('1')">
+					<p style="height: 30px;line-height: 30px;width: 100%;text-align: center;">单人单桌式</p>
+				</div>
+				<div id="" style="padding: 10px;border: 1px solid #F0F1F1;float: left;margin-right: 12px;">	
+					<img src="img/new/desk2.png" style="width: 60px;height: 60px;" ng-click="updSeatStyle('2')">
+					<p style="height: 30px;line-height: 30px;width: 100%;text-align: center;">剧院式</p>
+				</div>
+
+				<div id="" class="" style="padding: 10px;border: 1px solid #F0F1F1;float: left;margin-right: 12px;">
+					<img src="img/new/desk3.png" style="width: 60px;height: 60px;" ng-click="updSeatStyle('3')" >
+					<p style="height: 30px;line-height: 30px;width: 100%;text-align: center;">马蹄式</p>
+				</div>
+				<div id=""  class=""style="padding: 10px;border: 1px solid #F0F1F1;float: left;margin-right: 12px;">
+					<img src="img/new/desk4.png" style="width: 60px;height: 60px;" ng-click="updSeatStyle('4')">
+					<p style="height: 30px;line-height: 30px;width: 100%;text-align: center;">四方式</p>
+				</div>
+				<div id="" class="" style="padding: 10px;border: 1px solid #F0F1F1;float: left;margin-right: 12px;">
+					<img src="img/new/desk5.png" style="width: 60px;height: 60px;" ng-click="updSeatStyle('5')">
+					<p style="height: 30px;line-height: 30px;width: 100%;text-align: center;">小组式</p>
+				</div>
+				<div id="" class="" style="padding: 10px;border: 1px solid #F0F1F1;float: left;margin-right: 12px;">
+					<img src="img/new/desk6.png" style="width: 60px;height: 60px;" ng-click="updSeatStyle('6')">
+					<p style="height: 30px;line-height: 30px;width: 100%;text-align: center;">圆圈式</p>
+				</div>
+				<div id="" class="" style="padding: 10px;border: 1px solid #F0F1F1;float: left;margin-right: 12px;">
+					<img src="img/new/desk7.png" style="width: 60px;height: 60px;" ng-click="updSeatStyle('7')">
+					<p style="height: 30px;line-height: 30px;width: 100%;text-align: center;">其他</p>
+				</div>
+			</div>
+			<div class="next-btn blue" style="cursor:pointer;margin:24px auto;border-radius:15px;background:#1E70E9;color:#fff;text-align: center;height: 30px;line-height: 30px;width: 80px;" ng-click="closeDetailBtn()" >
+				确定
+			</div>
+    </div>
+    
+    <div ng-include="'html/blocks/footer.html'" class="foot"></div>
+    <div id="zbglDailogadd" style="padding: 0;display:{{show}}">
+	    	<div class="detailDaiTitle" style="margin: 50px auto;">增加班级</div>
+			<div class="" style="overflow: hidden;clear: both;margin-bottom: 10px;margin-left: 64px;">
+				<div id="" style="float: left;margin-left: 10px;">
+					<span style="display:inline-block;">
+				        <span class="inpFont" style="display:block;width:200px;margin-bottom:4px;">学段</span>
+	                     <select class="selzb"  placeholder="请选择学段" ng-change="lessonType('2')" ng-model="myClassNew.periodCode">
+		                	<option value="">请选择学段</option>
+		                	<option value="1">高中段</option>
+		                	<option value="2">初中段</option>
+		                	<option value="3">小学高段</option>
+		                	<option value="4">小学低段</option>
+	                     </select>
+                     </span>
+                  <!--   <span style="display:inline-block;">
+						<span class="inpFont" style="display:block;margin-bottom:4px;">年级</span>
+	                    <select class="selzb" placeholder="请选择年级" ng-model="myClassNew.gradeCode">
+	                        <option value="">请选择年级</option>
+	                        <option value="1">一年级</option>
+	                        <option value="2">二年级</option>
+	                        <option value="3">三年级</option>
+	                        <option value="4">四年级</option>
+	                        <option value="5">五年级</option>
+	                        <option value="6">六年级</option>
+	                    </select>
+	                </span>
+	                 -->
+	                 <span style="display:inline-block;">
+	                   <span class="inpFont" style="display:block;margin-bottom:4px;">年级</span>
+                        <select class="selzb" name="" id="" placeholder="执教年级" ng-model="myClassNew.gradeCode" ng-init="myClassNew.gradeCode=''">
+                            <option value="">执教年级</option>
+                            <option value="{{item.code}}" ng-repeat="item in classCheck">{{item.grade}}</option>
+                        </select>
+                     </span>
+	                <span style="display:inline-block;margin-left: 22px;">
+						<span class="inpFont" style="display:block;margin-bottom:4px;">班级</span>
+	                    <select name="" id="" class="selzb" placeholder="请选择班级" ng-model="myClassNew.classCode">
+	                        <option value="">请选择班级</option>
+	                        <option value="1">(1)班</option>
+	                        <option value="2">(2)班</option>
+	                        <option value="3">(3)班</option>
+	                        <option value="4">(4)班</option>
+	                        <option value="5">(5)班</option>
+	                        <option value="6">(6)班</option>
+	                        <option value="7">(7)班</option>
+	                        <option value="8">(8)班</option>
+	                        <option value="9">(9)班</option>
+	                        <option value="10">(10)班</option>
+	                        <option value="11">(11)班</option>
+	                        <option value="12">(12)班</option>
+	                        <option value="13">(13)班</option>
+	                        <option value="14">(14)班</option>
+	                        <option value="15">(15)班</option>
+	                    </select>
+	                </span>
+				</div>
+				<div id="" style="float: left;margin-left: 10px;margin-top:10px;">
+					<span style="display:inline-block;">
+			    		<span class="inpFont" style="display:block;margin-bottom:4px;">学生</span>
+			    		<input class="selzb" type="text" placeholder="学生" ng-change="allNumNew()" onKeyUp="value=value.replace(/[^\d]/g,'')" ng-model="myClassNew.total">
+		    		</span>
+		    		<span style="display:inline-block;margin-left: 22px;">
+			    		<span class="inpFont" style="display:block;margin-bottom:4px;">男生</span>
+			    		<input class="selzb" type="text" placeholder="男生" ng-change="maleNumNew()" onKeyUp="value=value.replace(/[^\d]/g,'')" ng-model="myClassNew.male">
+			    	</span>
+			    	<span style="display:inline-block;margin-left: 22px;">
+			    		<span class="inpFont" style="display:block;margin-bottom:4px;">女生</span>
+			    		<input class="selzb" type="text" placeholder="女生" ng-change="femaleNumNew()" onKeyUp="value=value.replace(/[^\d]/g,'')" ng-model="myClassNew.female">
+			    	</span>
+				</div>
+				<div class="" style="overflow: hidden;clear: both;margin-bottom: 10px;margin-left: 120px;"/>
+				
+			</div>	
+			<p style="margin-left: 75px;">座位形式</p>
+			<div id="addSeat" style="overflow: hidden;margin-left: 64px;margin-top: 10px;">
+				<div id="" style="padding: 10px;border: 1px solid #F0F1F1;float: left;margin-right: 12px;    text-align: center;">
+					<img src="img/new/desk1.png" style="width: 60px;height: 60px;" ng-click="addSeatStyle('1')">
+					<p style="height: 30px;line-height: 30px;width: 100%;text-align: center;">单人单桌式</p>
+				</div>
+				<div id="" style="padding: 10px;border: 1px solid #F0F1F1;float: left;margin-right: 12px;">	
+					<img src="img/new/desk2.png" style="width: 60px;height: 60px;" ng-click="addSeatStyle('2')">
+					<p style="height: 30px;line-height: 30px;width: 100%;text-align: center;">剧院式</p>
+				</div>
+
+				<div id="" style="padding: 10px;border: 1px solid #F0F1F1;float: left;margin-right: 12px;">
+					<img src="img/new/desk3.png" style="width: 60px;height: 60px;" ng-click="addSeatStyle('3')" >
+					<p style="height: 30px;line-height: 30px;width: 100%;text-align: center;">马蹄式</p>
+				</div>
+				<div id="" style="padding: 10px;border: 1px solid #F0F1F1;float: left;margin-right: 12px;">
+					<img src="img/new/desk4.png" style="width: 60px;height: 60px;" ng-click="addSeatStyle('4')">
+					<p style="height: 30px;line-height: 30px;width: 100%;text-align: center;">四方式</p>
+				</div>
+				<div id="" style="padding: 10px;border: 1px solid #F0F1F1;float: left;margin-right: 12px;">
+					<img src="img/new/desk5.png" style="width: 60px;height: 60px;" ng-click="addSeatStyle('5')">
+					<p style="height: 30px;line-height: 30px;width: 100%;text-align: center;">小组式</p>
+				</div>
+				<div id="" style="padding: 10px;border: 1px solid #F0F1F1;float: left;margin-right: 12px;">
+					<img src="img/new/desk6.png" style="width: 60px;height: 60px;" ng-click="addSeatStyle('6')">
+					<p style="height: 30px;line-height: 30px;width: 100%;text-align: center;">圆圈式</p>
+				</div>
+				<div id="" style="padding: 10px;border: 1px solid #F0F1F1;float: left;margin-right: 12px;">
+					<img src="img/new/desk7.png" style="width: 60px;height: 60px;" ng-click="addSeatStyle('7')">
+					<p style="height: 30px;line-height: 30px;width: 100%;text-align: center;">其他</p>
+				</div>
+			</div>
+			<div class="next-btn blue" style="cursor:pointer;margin:24px auto;border-radius:15px;background:#1E70E9;color:#fff;text-align: center;height: 30px;line-height: 30px;width: 80px;" ng-click="closeaddDetailBtn()" >
+				确定
+			</div>
+    </div>
+</div>

@@ -1,0 +1,371 @@
+#cj .top {
+    height: 60px;
+    position: relative;
+    font-size: 16px;
+    border-bottom: 1px solid #c3c3c3;
+}
+.loginam{animation:loginam .8s;-webkit-animation:loginam .8s;}
+.loginam2{animation:loginam2 .8s;-webkit-animation:loginam2 .8s;}
+#cj .tx {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+.toggle{
+    display:inline-block !important;
+}
+.sep_field fieldset .level3Sel .hidd{
+    display:none;
+}
+.sep_field fieldset .level3Sel  .show{
+    display:inline-block;
+}
+#cj div.animate1{
+    position: relative;
+    width:500px;
+    min-height:260px;
+    border-radius:16px;
+}
+.animate1 .dialog-btn{
+    position: absolute;
+    bottom:20px;
+    display:flex;
+    justify-content: space-around;
+    width:300px;
+    left:50%;
+    margin-left:-150px;
+}
+.animate1 .dialog-btn>button{
+    width:60px;
+    height:26px;
+    background:transparent;
+    border:none;
+}
+.level3Sel{
+    display:none;
+}
+.animate1 .content ul{
+    height:160px;
+    overflow-y:auto; 
+    padding:20px;
+}
+.animate1 .content li{
+    height:30px;
+    line-height: 30px;
+    float:left;
+    width:45%;
+    margin-right:10px;
+    margin-top:10px;
+    border:1px solid #ccc;
+}
+.animate1 .dialog-btn .cancel{
+    border:1px solid #ccc;
+    color:#aaa;
+}
+.animate1 .dialog-btn .sure{
+    background:#1e70e9;
+    color:#fff;
+}
+.animate1 .title1{
+    font-size:16px;
+    height:40px;
+    border-radius:16px 16px 0 0;
+    line-height: 40px;
+    text-indent: 20px;
+    background:#447dfe;
+    color:#fff;
+}
+
+#cj .tx .icon_del {
+    display: inline-block;
+    color: #ffb430;
+    width: 15px;
+    height: 15px;
+    margin: 0 10px;
+    background-size: 100% 100%
+}
+
+#cj .tx:hover {
+    color: #1e70e9
+}
+
+#cj .tx .icon_del:hover {
+    color: red;
+}
+
+#cj .top>div {
+    display: inline-block;
+}
+
+#cj .top>.title {
+    padding: 19px;
+}
+
+#cj .finish {
+    background-color: #ffb430;
+    position: absolute;
+    top: 11px;
+    right: 0;
+    padding: 14px 38px;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#cj .zb {
+    display: flex;
+    justify-content: start;
+    padding: 22px 0 22px 40px;
+    float: left;
+    color: #ccc;
+    font-weight: bold;
+}
+
+#cj .zb .theme {
+    padding: 0 70px 0 10px;
+    color: #447dfe;
+    font-size: 20px;
+}
+
+#cj .zb>div>img {
+    margin-right: 10px;
+    width: 30px;
+}
+
+#cj .zb>div>span {
+    margin-right: 20px;
+    font-size: 15px;
+}
+
+#cj .zb>div>span:hover {
+    color: #666;
+    cursor: pointer;
+}
+
+#cj .select.active {
+    color: #1e70e9;
+}
+
+#cj .contentBottom {
+    padding: 80px 0 80px 40px;
+}
+
+#cj .contentBottom:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+#cj .level {
+    width: 200px;
+    float: left;
+}
+
+#cj .confirm {
+    width: 600px;
+}
+
+#cj .level>.title {
+    padding-bottom: 10px;
+    border: 1px solid #fff;
+    border-bottom-color: #ccc;
+}
+
+#cj .level>.title>i {
+    float: right;
+    font-style: normal;
+    color:#1e70e9;
+}
+
+#cj .level>ul {
+    margin-top: 10px;
+}
+
+#cj .item {
+    padding: 9px 5px;
+    position: relative;
+    cursor: pointer;
+}
+
+#cj .item.active {
+    background-color: #1e70e9;
+    color: #fff;
+}
+#cj .addIndexActive{
+    color:#1e70e9;
+    border:1px solid #1e70e9 !important;
+}
+#cj .item>img {
+    position: absolute;
+    right: 9px;
+    width: 16px;
+}
+
+#cj .time .tip{
+    display: inline-block;
+    width:6px;
+    height:26px;
+    border-radius:5px;
+    background: #1e70e9;
+}
+
+#cj .time{
+    margin:10px 0;
+    height:30px;
+    text-align: right;
+    display:table;
+    width:100%;
+}
+#cj .time>p{
+    display:table-cell;
+    vertical-align: middle;
+    font-weight: 600;
+}
+#cj .time .tips{
+    width:70%;
+    text-align: left;
+    vertical-align: middle;
+}
+#cj .time .getTime{
+    width:30%;
+    text-align: center;
+    vertical-align: middle;
+    border-radius:20px;
+    background:#1e70e9;
+    color:#fff;
+}
+#cj input[type="checkbox"] {
+    background-color: red !important;
+    margin: 0 5px 0 6px;
+}
+
+#cj .level2 {
+    margin: 0 50px;
+}
+
+#cj .level3 {
+    width: 50%;
+    height:600px;
+    overflow-y: auto;
+}
+#cj .level3>.title>i{
+    float:right;
+    font-style:normal;
+    color:#447dfe;
+}
+#cj .level3>span {
+    padding: 27px;
+}
+
+#cj .level3t {
+    margin: 20px 0 10px 7px;
+}
+
+#cj .level3t>img {
+    margin-right: 5px;
+}
+form.sep_field legend{
+    width:auto;
+    font-size:18px;
+    border-bottom:none;
+    margin-bottom:0;
+}
+form.sep_field fieldset{
+   border:1px solid silver;
+}
+#cj form.sep_field .retract{
+    border:0;
+    border-top:1px solid silver;
+}
+#cj .pgContent:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+label {
+    font-weight: normal;
+    font-size: 12px;
+}
+
+#cj .level3t>span {
+    color: #1e70e9;
+}
+
+#cj .level3t>span>span {
+    cursor: pointer;
+}
+
+#cj img {
+    cursor: pointer;
+}
+
+#cj .dialogMask {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10;
+    height: 100%;
+    background-color: rgb(0, 0, 0, 0.5);
+}
+
+#cj .delTip {
+    position: absolute;
+    top: -57px;
+    left: 108px;
+}
+
+#cj .dialogBox {
+    width: 307px;
+    height: 220px;
+    border-radius: 20px;
+    background-color: #fff;
+    position: relative;
+    top: 33%;
+    left: 39%;
+}
+
+#cj .dialogBox .title {
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    padding: 63px 0 18px 0;
+    color: #3a3a3a;
+}
+
+#cj .dialogBox .content {
+    font-size: 14px;
+    text-align: center;
+}
+
+#cj .dialogBox .dialogbtn {
+    position: absolute;
+    bottom: 0;
+    border-top-style: solid;
+    border-top-width: 1px;
+    border-top-color: #bfbfbf;
+}
+
+#cj .dialogBox .no {
+    display: inline-block;
+    width: 152px;
+    text-align: center;
+    font-weight: bold;
+    color: #6b6b6b;
+    cursor: pointer;
+    padding: 15px;
+}
+
+#cj .dialogBox .yes {
+    display: inline-block;
+    width: 151px;
+    text-align: center;
+    padding: 15px;
+    color: #2ddce6;
+    font-weight: bold;
+    border-left-color: #ccc;
+    border-left-width: 1px;
+    border-left-style: solid;
+    cursor: pointer;
+}

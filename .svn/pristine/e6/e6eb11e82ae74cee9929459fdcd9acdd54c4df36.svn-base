@@ -1,0 +1,126 @@
+rootApp.controller('topBarCtrl', ["$scope","$rootScope", "$state", "$http", "$stateParams","locals",function ($scope,$rootScope, $state, $http, $stateParams,locals) {
+    $scope.showMenu = false;
+    $scope.showUserMenu = function () {
+        $scope.showMenu = !$scope.showMenu;
+    }
+    
+    $scope.outNone = function(){
+    	$scope.showMenu = false;
+    }
+    
+   
+    $scope.showUserMenu1 = function () {
+        $scope.showMenu = false;
+    }    
+    //退出
+//    $scope.exit = function(){
+//    	$state.go("login")
+//    }
+    $scope.exit = function(){
+		var vm=layer.confirm('确认退出？', {
+		    btn: ['确定','取消'],
+		    skin: 'layui-layer-lan',//按钮
+		}, function(){
+			$state.go("login");
+			layer.close(vm)
+		});		
+	}
+    //console.log(2)
+    $rootScope.namep = locals.get("name");
+    //基本信息
+    $scope.onePage = function(){
+    	$scope.showMenu = false;
+    	$state.go("app.workboard.basic")
+    }
+    //班级信息
+    $scope.twoPage = function(){
+    	$scope.showMenu = false;
+    	$state.go("app.workboard.classInfo")
+    }  
+    //修改密码
+    $scope.threePage = function(){
+    	$scope.showMenu = false;
+    	$state.go("app.workboard.detailPassword")
+    } 
+    //关于我们
+    $scope.fourthPage = function(){
+    	$scope.showMenu = false;
+    	$state.go("app.workboard.aboutUs")
+    }     
+}])
+
+rootApp.controller('SideNavCtrl', ["$scope", "$state", "$http", "$stateParams", function ($scope, $state, $http, $stateParams) {
+    $scope.menuList = [{
+            title: '首页',
+            img: 'img/sy1.png',
+            activeImg: 'img/sy.png',
+            url: 'app.workboard',
+            children: []
+        },
+        {
+            title: '课堂观测',
+            img: 'img/ktgc1.png',
+            activeImg: 'img/ktgc.png',
+            url: 'app.ktgc',
+            children: []
+        }
+//      {
+//          title: '测评报告',
+//          img: 'img/pjbg1.png',
+//          activeImg: 'img/pjbg.png',
+//          url: 'app.pjbg' ,
+//          showChild: false,
+//          children: [{
+//                  title: '我的讲课',
+//                  url: 'app.pjbg.main'
+//              },
+//              {
+//                  title: '我的听课',
+//                  url: 'app.pjbg1.main'
+//              }
+//          ]          
+//      },
+        
+//      {
+//          title: '指标库管理',
+//          img: 'img/zbgl1.png',
+//          activeImg: 'img/zbgl.png',
+//          url: 'app.zbgl',
+//          children: []
+//      },
+//      {
+//          title: '系统管理',
+//          img: 'img/xtgl1.png',
+//          activeImg: 'img/xtgl.png',
+//          url: 'app.xtgl',
+//          children: []
+//      }
+    ];
+    $scope.curUrl = $state.current.name;
+    $scope.mouseoverIndex = -1;
+    $scope.$on('$stateChangeStart',
+        function (event, toState, toParams, fromState, fromParams) {
+            $scope.curUrl = toState.name;
+        });
+    $scope.changeNav = function (index) {
+        $scope.mouseoverIndex = index;
+    }
+    $scope.cleanNav = function () {
+        $scope.mouseoverIndex = -1;
+    }
+    $scope.changeChild = function (item) {
+    	
+    	if(item.title=="测评报告"){
+    		//console.log(2)
+    		item.showChild = !item.showChild
+    	}else{
+    		for(var i=0;i<$scope.menuList.length;i++){
+    			$scope.menuList[i].showChild = false;
+    		}
+    		item.showChild = false
+    	}
+		
+        $state.go(item.url+ '.main');
+
+    };
+}])

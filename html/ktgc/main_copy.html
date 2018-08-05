@@ -1,0 +1,275 @@
+<div class="main" style="min-height: 100%;background: #fff;" ng-controller="ktgcCtrl">
+    <div class="top">
+        <div class="tabset">
+            <div ng-class="{'active': curTab === 1}" class="fl" ng-click="changeTab(1)">我的讲课(<span>{{myTeachTotal}}</span>)</div>
+            <div ng-class="{'active': curTab === 2}" class="fl" ng-click="changeTab(2)">我的听课(<span>{{myListenTotal}}</span>)</div>
+            <div class="add-btn orange fr" ng-show="curTab === 1" ng-click="addClass()">新增讲课</div>
+            <div class="add-btn orange fr" ng-show="curTab === 2" ng-click="addLecture()">新增听课</div>
+        </div>
+    </div>
+    <div class="middle-contain">
+        <div class="tab-content" ng-show="curTab === 1">
+            <div class="sear-box clearfix">
+                
+                
+                <!--<input type="text" class="input small" placeholder="开始时间">-->
+                <div class="layui-form" style="width: 100%;">
+				  <div class="layui-form-item">
+				    <div class="layui-inline" style="width: 100%;">
+				      <div class="layui-input-inline"  style="width: 100%;position: relative;">
+				      	<div class="m-r-10 fl" style="float: left;height: 36px;line-height: 36px;">时间范围</div>
+				        <input type="text" style="float: left;" class="layui-input input small" id="test1" placeholder="开始时间">
+						      <span style="float: left;">-</span>
+		                <input style="float: left;" type="text" class="layui-input input small" ng-model="date.end" id="test2" placeholder="结束时间">
+		               
+		                <!--<input type="text" ng-keydown="search($event)" style="float: left;" class="input middle search" ng-model="nameSearch1" placeholder="关键词搜索">-->
+		                
+				      	<div class="" style="float: left;position: relative;">
+				      		<input type="text" ng-blur="hideSearchBox()" ng-click="showSearchBox()" style="background: none;width: 150px;margin-left: 5px;" class="input middle search" ng-model="nameSearch1" placeholder="关键词搜索">
+				      		<div class="searchBox" style="margin-left: 5px;display: none;box-shadow: 2px 2px 16px 0;z-index:999999999999;position: absolute;top: 40px;width: 150px;height: 80px;background: #fff;overflow: auto;">
+				      			<div class="" ng-click="changeName(item)" style="height: 26px;text-align: center;line-height: 26px;border-bottom:1px solid #eee;cursor: pointer;" ng-repeat="item in searchData">
+				      				{{item}}
+				      			</div>
+				      		</div>
+				      	</div>		                
+		                <!--<input type="text" style="float: left;background: none;width: 150px;margin-left: 5px;" class="input middle search" ng-model="nameSearch1" placeholder="关键词搜索">-->
+		                 <div ng-click="search()" class="" style="cursor:pointer;width: 80px;height: 30px;background: #FFB430;float: right;color:#fff;border-radius: 15px;text-align: center;line-height: 30px;">查询</div>	
+		                <!--<div class="" ng-click="search()" style="background: ;height: 36px;width: 36px;position: absolute;right: 5px;cursor: pointer;"></div>-->
+				      	
+
+				    
+				      </div>
+				    </div>
+				   </div>
+                </div>
+                
+            </div>
+            <div class="class-box">
+                <ul class="clearfix">
+                	<div class="boxLiContent" ng-repeat="item in teachList">
+	                    <li class="class classLearn{{$index}}" style="position: relative;" ng-mouseout="outDetailClick($index)">
+	                        <div style="padding:20px 20px 0;height: 190px;"  ng-mouseover="detailClick(1,$index)">
+	                            <div class="sign clearfix" style="position: relative;">
+	                            	<img ng-Src="{{item.teach.subjectImg}}" style="width: 50px;height: 50px;float: left;margin-right: 15px;"/>
+	                                <!--<div></div>-->
+	                                <p style="line-height: 60px;" ng-mouseover="mouseUp($index,item.teach.title)"><span style="font-size:16px;font-weight: bold;float: left;margin-right:5px;"> </span><span  class="fontB{{$index}}" style="float: left;width: 80px; overflow: hidden; text-overflow:ellipsis; white-space: nowrap;">{{item.teach.title}}</span></p>
+	                                <div ng-click="codeCheck($event,$index)" style="cursor: pointer;position: absolute;right: 0;top: 0;"></div>
+	                            </div>
+	                            <div class="class-info clearfix">
+	                                <div class="overflow-dots">课型：{{item.teach.lessonName}}</div>
+	                                <div class="overflow-dots">{{item.teach.schoolName}}</div>
+	                            </div>
+	                            <div class="class-state clearfix">
+	                                <div class="{{item.teach.red}} fl tians{{$index}}">{{item.teach.redCheck}}</div>
+	                                <div class="fr">{{item.teach.siteStyleName}}</div>
+	                            </div>
+	                            <div class="class-time clearfix">
+	                                <div class="time-img fl">
+	                                    <div style="position: relative;">
+	                                        <span style="font-size:12px;color: #C0C4C8;">{{item.teach.match}}&nbsp;{{item.teach.time}}</span>
+	                                        <div class="class-process"></div>
+	                                    </div>
+	                                </div>
+	                                <div class="time fl" style="width: 48%;font-size: 10px;">{{item.teach.startTime}}</div>
+	                            </div>
+	                        </div>
+	                        <div class="class-user">
+	                            <ul class="apt{{$index}}" dataIndex="{{$index}}">
+	                                    <img src="img/user.png" dataName="{{item1.teacherName}}" class="imgB{{$index}}{{$parent.$index}}" alt="" ng-repeat="item1 in item.teachListener"  ng-mouseover="mouseDailog($index,$parent.$index,item1.teacherName)" alt="" style="width:26px;height: 26px;">
+	                                    <img src="img/last.png" data="{{$index}}" class="slShow" alt="" style="width:26px;height: 26px;display: none;" >
+	                                    <!--<img src="img/user.png" alt="">-->
+	                                
+	                            </ul>
+	                             <div class="operate clearfix apo{{$index}}" style="display: none;" ng-mouseover="detailClick1($index)">
+	                             	<div id="" ng-show="item.teach.checkLectureNum=='1'" style="width: 100%;">
+		                                <div class="fl" style="background: #1E70E9;width: 50%;" dataImg="{{item.teach.qrcode}}" ng-click="toListen($event,item.teach.subjectCode,item.teach.periodCode,item.teach.lessonCode,item.teach.gradeCode,item.teach.classCode,item.teach.title,item.teach.startTime,item.teach.endTime,item.teach.id)">{{item.teach.checkLecture}}</div>
+		                                <div class="fl" style="background: #FF4E68;width: 50%;" ng-click="deleteach(item.teach.id)">删除讲课</div>	                             		
+	                             	</div>
+
+	                                <div class="fl" style="background: #1E70E9;width: 100%;"  ng-show="item.teach.checkLectureNum=='2'" ng-click="startClass($index,item.teach.areaCode,item.teach.schoolCode,item.teach.periodCode,item.teach.classCode,item.teach.teacherId,item.teach.teachTime,item.teach.id)">{{item.teach.checkLecture}}</div>
+	                                <!--<div class="fl" style="height: 0px;"  ng-show="item.teach.checkLectureNum=='3'"></div>-->
+	                            </div> 
+	                        </div>
+	                        
+	                        <!--弹窗-->
+							<div class="selUpDailog selUpDailog2 selUpDailogCheckt{{$index}} selUpDailogCheck" style="position: absolute;top: 220px;display: none;left: 50px;">
+								<div class="selUpDailogImg"></div>
+								<div class="selUpDailogScroll" id="selUpDailogScroll1">
+									<div class="elUpDailogFont" style="text-align: center;cursor: pointer;" ng-click="comeIn(item.teach.id,'','2')"> 
+										总报告&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{totalS.totalScore}}
+									</div> 									
+									<div class="elUpDailogFont" ng-show="itemt.listenScore!=null" style="text-align: center;cursor: pointer;" ng-click="comeIn(item.teach.id,itemt.listenId,'1')" ng-repeat="itemt in teachListenData"> 
+										{{itemt.listenName}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{itemt.listenScore}}
+									</div> 
+									<div class="elUpDailogFont" ng-show="itemt.listenScore==null" style="text-align: center;cursor: pointer;" ng-click="comeIn(item.teach.id,itemt.listenId,'1')" ng-repeat="itemt in teachListenData"> 
+										{{itemt.listenName}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0
+									</div> 
+								</div>
+							</div>	                        
+	                    </li>
+	                    <li class="class  classLearnt{{$index}}" style="display: none;margin-top: -20px;">
+	                        <div class="share1">
+	                            <div style="font-size:16px;margin-top: 10px;">扫一扫加入听课</div>
+	                            <div>
+	                            	<!--javascript:this.src='img/ktgc/gc-ewm-big.png'-->
+	                                <img ng-Src="{{http1}}{{item.teach.qrcode}}" onerror="javascript:this.src='img/ktgc/gc-ewm-big.png'" alt="" style="width:100%;padding:5% 0 8% 0;">
+	                            </div>
+	                            <div class="" style="width: 100%;overflow: hidden;">
+	                            	<div class="share-btn" ng-click="showShare(item.teach.qrcode,item.teach.schoolName,item.teach.teacherName,item.teach.teachTime)" style="float: left;">分享</div>
+	                            	<div class="share-btn1" ng-click="closeShare1($index)" style="float: left;">返回</div>
+	                            </div>
+	                            
+	                        </div>
+	                    </li>                 		
+                	</div>
+ 
+                </ul>
+                <div class="page-footer">
+                    <div class="pager" style="float:right;">
+                        <pager page-count="pageCountError" current-page="errorPage" on-page-change="onPageError()"></pager>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-content" ng-show="curTab === 2">
+                <div class="sear-box clearfix">
+	                <div class="layui-form" style="width: 100%;">
+					  <div class="layui-form-item">
+					    <div class="layui-inline" style="width: 100%;">
+					      <div class="layui-input-inline"  style="width: 100%;position: relative;">
+					      	<div class="m-r-10 fl" style="float: left;height: 36px;line-height: 36px;">时间范围</div>
+					        <input type="text" style="float: left;" class="layui-input input small" id="test3" placeholder="开始时间">
+							      <span style="float: left;">-</span>
+			                <input style="float: left;" type="text" class="layui-input input small" ng-model="date.end" id="test4" placeholder="结束时间">
+			                <!--<input type="text" ng-keydown="search1($event)" class="input middle search" ng-model="nameSearch2" placeholder="关键词搜索">
+			                <div class="" ng-click="search1()" style="background: ;height: 36px;width: 36px;position: absolute;right: 5px;cursor: pointer;"></div>-->
+			                
+					      	<div class="" style="float: left;position: relative;">
+					      		<input type="text" ng-blur="hideSearchBox1()" ng-click="showSearchBox1()" style="background: none;width: 150px;margin-left: 5px;" class="input middle search" ng-model="nameSearch2" placeholder="关键词搜索">
+					      		<div class="searchBox1" style="margin-left: 5px;display: none;box-shadow: 2px 2px 16px 0;z-index:999999999999;position: absolute;top: 40px;width: 150px;height: 80px;background: #fff;overflow: auto;">
+					      			<div class="" ng-click="changeName1(item)" style="height: 26px;text-align: center;line-height: 26px;border-bottom:1px solid #eee;cursor: pointer;" ng-repeat="item in searchData1">
+					      				{{item}}
+					      			</div>
+					      		</div>
+					      	</div>		
+					      	
+		                	<!--<input type="text" style="float: left;background: none;width: 150px;margin-left: 5px;" class="input middle search" ng-model="nameSearch2" placeholder="关键词搜索">-->
+		                 	<div ng-click="search1()" class="" style="cursor:pointer;width: 80px;height: 30px;background: #FFB430;float: right;color:#fff;border-radius: 15px;text-align: center;line-height: 30px;">查询</div>					      
+					      </div>
+					    </div>
+					   </div>
+	                </div>
+                    </div>
+                    <div class="class-box">
+                        <ul class="clearfix">
+		                	<div class="boxLiContent" ng-repeat="item in listenList">
+			                    <li class="class classLearnz{{$index}}" style="" ng-mouseout="outDetailClick($index)">
+			                        <div style="padding:20px 20px 0;height: 190px;"  ng-mouseover="detailClick(2,$index)">
+			                            <div class="sign clearfix" style="position: relative;">
+			                            	<img ng-Src="{{item.subjectImg}}" style="width: 50px;height: 50px;float: left;margin-right: 15px;"/>
+			                                <!--<div></div>-->
+			                                
+			                                <p style="line-height: 60px;" ng-mouseover="mouseUp1($index,item.title)"><span style="font-size:16px;font-weight: bold;float: left;margin-right:5px;">  </span><span  class="fontA{{$index}}" style="float: left;width: 80px; overflow: hidden; text-overflow:ellipsis; white-space: nowrap;">{{item.title}}</span></p>
+			                                <div ng-click="codeCheck1($event,$index)" style="cursor: pointer;position: absolute;right: 0;top: 0;"></div>
+			                            </div>			                            
+			                            
+			                            <div class="class-info clearfix">
+			                                <div class="overflow-dots">课型：{{item.lessonName}}</div>
+			                                <div class="overflow-dots">{{item.schoolName}}</div>
+			                            </div>
+			                            <div class="class-state clearfix">
+			                                <div class="{{item.red}} fl">{{item.redCheck}}</div>
+			                                <div class="blue fr">{{item.siteStyleName}}</div>
+			                            </div>
+			                            <div class="class-time clearfix">
+			                                <div class="time-img fl">
+			                                    <div style="position: relative;">
+			                                        <span style="font-size:12px;color: #C0C4C8;">{{item.match}}&nbsp;{{item.time}}</span>
+			                                        <div class="class-process"></div>
+			                                    </div>
+			                                </div>
+			                                <div class="time fl" style="width: 48%;font-size: 10px;">{{item.startTime}}</div>
+			                            </div>
+			                        </div>
+			                        <div class="class-user">
+			                            <ul class="apt{{$index}}" dataIndex="{{$index}}">
+		                                    <p style="line-height: 100%;float: right;margin-top:15px;"><span ng-show="item.teacherName!=''">讲课老师：</span>{{item.teacherName}}</p>
+			                            </ul>
+			                            
+		 	                            <div class="operate clearfix apo{{$index}}" style="display: none;" ng-mouseover="detailClick1($index)">
+			                             	<div id="" ng-show="item.checkLectureNum=='1'" style="width: 100%;">
+				                                <div class="fl" style="background: #1E70E9;width: 50%;" ng-click="toListen($event,item.teachId)">{{item.checkLecture}}</div>
+				                                <div class="fl" style="background: #FF4E68;width: 50%;" ng-click="deleListen(item.id)">删除听课</div>	                             		
+			                             	</div>
+		
+			                                <!--<div class="fl" style="background: #1E70E9;width: 100%;"  ng-show="item.checkLectureNum=='2'" ng-click="lecssonTo(item.areaCode,item.schoolCode,item.periodCode,item.classCode,item.teacherId,item.listenTeacherId,item.teachTime,item.teachId)">{{item.checkLecture}}</div>-->
+			                            	<div class="fl" style="background: #1E70E9;width: 100%;"  ng-show="item.checkLectureNum=='2'"  ng-click="toCpbg(item.teachId,item.listenTeacherId,'1')">{{item.checkLecture}}</div>
+			                            	<div class="fl" style="background: #1E70E9;width: 100%;"  ng-show="item.checkLectureNum=='3'" ng-click="toListen($event,item.teachId,item.classCode,item.gradeCode,item.periodCode,item.listenTeacherId)">{{item.checkLecture}}</div>
+		 	                            </div>                    
+<!--			                            
+			                             <div class="operate clearfix apo{{$index}}" style="display: none;" ng-show="item.checkLectureNum=='1'"   ng-mouseover="detailClick1($index)">
+			                                <div class="fl" style="background: #1E70E9;width: 50%;" ng-click="toListen($event)">开始听课</div>
+			                                <div class="fl" style="background: #FF4E68;" ng-click="deleListen(item.id)">删除听课</div>
+			                            </div> 
+			                            <div class="fl" style="background: #1E70E9;width: 100%;"  ng-show="item.checkLectureNum=='2'" ng-click="startClass()">{{checkLecture1}}</div>-->
+			                        </div>
+			                    </li>
+			                    <li class="class  classLearntz{{$index}}" style="display: none;margin-top: -20px;">
+			                        <div class="share1">
+			                            <div style="font-size:16px;">扫一扫加入听课</div>
+			                            <div>
+			                                <img ng-Src="{{http1}}{{item.qrcode}}" alt="" style="width:100%;padding:5% 0 8% 0;">
+			                            </div>
+			                            <div class="" style="width: 100%;overflow: hidden;">
+			                            	<div class="share-btn" ng-click="showShare(item.qrcode)" style="float: left;">分享</div>
+			                            	<div class="share-btn1" ng-click="closeShare2($index)" style="float: left;">返回</div>
+			                            </div>
+			                            
+			                        </div>
+			                    </li>                 		
+		                	</div>
+                        
+                        
+                        </ul>
+                        <div class="page-footer">
+                            <div class="pager" style="float:right;">
+                                <pager page-count="pageCountError1" current-page="errorPage1" on-page-change="onPageError1()"></pager>
+                            </div>
+                        </div>
+                    </div>
+        </div>
+    	<div ng-include="'html/blocks/footer.html'"></div>
+    </div>
+
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="share-modal">
+            <div>
+                <img src="img/ktgc/u1.png" alt="" style="width:34%;">
+            </div>
+            <div>
+                <img src="{{http1}}{{imgF}}" alt="" class="twocode">
+            </div>
+            <div class="tip">
+                    请下载安装“课堂观测“APP，扫描二维码进入听课
+            </div>
+            <div class="share-info">
+                <div style="font-size: 14px;color: #606060;">{{schoolName}}</div>
+                <div style="font-size: 16px;color: #1E70E9;">{{teacherName}}</div>
+                <div style="font-size: 12px;color: #9E9E9E;">{{teachTime}}</div>
+            </div>
+            <div class="close-btn" ng-click="closeShare()">关闭</div>
+        </div>
+    </div>
+	<div class="shareDailog" style="display: none;">
+		<div class="shareDailogImg">
+			分享讲课
+		</div>
+		<div class="imgFloat">
+			<img class="shareImg1" src="img/ktgc/qq.png" style="width: 60px;height: 60px;cursor: pointer;"/>
+			<img class="shareImg2" src="img/ktgc/qweib.png"  style="width: 60px;height: 60px;cursor: pointer;" />
+			<img class="shareImg3" src="img/ktgc/qwh.png"  style="width: 60px;height: 60px;cursor: pointer;"/>
+		</div>
+		<div class="chslas">关闭</div>
+	</div>    
+    
+</div>

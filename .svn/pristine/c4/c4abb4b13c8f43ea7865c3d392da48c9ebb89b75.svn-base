@@ -1,0 +1,15 @@
+<div ng-controller="SideNavCtrl">
+    <ul class="main-nav">
+        <li ng-repeat="item in menuList track by $index" ng-mouseover="changeNav($index)" ng-mouseleave="cleanNav()">
+            <a ng-click="changeChild(item)" ng-class="{'active': curUrl.indexOf(item.url) >= 0 }">
+                <img ng-src="{{item.img}}" ng-show="curUrl.indexOf(item.url) < 0 && mouseoverIndex !== $index">
+                <img ng-src="{{item.activeImg}}" ng-show="curUrl.indexOf(item.url) >= 0 || mouseoverIndex === $index">
+                <div class="nav-name">{{item.title}}</div>
+                <div class="bar" ng-show="curUrl.indexOf(item.url) >= 0 || mouseoverIndex === $index"></div>
+            </a>
+            <div ng-show="item.showChild">
+                <div class="child-menu" ui-sref="{{item1.url}}" ng-class="{'active': curUrl.indexOf(item1.url) >= 0 }" ng-repeat="item1 in item.children">{{item1.title}}</div>
+            </div>
+        </li>
+    </ul>
+</div>

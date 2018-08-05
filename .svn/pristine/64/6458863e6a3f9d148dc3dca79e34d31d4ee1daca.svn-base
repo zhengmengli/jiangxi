@@ -1,0 +1,251 @@
+<div class="main" id="cj" style="min-height: 100%;background: #fff;" ng-controller="cjzbCtrl">
+    <div class="top">
+    	<div class="title">教学测评</div>
+    	<div class="finish" ng-click="certain()" ng-show="btnClick==1">下一步</div>
+    	<div class="finish" ng-click="finish()" ng-show="btnClick==2">完成测评</div>
+    </div> 
+    <div class="content" style="height:auto;" ng-show="active<2">
+    	<div class="zb" >
+ 			<div class="select" ng-click="type($index,collectType)" ng-class="{'active':$index==active}" ng-repeat="collectType in collectTypeList track by $index" >
+                <img ng-show="$index!=active" ng-src="{{collectType.img}}" />
+                <img ng-show="$index==active" ng-src="{{collectType.activeImg}}">
+                <span ng-show="active<2">{{collectType.name}}</span>
+            </div>
+    	</div>
+        <div class="contentBottom" ui-view >
+        	<!-- 主辅教学 -->
+        	<div ng-show="active==0">
+        		<!-- 一级 -->
+	         	<div class="level1 level">
+					<div class="title">
+						<span>一级指标</span>
+						<img src="img/cjzb/dele.png" ng-click="del()" title="删除" />
+					</div>
+					<ul class="items">
+						<li class="item tx" ng-class="{'active':$index==active1}" ng-repeat="item in level1 track by $index" ng-click="fir($index)">
+							<span ng-show="$index==active1" style="display:inline-block;width:15px;height:15px;    margin: 0 5px;background:url(img/cjzb/check.png)no-repeat;background-size:100% 100%;"></span>
+							<span ng-show="$index!=active1" style="display:inline-block;width:15px;height:15px;    margin: 0 5px;background:url(img/cjzb/nocheck.png)no-repeat;background-size:100% 100%;"></span>
+							<span>{{item.text}}</span>
+							<img src="img/cjzb/copy.png" ng-if="item.repeatFlag==1" title="复制" ng-show="item.copy!=1" ng-click="copy(item)" />
+						</li>
+					</ul>
+					<ul class="items" style="margin:0;">
+						<li class="item tx"  ng-repeat="item in level11 track by $index">
+							<span style="display:inline-block;width:17px;height:17px;margin:0 5px;background:url(img/cjzb/delAfter.png)no-repeat;background-size:100% 100%;"></span>
+							<span style="color:#ccc;">{{item.text}}</span>
+							<img src="img/cjzb/return.png"/ title="恢复" style="width: 15px;" ng-click="return(item,$index)">
+						</li>
+					</ul>
+				</div>
+				<!-- 二级 -->
+				<div class="level2 level" ng-show="active2!=-2"  >
+					<div class="title" >
+						<span>二级指标</span>
+						<img src="img/cjzb/dele.png" ng-click="deltwo()" title="删除">
+					</div>
+					<ul class="items">
+						<li class="item tx" ng-class="{'active':$index==active2}" ng-repeat ='item in level2 track by $index' ng-click="sec($index,item.text)">
+							<span ng-show="$index==active2" style="display:inline-block;width:15px;height:15px;margin: 0 5px;background:url(img/cjzb/check.png)no-repeat;background-size:100% 100%;"></span>
+							<span ng-show="$index!=active2" style="display:inline-block;width:15px;height:15px;margin: 0 5px;background:url(img/cjzb/nocheck.png)no-repeat;background-size:100% 100%;"></span>							<span>{{item.text}}</span>
+							<img src="img/cjzb/copy.png" title="复制" ng-if="item.repeatFlag==1" ng-show="item.copy!=1"  ng-click="copy2(item)"/ >
+						</li>
+					</ul>
+					<ul class="items"  style="margin:0;">
+						<li class="item tx" ng-repeat ='item in level22 track by $index' >
+							<span style="display:inline-block;width:17px;height:17px;margin:0 5px;background:url(img/cjzb/delAfter.png)no-repeat;background-size:100% 100%;"></span>					
+							<span style="color:#ccc;">{{item.text}}</span>
+							<img src="img/cjzb/return.png"/ title="恢复" style="width:15px;" ng-click="returntwo(item,$index)">
+						</li>
+					</ul>
+				</div>
+				<!-- 三级 -->
+				<div class="level3 level" ng-show="active3!=-1"  >
+					<div class="title">
+						<span>{{level3Title}}</span>
+					</div>
+					<div class="level3t" ng-repeat="item in level3 track by $index">
+						<img src="img/cjzb/green.png"/>
+						<span>{{item.text}}</span>
+						<div class="level3Sel" style="margin:10px 0 0 15px;">
+							<span ng-repeat="thr in item[item.classCode] track by $index" >
+								<span ng-if="thr.optionType==0" ng-click="select(thr,item[item.classCode])" style="margin-right:10px;">
+									<input id="{{thr.id}}"  ng-model="thr.isDefault" style="margin-right:5px;position:relative;top:2px;" ng-checked="thr.isDefault==1" name="{{item.classCode}}" type="radio" /><label for="{{thr.id}}">{{thr.optionName}}</label>
+								</span>
+								<span ng-if="thr.optionType==1" style="margin-right:10px;cursor:pointer;" ng-click="select(thr)">
+			            			<input type="checkbox" style="margin-right:5px;position:relative;top:2px;"  ng-checked="thr.isDefault==1" /><label >{{thr.optionName}}</label>
+								</span>
+			            	</span>
+						</div>
+					</div>
+				</div>
+			 </div>
+
+			<!-- 组织管理 -->
+			<div ng-show="active==1">
+				<!-- 一级 -->
+	         	<div class="level1 level">
+					<div class="title">
+						<span>一级指标</span>
+						<img src="img/cjzb/dele.png" ng-click="cut()" title="删除" />
+					</div>
+					<ul class="items">
+						<li class="item tx" ng-class="{'active':$index==active4}" ng-repeat="item in level4 track by $index" ng-click="firzz($index)">
+							<span ng-show="$index==active4" style="display:inline-block;width:15px;height:15px;    margin: 0 5px;background:url(img/cjzb/check.png)no-repeat;background-size:100% 100%;"></span>
+							<span ng-show="$index!=active4" style="display:inline-block;width:15px;height:15px;    margin: 0 5px;background:url(img/cjzb/nocheck.png)no-repeat;background-size:100% 100%;"></span>
+							<span >{{item.text}}</span>
+							<img src="img/cjzb/copy.png" ng-if="item.repeatFlag==1" title="复制" ng-show="item.copy!=1" ng-click="double(item)" />
+							
+						</li>
+					</ul>
+					<ul class="items" style="margin:0;">
+						<li class="item tx"  ng-repeat="item in level33 track by $index">
+							<span style="display:inline-block;width:17px;height:17px;margin:0 5px;background:url(img/cjzb/delAfter.png)no-repeat;background-size:100% 100%;"></span>
+							<span style="color:#ccc;">{{item.text}}</span>
+							<img src="img/cjzb/return.png"/ title="恢复" style="width: 15px;" ng-click="back(item,$index)">
+						</li>
+					</ul>
+				</div>
+				<!-- 二级 -->
+				<div class="level2 level" ng-show="active4!=-1"  >
+					<div class="title" >
+						<span>二级指标</span>
+						<img src="img/cjzb/dele.png" ng-click="cuttwo()" title="删除" />
+					</div>
+					<ul class="items" >
+						<li class="item tx" style="padding-left: 5px;" ng-class="{'active':$index==active5}" ng-repeat ='item in level5 track by $index' ng-click="seczz($index,item.text)">
+							<span ng-show="$index==active5" style="display:inline-block;width:15px;height:15px;margin: 0 5px;background:url(img/cjzb/check.png)no-repeat;background-size:100% 100%;"></span>
+							<span ng-show="$index!=active5" style="display:inline-block;width:15px;height:15px;margin: 0 5px;background:url(img/cjzb/nocheck.png)no-repeat;background-size:100% 100%;"></span>	
+							<span>{{item.text}}</span>
+							<img src="img/cjzb/copy.png" ng-if="item.repeatFlag==1" title="复制" ng-show="item.copy!=1" ng-click="double2(item)" />
+							
+						</li>
+					</ul>
+					<ul class="items"  style="margin:0;">
+						<li class="item tx" ng-repeat ='item in level44 track by $index' >
+							<span style="display:inline-block;width:17px;height:17px;margin:0 5px;background:url(img/cjzb/delAfter.png)no-repeat;background-size:100% 100%;"></span>					
+							<span style="color:#ccc;">{{item.text}}</span>
+							<img src="img/cjzb/return.png"/ title="恢复" style="width:15px;" ng-click="backtwo(item,$index)">
+						</li>
+					</ul>
+				</div>
+				<!-- 三级 -->
+				 <div class="level3 level" ng-show="active5!=-1"  >
+					<div class="title">
+						<span>{{level6Title}}</span>
+					</div>
+					<div class="level3t" ng-repeat="item in level6 track by $index">
+						<img src="img/cjzb/green.png"/>
+						<span>{{item.text}}</span>
+						<div class="level3Sel" style="margin:10px 0 0 15px;">
+							<span ng-repeat="thr in item[item.classCode] track by $index" >
+								<span ng-if="thr.optionType==0" ng-click="select(thr,item[item.classCode])" style="margin-right:10px;">
+									<input id="{{thr.id}}" ng-model="thr.isDefault" style="margin-right:5px;position:relative;top:2px;" ng-checked="thr.isDefault==1" name="{{item.classCode}}" type="radio" /><label for="{{thr.id}}">{{thr.optionName}}</label>
+								</span>
+								<span ng-if="thr.optionType==1" style="margin-right:10px;" ng-click="select(thr)">
+			            			<input type="checkbox"   style="margin-right:5px;position:relative;top:2px;" ng-checked="thr.isDefault==1" /><label>{{thr.optionName}}</label>
+								</span>
+			            	</span>
+						</div>
+					</div>
+				 </div> 
+			</div>	
+        </div>
+    </div>
+    <!-- 综合评价 -->
+	<div ng-show="active==2" style="height: auto;">
+		<div class="zb" style="width:100%;">
+			<div class="select" >
+            	<img src="img/cjzb/zonghe-hover.png" />
+            	<span style="color:#1e70e9;">综合评价</span>
+        	</div>
+		</div>
+		<div class="pgContent" style="padding: 80px 0 80px 40px;">
+			<!-- 一级 -->
+	     	<div class="level1 level">
+				<div class="title">
+					<span>一级指标</span>				
+				</div>
+				<ul class="items">
+					<li class="item tx" ng-class="{'active':$index==active7}" ng-repeat="item in level7 track by $index" ng-click="firtt($index)">
+						<span style="margin-left:10px;">{{item.text}}</span>
+					</li>
+				</ul>
+			</div>
+			<!-- 二级 -->
+			<div class="level2 level" ng-show="active7!=-1"  >
+				<div class="title" >
+					<span>二级指标</span>
+				</div>
+				<ul class="items" >
+					<li class="item tx" ng-class="{'active':$index==active8}" ng-repeat ='item in level8 track by $index' ng-click="sectt($index,item.text)">
+						<span style="margin-left:10px;">{{item.text}}</span>
+					</li>
+				</ul>
+			</div>
+			<!-- 三级 -->
+			 <div class="level3 level" ng-show="active8!=-1"  >
+				<div class="title">
+					<span>{{level9Title}}</span>
+				</div>
+				<div class="level3t" ng-repeat="item in level9 track by $index">
+					<img src="img/cjzb/green.png"/>
+					<span>{{item.text}}</span>
+					<div class="level3Sel" style="margin:10px 0 0 15px;">
+						<span ng-repeat="thr in item[item.classCode] track by $index" >
+							<span ng-if="thr.optionType==0" ng-click="select(thr,item[item.classCode])" style="margin-right:10px;">
+								<input id="{{thr.optionCode}}" ng-model="thr.isDefault" style="margin-right:5px;position:relative;top:2px;" ng-checked="thr.isDefault==1" name="{{item.classCode}}" type="radio" /><label for="{{thr.optionCode}}">{{thr.optionName}}</label>
+							</span>
+							<span ng-if="thr.optionType==1" style="margin-right:10px;">
+		            			<input ng-click="select(thr)" ng-model="thr.isDefault" type="checkbox" style="margin-right:5px;position:relative;top:2px;" ng-checked="thr.isDefault==1" /><label ng-click="select(thr)">{{thr.optionName}}</label>
+							</span>
+		            	</span>
+					</div>
+				</div>
+			 </div> 
+		</div>
+	</div>
+	<div ng-show="dialog1==1" class="dialogMask">
+		<div class="dialogBox">
+			<img class="delTip" src="img/cjzb/delTip.png" />
+			<div class="title">删除提示</div>
+			<div class="content">关联的内容也会一并删除</div>
+			<div class="dialogbtn">
+				<div class="no" ng-click="No1()">取消</div>
+				<div class="yes" ng-click="Yes1()">确定</div>
+			</div>
+		</div>
+	</div>
+	<div ng-show="dialog2==1" class="dialogMask">
+		<div class="dialogBox">
+			<img class="delTip" src="img/cjzb/delTip.png"/>
+			<div class="title">删除提示</div>
+			<div class="content">关联的内容也会一并删除</div>
+			<div class="dialogbtn">
+				<div class="no" ng-click="No2()">取消</div>
+				<div class="yes" ng-click="Yes2()">确定</div>
+			</div>
+		</div>
+	</div>
+	<div ng-show="dialog3==1" class="dialogMask">
+		<div class="dialogBox">
+			<img class="delTip" src="img/cjzb/delTip.png"/>
+			<div class="title">删除提示</div>
+			<div class="content">关联的内容也会一并删除</div>
+			<div class="dialogbtn">
+				<div class="no" ng-click="No3()">取消</div>
+				<div class="yes" ng-click="Yes3()">确定</div>
+			</div>
+		</div>
+	</div>
+	<div ng-show="dialog4==1" class="dialogMask">
+		<div class="dialogBox">
+			<img class="delTip" src="img/cjzb/delTip.png"/>
+			<div class="title">删除提示</div>
+			<div class="content">关联的内容也会一并删除</div>
+			<div class="dialogbtn">
+				<div class="no" ng-click="No4()">取消</div>
+				<div class="yes" ng-click="Yes4()">确定</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,11 @@
+.contain1{
+	padding-left: 26%;	
+	padding-right: 26%;	
+	padding-top: 40px;
+}
+.add-class .inpFont{
+	margin-bottom: 5px;
+}
+.add-class .inpFont1{
+	margin-bottom: -20px;
+}

@@ -1,0 +1,103 @@
+.pager{
+  width: auto;
+  margin-top:20px;
+  padding-bottom:20px;
+}
+
+.blank{
+  height: 20px;
+  width:20%;
+  margin: 0px;
+  padding: 0px;
+  float: left;
+}
+.ng-pagination {
+  font-family: 'Microsoft YaHei';
+  font-size: 12px;
+  color: #0582d2;
+}
+
+.ng-pagination>ul {
+  display: block;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ng-pagination>ul>li{
+    font-family: simsun;
+    width:25px;
+    height:25px;
+    line-height:25px;
+    margin-right: 5px;
+    text-align:center;
+    background-color:#fff;
+    border:1px solid #0f8bab;
+    color:#0f8bab;
+    border-radius:100%;
+    float:left;
+    cursor:pointer;
+    font-size:13px;
+}
+.ng-pagination>ul>li:first-child,.ng-pagination>ul>li:nth-last-child(2){
+        height:27px;
+        line-height:30px;
+        width:auto;
+        border:none;
+        background:none;
+        margin:0 10px;
+}
+.ng-pagination>ul>li:nth-last-child(2){
+    margin:0 10px 0 5px;
+}
+.ng-pagination>ul>li:first-child:hover,.ng-pagination>ul>li:nth-last-child(2):hover{
+    border:none;
+    background:none;
+    color: #1E70E9;
+}
+.ng-pagination>ul>li:last-child{
+    margin-right:0;
+}
+
+.ng-pagination>ul>li:hover,
+.ng-pagination>ul>li.active {
+  border:1px solid #1E70E9;
+  background-color: #1E70E9;
+  color: #ffffff;
+}
+.ng-pagination>ul>li.firstLast{
+  background-color: #0582d2;
+  color: #ffffff;
+}
+
+
+.ng-pagination>ul>li.showGoto {
+  padding-top:3px;
+  width:auto;
+  background:none;
+  border-radius:0;
+  border:none;
+}
+
+.ng-pagination>ul>li.showGoto span.pageCount{
+  margin-left:3px;
+  line-height:0px;
+  color:#0f8bab;
+  font-size:13px;
+}
+
+.ng-pagination>ul>li.showGoto>lable input {
+  margin-left: 2px;
+  width:27px;
+  height:20px;
+  line-height:0px;
+  border-radius: 16px;
+  border: 1px solid #0f8bab;
+  vertical-align: top;
+  background:none;
+  color:#0f8bab;
+  font-size:12px;
+  text-align:center;
+  padding:0 3px;
+  outline:none;
+}

@@ -1,0 +1,188 @@
+#cj .top{
+    height: 60px;
+    position: relative;
+    font-size: 16px;
+    border-bottom: 1px solid #c3c3c3;
+}
+#cj .tx{
+    display: flex;
+    justify-content: start;
+    align-items: center;
+}
+#cj .top>div{
+	display: inline-block;
+}
+#cj .top>.title{
+	padding: 19px;
+}
+#cj .finish{
+    background-color: #ffb430;
+    position: absolute;
+    top: 11px;
+    right: 0;
+    padding: 14px 38px;
+    color: #fff;
+    font-weight: bold;
+    cursor:pointer;
+}
+#cj .zb{
+	display: flex;
+    justify-content: start;
+    padding: 22px 0 22px 40px;
+    float:left;
+    color:#ccc;
+    font-weight: bold;
+}
+#cj .zb>div>img{
+	margin-right:10px;
+    width: 30px;
+}
+#cj .zb>div>span{
+	margin-right:20px;
+        font-size: 15px;
+}
+#cj .zb>div>span:hover{
+    color:#666;
+    cursor:pointer;
+}
+#cj .select.active{
+    color:#1e70e9;
+}
+#cj .contentBottom{
+    padding: 80px 0 80px 40px;
+}
+#cj .contentBottom:after{
+	content:"";
+	display: block;
+	clear:both;
+}
+#cj .level{
+    width: 200px;
+    float: left;
+}
+#cj .confirm{
+    width:600px;
+}
+#cj .level>.title{
+    padding-bottom:10px;
+    border: 1px solid #fff;
+    border-bottom-color: #ccc;
+}
+#cj .level>.title>img{
+	float:right;
+}
+#cj .level>ul{
+	margin-top: 10px;
+}
+#cj .item{
+    padding: 9px 5px;
+    position: relative;
+    cursor:pointer;
+}
+#cj .item.active{
+    background-color:#1e70e9;
+    color:#fff;
+}
+#cj .item>img{
+    position: absolute;
+    right: 9px;
+    width: 16px;
+}
+#cj input[type="checkbox"]{
+	background-color: red!important;
+    margin: 0 5px 0 6px;
+}
+#cj .level2{
+    margin:0 50px;
+}
+#cj .level3{
+    width: 53%;
+}
+#cj .level3>span{
+    padding: 27px;
+}
+#cj .level3t{
+    margin: 20px 0 10px 7px;
+}
+#cj .level3t>img{
+    margin-right: 5px;
+}
+#cj .pgContent:after{
+    content:"";
+    display: block;
+    clear:both;
+}
+label{
+    font-weight: normal;
+    font-size: 12px;
+}
+#cj .level3t>span{
+    color:#2cc17b;
+}
+#cj .level3t>span>span{
+    cursor: pointer;
+}
+#cj img{
+    cursor: pointer;
+}
+#cj .dialogMask{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 10;
+    height: 100%;
+    background-color: rgb(0,0,0,0.5);
+}
+#cj .delTip{
+    position: absolute;
+    top: -57px;
+    left: 108px;
+}
+#cj .dialogBox{
+        width: 307px;
+    height: 220px;
+    border-radius: 20px;
+    background-color: #fff;
+    position: relative;
+    top: 33%;
+    left: 39%;
+}
+#cj .dialogBox .title{
+        font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    padding: 63px 0 18px 0;
+    color: #3a3a3a;
+}
+#cj .dialogBox .content{
+        font-size: 14px;
+    text-align: center;
+}
+#cj .dialogBox .dialogbtn{
+    position: absolute;
+    bottom: 0;
+    border-top-style: solid;
+    border-top-width: 1px;
+    border-top-color: #bfbfbf;
+}
+#cj .dialogBox .no{
+        display: inline-block;
+    width: 152px;
+    text-align: center;
+    font-weight: bold;
+    color: #6b6b6b;
+    cursor: pointer;
+}
+#cj .dialogBox .yes{
+        display: inline-block;
+    width: 151px;
+    text-align: center;
+    padding: 15px;
+    color: #2ddce6;
+    font-weight: bold;
+    border-left-color: #ccc;
+    border-left-width: 1px;
+    border-left-style: solid;
+    cursor: pointer;
+}

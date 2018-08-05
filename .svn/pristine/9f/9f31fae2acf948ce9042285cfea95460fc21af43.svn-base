@@ -1,0 +1,386 @@
+rootApp.controller('cjzbCtrl', ["$scope", "$state", "$http", "$stateParams","commonHttpService","locals","jdhPath" ,function ($scope, $state, $http, $stateParams,commonHttpService,locals,jdhPath) {
+//获取地址栏信息
+	// function decodeUnicode(str) {  
+	//     str = str.replace(/\\/g, "%");  
+	//     return unescape(str);  
+	// } 
+	// var url=decodeUnicode($state.params.test1);
+	var url=JSON.parse($state.params.test1);
+	var lessonCode1=url.value1;
+	var periodCode1=parseInt(url.value2);
+	var subjectCode1=parseInt(url.value3);
+	var listenTeacherId=parseInt(url.value4);
+	var teachId=parseInt(url.value5);
+	var teachTeacherId=parseInt(url.value6);
+//主辅/组织切换
+	$scope.collectTypeList=[{
+			name:'主辅教学',
+			img:'img/cjzb/zhufu.png',
+			activeImg:'img/cjzb/zhufu-hover.png'
+		},{
+			name:'组织管理',
+			img:'img/cjzb/zuzhi.png',
+			activeImg:'img/cjzb/zuzhi-hover.png'
+		}
+	]
+	$scope.type=function(index,name){
+		$scope.active=index;
+	}
+	//点击完成之前
+	$scope.btnClick=1;
+	$scope.active=0;
+//主辅教学
+	$scope.level1=[];
+	$scope.level2=[];
+	$scope.level3=[];
+
+	//获取每级指标
+	var param1={collectType:1,lessonCode:lessonCode1,parentClassCode:0,periodCode:periodCode1,subjectCode:subjectCode1};
+	$http.post(jdhPath.finalRoot1+'/index/collect/indexTree',param1).then(function(response) { 
+		$scope.level1=response.data.data[param1.parentClassCode];
+		angular.forEach($scope.level1,function(item){
+			if(!("number" in item)){
+				item.number=1;
+				item.addNumber=1;
+			}
+		})
+		console.log($scope.level2)
+		//debugger;
+       }, function errorCallback(response) {
+          alert(response.data.info);
+   	});
+   	var optionFinish=0;
+	//获取指标项
+   	var optionList = {};
+   	$scope.optionObj = {};
+   	var param3={collectType:1,lessonCode:lessonCode1,periodCode:periodCode1,subjectCode:subjectCode1};
+   	$http.post(jdhPath.finalRoot1+'/index/collect/option/list',param3).then(function(response) { 
+		optionList=response.data.data;
+			for(key in optionList){
+				$scope.optionObj[optionList[key].optionList[0].classCode3]=[];
+				$scope.optionObj[optionList[key].optionList[0].classCode3]=optionList[key].optionList;
+				angular.forEach(optionList[key].optionList,function(item,index){
+					item.orderNums=1;
+				});
+			}
+			optionFinish=1;
+
+       	}, function errorCallback(response) {
+         alert(response.data.info);
+   	});
+   	//一二级
+   	$scope.active1=-1;
+   	$scope.active2=-2;
+   	$scope.active3=-1;
+ 
+   	//主辅教学一级指标点击
+	$scope.fir=function(index){
+		$scope.level2=$scope.level1[index].children;
+		$scope.level3=[];
+		$scope.active1=index;
+		$scope.active2=-1;
+	}
+	//主辅教学二级指标点击
+	$scope.sec=function(index,title){
+		if(optionFinish==1){
+			$scope.level3=$scope.level2[index].children;
+			angular.forEach($scope.level3,function(item,index1){
+				if(!(item.classCode in item)){
+					item[item.classCode] = [];
+					item[item.classCode] = angular.copy($scope.optionObj[item.classCode]);
+				}
+				
+			});
+			$scope.level3Title=title;
+			$scope.active2=index;
+			$scope.active3=0;
+		}else{
+			alert("正在加载");
+		}	
+	}
+	//复制
+	$scope.copy=function(item){
+		item.addNumber++;
+		if(!('copy' in item)){
+			var itemCopy=angular.copy(item);
+			itemCopy.text+="(副本)";
+			itemCopy.copy=1;
+			itemCopy.number=item.addNumber;
+			$scope.level1.push(itemCopy);
+		}
+	}
+	$scope.copy2=function(item){
+		if(!('copy' in item)){
+			var itemCopy=angular.copy(item);
+			itemCopy.text+="(副本)";
+			itemCopy.copy=1;
+			$scope.level2.push(itemCopy);
+		}
+	}
+	$scope.level11=[];
+	$scope.level22=[];
+	//一级删除
+	$scope.del=function(){
+		if($scope.active1==-1){
+			$scope.active1=0;
+		}else{
+			if($scope.level1.length!=0){
+				$scope.level11.push($scope.level1[$scope.active1]);
+				$scope.level1.splice($scope.active1,1);
+				$scope.active1=0;
+
+			}
+			$scope.active2=-2;
+			$scope.active3=-1;	
+		}
+	}
+	//一级返回
+	$scope.return=function(item,index){
+		$scope.level1.push(item);
+		$scope.level11.splice(index,1);
+		$scope.active1=0;
+	}
+	//二级删除
+	$scope.deltwo=function(){
+		if($scope.active2==-1){
+			// $scope.active2=0;
+		}else{
+			var level2Par=$scope.level1[$scope.active1];
+			if(!("children1" in level2Par)){
+				level2Par.children1=[];
+			}	
+			if($scope.level2.length!=0){
+				level2Par.children1.push($scope.level2[$scope.active2]);
+				$scope.level3=[];
+				$scope.level22=level2Par.children1;
+				$scope.level2.splice($scope.active2,1);
+				$scope.active2=0;
+				$scope.active3=-1;
+			}
+		}
+	}
+	//二级返回
+	$scope.returntwo=function(item,index){
+		$scope.level2.push($scope.level1[$scope.active1].children1[index]);
+		$scope.level1[$scope.active1].children1.splice(index,1);
+		//$scope.level22.length=0;
+		$scope.active2=0;
+	}
+
+//组织管理
+	$scope.level4=[];
+	$scope.level5=[];
+	$scope.level6=[];
+	//获取每级指标
+	var param2={collectType:2,lessonCode:lessonCode1,parentClassCode:0,periodCode:periodCode1,subjectCode:subjectCode1};
+   	$http.post(jdhPath.finalRoot1+'/index/collect/indexTree',param2).then(function(response) { 
+		$scope.level4=response.data.data[param2.parentClassCode];
+       }, function errorCallback(response) {
+          alert(response.data.info);
+   	});
+   	
+   	//获取指标项
+ 	var optionList2 = {};
+   	$scope.optionObj2 = {};
+   	var param4={collectType:2,lessonCode:lessonCode1,periodCode:periodCode1,subjectCode:subjectCode1};
+   	$http.post(jdhPath.finalRoot1+'/index/collect/option/list',param4).then(function(response) { 
+		optionList2=response.data.data;
+			for(key in optionList2){
+				//debugger;
+				$scope.optionObj2[optionList2[key].optionList[0].classCode3]=[];
+				$scope.optionObj2[optionList2[key].optionList[0].classCode3]=optionList2[key].optionList;
+				angular.forEach(optionList2[key].optionList,function(item,index){
+					item.orderNums=1;
+				});
+			}
+       	}, function errorCallback(response) {
+          alert(response.data.info);
+   	});
+
+	$scope.active4=-1;
+   	$scope.active5=-1;
+   	
+	//组织管理一级指标点击
+	$scope.firzz=function(index){
+		$scope.level5=$scope.level4[index].children;
+		$scope.level6=[];
+		$scope.active4=index;
+		$scope.active5=-1;
+	}
+	//组织管理二级指标点击
+	$scope.seczz=function(index,title){
+		$scope.level6=$scope.level5[index].children;
+		angular.forEach($scope.level6,function(item,index1){
+			item[item.classCode] = [];
+			item[item.classCode] = $scope.optionObj2[item.classCode];
+		});
+		$scope.level6Title=title;
+		$scope.active5=index;
+	}
+
+//综合评价
+	$scope.level7=[];
+	$scope.level8=[];
+	$scope.level9=[];
+	//获取每级指标
+	var param6={collectType:3,lessonCode:lessonCode1,parentClassCode:0,periodCode:periodCode1,subjectCode:subjectCode1};
+   	$http.post(jdhPath.finalRoot1+'/index/collect/indexTree',param6).then(function(response) { 
+		$scope.level7=response.data.data[param6.parentClassCode];
+       }, function errorCallback(response) {
+          alert(response.data.info);
+   	});
+	var optionList3 = {};
+   	$scope.optionObj3= {};
+   	var param7={collectType:3,lessonCode:lessonCode1,periodCode:periodCode1,subjectCode:subjectCode1};
+   	$http.post(jdhPath.finalRoot1+'/index/collect/option/list',param7).then(function(response) { 
+		optionList3=response.data.data;
+			for(key in optionList3){
+				//debugger;
+				$scope.optionObj3[optionList3[key].optionList[0].classCode3]=[];
+				$scope.optionObj3[optionList3[key].optionList[0].classCode3]=optionList3[key].optionList;
+				angular.forEach(optionList3[key].optionList,function(item,index){
+					item.orderNums=1;
+				});
+			}
+       	}, function errorCallback(response) {
+        	alert(response.data.info);
+   	});
+   	$scope.active7=-1;
+   	$scope.active8=-1;
+   	
+	//综合评价一级指标点击
+	$scope.firtt=function(index){
+		$scope.level8=$scope.level7[index].children;
+		$scope.level9=[];
+		$scope.active7=index;
+		$scope.active8=-1;
+	}
+	//综合评价二级指标点击
+	$scope.sectt=function(index,title){
+		$scope.level9=$scope.level8[index].children;
+		angular.forEach($scope.level9,function(item,index1){
+			item[item.classCode] = [];
+			item[item.classCode] = $scope.optionObj3[item.classCode];
+		});
+		$scope.level9Title=title;
+		$scope.active8=index;
+	}
+	//更改选项
+	$scope.select=function(item,list){
+		if(item.optionType==0){
+			angular.forEach(list,function(item,index1){
+				item.isDefault=0;
+			});
+			item.isDefault=1;
+		}else{
+			item.isDefault=item.isDefault==1?0:1;
+		}
+	}
+	//获取更改指标项
+	function getChecked(optionCode){
+		var list=[];
+		for(var i=0;i<$scope.level1.length;i++){
+			//debugger;
+			if($scope.level1[i].children){
+				for(var j=0;j<$scope.level1[i].children.length;j++){
+					if($scope.level1[i].children[j].children){
+						for(var h=0;h<$scope.level1[i].children[j].children.length;h++){
+							if($scope.level1[i].children[j].children[h][$scope.level1[i].children[j].children[h].classCode]){
+								for(var t=0;t<$scope.level1[i].children[j].children[h][$scope.level1[i].children[j].children[h].classCode].length;t++){
+									if($scope.level1[i].children[j].children[h][$scope.level1[i].children[j].children[h].classCode][t].isDefault==1){
+										$scope.level1[i].children[j].children[h][$scope.level1[i].children[j].children[h].classCode][t].orderNums=$scope.level1[i].number;
+										list.push($scope.level1[i].children[j].children[h][$scope.level1[i].children[j].children[h].classCode][t][optionCode]);
+									}	
+								}
+							}
+							
+						}
+					}
+					
+				}
+			}
+			
+		}
+		return list;
+	}
+	//获取组织管理更改指标项
+	function getChecked2(optionCode){
+		var list=[];
+		for(key in $scope.optionObj2){
+			angular.forEach($scope.optionObj2[key],function(item,index){
+				if(item.isDefault==1){
+					list.push(item[optionCode]);
+				}
+			});
+		}
+		return list;
+	}
+	//获取综合评价更改指标项
+	function getChecked3(optionCode){
+		var list=[];
+		for(key in $scope.optionObj3){
+			angular.forEach($scope.optionObj3[key],function(item,index){
+				if(item.isDefault==1){
+					list.push(item[optionCode]);
+				}
+			});
+		}
+		return list;
+	}
+	$scope.list55=[];
+	$scope.list66=[];
+	//确认按钮点击
+	$scope.certain=function(){
+		var list1=getChecked("optionCode").join(",");
+		var list3=getChecked2("optionCode").join(",");
+		var list5="";
+		if(list1.length==0){
+			list5=list3;
+		}else if(list3.length==0){
+			list5=list1;
+		}else{
+			list5=list1+","+list3;
+		}
+		$scope.list55=list5;
+		var list2=getChecked("orderNums").join(",");
+		var list4=getChecked2("orderNums").join(",");
+		var list6="";
+		if(list2.length==0){
+			list6=list4;
+		}else if(list4.length==0){
+			list6=list2;
+		}else{
+			list6=list2+","+list4;
+		}
+		$scope.list66=list6;
+		$scope.btnClick=2;
+		$scope.active=2;		
+	}
+	//完成按钮点击
+	$scope.finish=function(){
+		var list7=getChecked3("optionCode").join(",");
+		var list8=getChecked3("orderNums").join(",");
+		var list77="";
+		if(list7.length==0){
+			list77=$scope.list55;
+		}else if($scope.list55.length==0){
+			list77=list7;
+		}else{
+			list77=$scope.list55+","+list7;
+		}
+		var list88="";
+		if(list8.length==0){
+			list88=$scope.list66;
+		}else if($scope.list66.length==0){
+			list88=list8;
+		}else{
+			list88=$scope.list66+","+list8;
+		}
+		var param10={listenTeacherId:listenTeacherId,optionCodes:list77,orderNums:list88,teachId:teachId,teachTeacherId:teachTeacherId}
+		$http.post(jdhPath.finalRoot1+'/index/collect/option/mark',param10).then(function(response) { 
+				$state.go("app.ktgc.main");
+	       	}, function errorCallback(response) {
+	         alert(response.data.info);
+	   	});
+	}
+}]);

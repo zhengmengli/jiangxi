@@ -1,0 +1,183 @@
+<div min-height class="main attent-class" ng-controller="attendClassCtrl">
+    <div class="top clearfix">
+        <div class="class-state fl">
+            <span>测评进度</span>
+            <!--<span>{{time.left | time}}</span>-->
+            <span>{{timerNt}} / {{timerNg}}</span>
+            <!--<span ng-show="jinDuD==0">0</span>-->
+            <!--<span>）</span>-->
+        </div>
+        <div class="add-btn orange fr" ng-click="showSeat()">座位表</div>
+        <div class="add-btn blue fr" ng-click="showSeat1()" >实时报告</div>
+        <!--<div class="time-box">
+            <div class="time-process" style="width:{{time.width}}">
+                <div class="timer"></div>
+                <div class="time-num">{{time.now | time}}</div>
+            </div>
+        </div>-->
+
+    </div>
+    <div class="middle-contain add-class" style="position:relative;">
+        <div class="clearfix">
+			<!--<div class="" style="overflow: auto;">-->
+            <div class="quota-box fl caption1" style="display: none;">
+	        	
+                <div class="quota-title">一级指标</div>
+                <ul  style="height: 500px;overflow: auto;">
+                    <li class="quota caption1 oneClick{{$index}}" ng-class="{'active': current.quota1 == $index}" ng-repeat="item in list1 track by $index" ng-click="chooseQuota($index,'quota1',item.indexId,item.id,$index)">
+                        <div class="dot blue-dot" ></div>
+                        <div class="dot white-dot" ></div>
+                        <span>{{item.name}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i class="inNum{{$index}}">{{item.selected}} </i> / <i>{{item.indexNum}}</i></span>
+                    </li>
+                </ul>	        		
+	        	           	
+            </div>
+            	
+            <!--</div>--> 
+            <div class="quota-box fl caption2" style="display: none;">
+                <div class="quota-title">二级指标</div>
+                <ul style="height: 500px;overflow: auto;">
+                    <li class="quota"  ng-class="{'active': current.quota2 == $index}" ng-repeat="item in list2 track by $index" ng-click="chooseQuota($index,'quota2',item.indexId,item.id)">
+                        <div class="dot blue-dot"></div>
+                        <div class="dot white-dot"></div>
+                        <span>{{item.name}}</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="quota-box fl caption3" style="display: none;">
+	                <div class="quota-title">三级指标</div>
+	                <ul style="height: 500px;overflow: auto;">
+	                    <li class="quota" ng-class="{'active': current.quota3 == $index}" ng-repeat="item in list3 track by $index" ng-click="chooseQuota($index,'quota3',item.indexId,item.id)">
+	                        <div class="dot blue-dot"></div>
+	                        <div class="dot white-dot"></div>
+	                        <span>{{item.name}}</span>
+	                    </li>
+	                </ul>           		
+
+            </div>
+            <div class="quota-box fl caption4" style="display: none;">
+            	
+                <div class="quota-title">四级指标</div>
+                <ul style="height: 500px;overflow: auto;">
+                    <li class="quota" ng-class="{'active': current.quota4 == $index}" ng-repeat="item in list4 track by $index" ng-click="chooseQuota($index,'quota4',item.indexId,item.id)">
+                        <div class="dot blue-dot"></div>
+                        <div class="dot white-dot"></div>
+                        <span>{{item.name}}</span>
+                    </li>
+                </ul>
+            </div>
+            <div class="evaluate-box fl caption5" style="display: none;position: relative;">
+            	<div class="next-btn blue" dataId="{{ba}}" style="position: absolute;right: 0;text-align: center;top: 0px;" ng-click="getScore(ba)">确定</div>
+                <div class="evaluate-title no-border">评价选项</div>
+                <div class="" style="position: absolute;top: 0;left: 20%;">
+	                <!--<input type="radio" name="getScoreDo" class="getScoreDo" id="getScoreDo1" value="1" checked="checked"/>
+	                <label for="getScoreDo1">多选</label>
+	                <input type="radio" name="getScoreDo" class="getScoreDo" id="getScoreDo2" value="2" />
+	                <label for="getScoreDo2">单选</label>                 	-->
+	                <p  ng-show="list5[0].radio=='0'">多选</p>
+	                <p  ng-show="list5[0].radio=='1'">单选</p>
+                </div>
+               
+                
+                <div class="evaluate-list radioH1" ng-show="list5[0].radio=='0'">
+                    <ul class="clearfix">
+                        <li ng-class="{'active': item.selected==1}" dataId="{{item.id}}" ng-repeat="item in list5 track by $index" ng-click="checkEvaluate(item,item.id)">{{item.options}}</li>
+                        
+                    </ul>
+                </div>
+                
+                
+                <div class="evaluate-list radioH2" ng-show="list5[0].radio=='1'">
+                    <ul class="clearfix">
+                        <li class="evaluateActive" ng-class="{'active': item.selected==1}" dataId="{{item.id}}" ng-repeat="item in list5 track by $index" >{{item.options}}</li>
+                    </ul>
+                </div>                
+                
+            </div>
+        </div>
+        <div class="next-content clearfix displayBtn" style="display: none;">
+            <div class="next-btn blue" ng-show="!isShowSeat" ng-click="finish()" >{{btnFinishText}}</div>
+        </div>
+        <div class="seat-box" ng-show="isShowSeat">
+            <div class="seat-title"></div>
+    		<div class="add-class" ng-show="seatInfor=='1'">
+    			<div class="info-content" style="width: 840px;">
+                    <ul class="clearfix">
+                        <li class="seat aseat" style="margin: 0 5px 10px 0;" ng-repeat="item in seatList track by $index" ng-click="chooseStudent($index)">
+                            <div data="{{item.siteCode}}" class="imgchec">
+                                <img src="img/home/hui.png" class="imgH" style="width: 20px;height: 16px;" alt="" ng-show="item.siteCode=='0'">
+                                <img src="img/home/lan.png" class="imgH" style="width: 20px;height: 16px;" alt="" ng-show="item.siteCode!='0'">
+                            </div>
+                            <div style="font-size: 12px;"  class="fontH tsha{{$index}}">{{item.name}}</div>
+                        </li>
+                    </ul>  
+                </div>
+    		</div>
+    		<div class="add-class" ng-show="seatInfor=='2'">
+    			<div class="info-content" style="width: 720px;">
+                    <ul class="clearfix">
+                        <li class="seatz seat33" style="width: 69px;" ng-repeat="item in seatList track by $index" ng-click="chooseStudent($index)">
+                            <div data="{{item.siteCode}}" class="imgchec">
+                                <img src="img/home/hui.png" class="imgH" style="width: 20px;height: 16px;" alt="" ng-show="item.siteCode=='0'">
+                                <img src="img/home/lan.png" class="imgH" style="width: 20px;height: 16px;" alt="" ng-show="item.siteCode!='0'">
+                            </div>
+                            <div style="font-size: 12px;"  class="fontH tsha{{$index}}">{{item.name}}</div>
+                        </li>
+                    </ul>  
+                </div>
+    		</div>           
+            
+            <div class="record" ng-show="isShowRecord">
+                <div style="position:relative;">
+                    <div class="name">张三丰</div>
+                    <div class="hand-box clearfix">
+                        <div class="hand fl">举手</div>
+                        <div class="count-input fl" ng-init="trueCount=0">
+                            <div class="plus fl" ng-click="addTrue()">+</div>
+                            <input type="text fl" value="{{trueCount}}">
+                            <div class="minus fr" ng-click="reduceTrue()">-</div>
+                        </div>
+                    </div>
+                    <div class="count-box clearfix">
+                        <div class="hand fl">回答
+                            <br>问题</div>
+                        <div class="fl">
+                            <div class="count-input clearfix">
+                                <div class="plus fl" ng-click="addQuestion()">+</div>
+                                <input type="text fl" value="{{questionCount}}">
+                                <div class="minus fr" ng-click="reduceQuestion()">-</div>
+                            </div>
+                            <div class="result">
+                                <div class="radio1" ng-class="{'check': curStudent.question == 'true'}">
+                                    <input type="radio" value="true" ng-model="curStudent.question" name="question" id="true">
+                                </div>
+                                
+                                <label for="true">回答正确</label>
+                            </div>
+                            <div class="result" style="margin-top:0;">
+                                    <div class="radio1" ng-class="{'check': curStudent.question == 'false'}">
+                                        <input type="radio" value="false" ng-model="curStudent.question" name="question" id="false">
+                                    </div>
+                                <label for="false">回答错误</label>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="close-btn" ng-click="closeRecord()">完成</div>
+                    <div class="close-ico" ng-click="closeRecord()"></div>
+                </div>
+            </div>
+	        <div class="closeFont" style="width: 100%;text-align: center;font-size: 20px;margin-top: 250px;margin-bottom: 100px;">
+	        		没找到该班级学生信息,请去班级信息维护!
+	        </div>            
+	        <div class="next-content clearfix" style="">
+	            <div class="next-btn blue seatClose"  ng-show="isShowSeat" ng-click="closeInfo()">关闭</div>
+	        </div>
+
+        </div>
+        <!--<div class="next-content clearfix" style="margin-top: -60px;">
+            <div class="next-btn blue"  ng-show="isShowSeat" ng-click="showSeat()">关闭</div>
+        </div>-->
+    </div>
+    <!--<div ng-include="'html/blocks/footer.html'"></div>-->
+</div>

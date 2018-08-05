@@ -1,0 +1,373 @@
+<div class="main" id="cj" style="min-height: 100%;background: #fff;" ng-controller="cjzbCtrl">
+	<div class="top">
+		<div class="title">我的听课/教学测评/朱自清</div>
+		<div class="finish" ng-click="finished()" ng-show="btnClick==1">完成测评</div>
+	</div>
+	<div class="content" style="height:auto;">
+		<div class="zb">
+			<span class="theme">教学测评</span>
+			<div class="select" ng-click="type($index,collectType)" ng-class="{'active':$index==active}" ng-show="collectType.status"
+			    ng-repeat="collectType in collectTypeList track by $index">
+				<img ng-show="$index!=active" ng-src="{{collectType.img}}" />
+				<img ng-show="$index==active" ng-src="{{collectType.activeImg}}">
+				<span>{{collectType.name}}</span>
+			</div>
+		</div>
+		<div class="contentBottom" ui-view>
+			<!-- 主辅教学 -->
+			<div ng-show="active==0">
+				<!-- 一级 -->
+				<div class="level1 level">
+					<div class="title">
+						<span>一级指标</span>
+						<i class="iconfont icon--jiahao" title="新增" ng-click="addFirstIndex(1,'主辅教学')"></i>
+					</div>
+					<ul class="items">
+						<li class="item tx" ng-class="{'active':$index==active1}" ng-repeat="item in level1 track by $index" ng-click="fir($index)">
+							<span class="icon_del iconfont icon-delete" title="删除" ng-click="del($event,'主辅教学',1,$index)"></span>
+							<span>{{item.nm}}</span>
+						</li>
+					</ul>
+				</div>
+				<!-- 二级 -->
+				<div class="level2 level" ng-show="active2!=-2">
+					<div class="title">
+						<span>二级指标</span>
+						<i class="iconfont icon--jiahao" title="新增" ng-click="addFirstIndex(2,'主辅教学')"></i>
+					</div>
+					<ul class="items">
+						<li class="item tx" ng-class="{'active':$index==active2}" ng-repeat='item in level2 track by $index' ng-click="sec($index,item.text)">
+							<span class="icon_del iconfont icon-delete" title="删除" ng-click="del($event,'主辅教学',2,$index)"></span>
+							<span>{{item.nm}}</span>
+						</li>
+					</ul>
+				</div>
+				<!-- 三级 -->
+				<div class="level3 level" ng-show="active3!=-1">
+					<div class="title">
+						<span>{{level3Title}}</span>
+						<i ng-click="showAllFlag()">{{lev3.showAll}}</i>
+					</div>
+					<div ng-repeat="it1 in level3 track by $index" ng-if="it1.cxt.length!==0">
+						<div class="time">
+							<p class="tips">
+								<span class="tip"></span>
+								<span>{{it1.title}}</span>
+							</p>
+							<p class="getTime" ng-click="startTime($index)">
+								<i class="iconfont icon-weibiaoti519" ng-show="it1.time"></i>
+								<i class="iconfont icon-play_fill" ng-show="!it1.time"></i>
+								<span class="setTime">{{it1.time}}</span>
+							</p>
+						</div>
+						<form class="sep_field">
+							<fieldset class="level3t retract" ng-repeat="item in it1.cxt track by $index">
+								<legend ng-click="showAddPart($index)">{{item.nm}}</legend>
+								<div class="level3Sel" style="margin:10px 0 0 15px;">
+									<span ng-click="select(thr,item.classCode)" style="margin-right:10px;" ng-repeat="thr in item.classCode track by $index">
+										<input id="{{thr.id}}" ng-model="thr.df" style="margin-right:5px;position:relative;top:2px;" ng-checked="thr.df==1" name="{{item.classCode}}"
+										    type="radio" />
+										<label for="{{thr.id}}">{{thr.nm}}</label>
+									</span>
+									<!-- <span ng-if="thr.optionType==1" style="margin-right:10px;cursor:pointer;" ng-click="select(thr)">
+											<input type="checkbox" style="margin-right:5px;position:relative;top:2px;" ng-checked="thr.isDefault==1" />
+											<label>{{thr.nm}}</label>
+										</span> -->
+									</span>
+								</div>
+							</fieldset>
+						</form>
+					</div>
+				</div>
+			</div>
+
+			<!-- 组织管理 -->
+			<div ng-show="active==1">
+				<!-- 一级 -->
+				<div class="level1 level">
+					<div class="title">
+						<span>一级指标</span>
+						<i class="iconfont icon--jiahao" title="新增" ng-click="addFirstIndex(1,'组织管理')"></i>
+					</div>
+					<ul class="items">
+						<li class="item tx" ng-class="{'active':$index==active4}" ng-repeat="item in level4 track by $index" ng-click="firzz($index)">
+							<span class="icon_del iconfont icon-delete" title="删除" ng-click="del($event,'组织管理',1,$index)"></span>
+							<span>{{item.nm}}</span>
+						</li>
+					</ul>
+				</div>
+				<!-- 二级 -->
+				<div class="level2 level" ng-show="active4!=-1">
+					<div class="title">
+						<span>二级指标</span>
+						<i class="iconfont icon--jiahao" title="新增" ng-click="addFirstIndex(2,'组织管理')"></i>
+					</div>
+					<ul class="items">
+						<li class="item tx" ng-class="{'active':$index==active5}" ng-repeat='item in level5 track by $index' ng-click="seczz($index,item.text)">
+							<span class="icon_del iconfont icon-delete" title="删除" ng-click="del($event,'组织管理',2,$index)"></span>
+							<span>{{item.nm}}</span>
+						</li>
+					</ul>
+				</div>
+
+
+
+				<div class="level3 level" ng-show="active5!=-1">
+					<div class="title">
+						<span>{{level3Title}}</span>
+						<i ng-click="showAllFlag()">{{lev3.showAll}}</i>
+					</div>
+					<div ng-repeat="it1 in level6 track by $index" ng-if="it1.cxt.length!==0">
+						<div class="time">
+							<p class="tips">
+								<span class="tip"></span>
+								<span>{{it1.title}}</span>
+							</p>
+							<p class="getTime" ng-click="startTime($index)">
+								<i class="iconfont icon-weibiaoti519" ng-show="it1.time"></i>
+								<i class="iconfont icon-play_fill" ng-show="!it1.time"></i>
+								<span class="setTime">{{it1.time}}</span>
+							</p>
+						</div>
+						<form class="sep_field">
+							<fieldset class="level3t retract" ng-repeat="item in it1.cxt track by $index">
+								<legend ng-click="showAddPart($index)">{{item.nm}}</legend>
+								<div class="level3Sel" style="margin:10px 0 0 15px;">
+									<span ng-click="select(thr,item.classCode)" style="margin-right:10px;" ng-repeat="thr in item.classCode track by $index">
+										<input id="{{thr.id}}" ng-model="thr.df" style="margin-right:5px;position:relative;top:2px;" ng-checked="thr.df==1" name="{{item.classCode}}"
+										    type="radio" />
+										<label for="{{thr.id}}">{{thr.nm}}</label>
+									</span>
+									<!-- <span ng-if="thr.optionType==1" style="margin-right:10px;cursor:pointer;" ng-click="select(thr)">
+											<input type="checkbox" style="margin-right:5px;position:relative;top:2px;" ng-checked="thr.isDefault==1" />
+											<label>{{thr.nm}}</label>
+										</span> -->
+									</span>
+								</div>
+							</fieldset>
+						</form>
+					</div>
+				</div>
+			</div>
+
+			<!-- 作业布置 -->
+			<div ng-show="active==2">
+				<!-- 一级 -->
+				<div class="level1 level">
+					<div class="title">
+						<span>一级指标</span>
+						<i class="iconfont icon--jiahao" title="新增" ng-click="addFirstIndex(1,'作业布置')"></i>
+					</div>
+					<ul class="items">
+						<li class="item tx" ng-class="{'active':$index==active41}" ng-repeat="item in level41 track by $index" ng-click="firzz1($index)">
+							<span class="icon_del iconfont icon-delete" title="删除" ng-click="del($event,'作业布置',1,$index)"></span>
+							<span>{{item.nm}}</span>
+						</li>
+					</ul>
+				</div>
+				<!-- 二级 -->
+				<div class="level2 level" ng-show="active41!=-1">
+					<div class="title">
+						<span>二级指标</span>
+						<i class="iconfont icon--jiahao" title="新增" ng-click="addFirstIndex(2,'作业布置')"></i>
+					</div>
+					<ul class="items">
+						<li class="item tx" ng-class="{'active':$index==active51}" ng-repeat='item in level51 track by $index' ng-click="seczz1($index,item.text)">
+							<span class="icon_del iconfont icon-delete" title="删除" ng-click="del($event,'作业布置',2,$index)"></span>
+							<span>{{item.nm}}</span>
+						</li>
+					</ul>
+				</div>
+				<!-- 三级 -->
+				<div class="level3 level" ng-show="active51!=-1">
+					<div class="title">
+						<span>{{level3Title}}</span>
+						<i ng-click="showAllFlag()">{{lev3.showAll}}</i>
+					</div>
+					<div ng-repeat="it1 in level61 track by $index" ng-if="it1.cxt.length!==0">
+						<div class="time">
+							<p class="tips">
+								<span class="tip"></span>
+								<span>{{it1.title}}</span>
+							</p>
+							<p class="getTime" ng-click="startTime($index)">
+								<i class="iconfont icon-weibiaoti519" ng-show="it1.time"></i>
+								<i class="iconfont icon-play_fill" ng-show="!it1.time"></i>
+								<span class="setTime">{{it1.time}}</span>
+							</p>
+						</div>
+						<form class="sep_field">
+							<fieldset class="level3t retract" ng-repeat="item in it1.cxt track by $index">
+								<legend ng-click="showAddPart($index)">{{item.nm}}</legend>
+								<div class="level3Sel" style="margin:10px 0 0 15px;">
+									<span ng-click="select(thr,item.classCode)" style="margin-right:10px;" ng-repeat="thr in item.classCode track by $index">
+										<input id="{{thr.id}}" ng-model="thr.df" style="margin-right:5px;position:relative;top:2px;" ng-checked="thr.df==1" name="{{item.classCode}}"
+										    type="radio" />
+										<label for="{{thr.id}}">{{thr.nm}}</label>
+									</span>
+									<!-- <span ng-if="thr.optionType==1" style="margin-right:10px;cursor:pointer;" ng-click="select(thr)">
+											<input type="checkbox" style="margin-right:5px;position:relative;top:2px;" ng-checked="thr.isDefault==1" />
+											<label>{{thr.nm}}</label>
+										</span> -->
+									</span>
+								</div>
+							</fieldset>
+						</form>
+					</div>
+				</div>
+
+
+
+				<!-- <div class="level3 level" ng-show="active51!=-1">
+					<div class="title">
+						<span>{{level3Title}}</span>
+						<i ng-click="showAllFlag()">{{lev3.showAll}}</i>
+					</div>
+					<div class="time">
+						<span class="tip"></span>
+						<span>{{optionAttr}}</span>
+						<p class="getTime">
+							<i class="iconfont icon-weibiaoti519"></i>
+							<i class="iconfont icon-play_fill"></i>
+							<span class="setTime">{{currentTime}}</span>
+						</p>
+					</div>
+					<form class="sep_field">
+						<fieldset class="level3t" ng-repeat="item in level61 track by $index">
+							<legend ng-click="showAddPart($index)">{{item.text}}</legend>
+							<div class="level3Sel" style="margin:10px 0 0 15px;">
+								<span ng-repeat="thr in item[item.classCode] track by $index">
+									<span ng-if="thr.optionType==0" ng-click="select(thr,item[item.classCode])" style="margin-right:10px;">
+										<input id="{{thr.id}}" ng-model="thr.isDefault" style="margin-right:5px;position:relative;top:2px;" ng-checked="thr.isDefault==1"
+										    name="{{item.classCode}}" type="radio" />
+										<label for="{{thr.id}}">{{thr.optionName}}</label>
+									</span>
+									<span ng-if="thr.optionType==1" style="margin-right:10px;cursor:pointer;" ng-click="select(thr)">
+										<input type="checkbox" style="margin-right:5px;position:relative;top:2px;" ng-checked="thr.isDefault==1" />
+										<label>{{thr.optionName}}</label>
+									</span>
+								</span>
+							</div>
+						</fieldset>
+					</form>
+				</div> -->
+			</div>
+			<!-- 综合评价 -->
+			<div ng-show="active==3">
+				<!-- 一级 -->
+				<div class="level1 level">
+					<div class="title">
+						<span>一级指标</span>
+					</div>
+					<ul class="items">
+						<li class="item tx" ng-class="{'active':$index==active7}" ng-repeat="item in level7 track by $index" ng-click="firtt($index)">
+							<span class="icon_del iconfont icon-delete" title="删除" ng-click="del($event,'综合记录',1,$index)"></span>
+							<span>{{item.nm}}</span>
+						</li>
+					</ul>
+				</div>
+				<!-- 二级 -->
+				<div class="level2 level" ng-show="active7!=-1">
+					<div class="title">
+						<span>二级指标</span>
+					</div>
+					<ul class="items">
+						<li class="item tx" ng-class="{'active':$index==active8}" ng-repeat='item in level8 track by $index' ng-click="sectt($index,item.text)">
+							<span class="icon_del iconfont icon-delete" title="删除" ng-click="del($event,'综合记录',2,$index)"></span>
+							<span>{{item.nm}}</span>
+						</li>
+					</ul>
+				</div>
+				<!-- 三级 -->
+
+				<div class="level3 level" ng-show="active8!=-1">
+					<div class="title">
+						<span>{{level3Title}}</span>
+						<i ng-click="showAllFlag()">{{lev3.showAll}}</i>
+					</div>
+					<div ng-repeat="it1 in level9 track by $index" ng-if="it1.cxt.length!==0">
+						<div class="time">
+							<p class="tips">
+								<span class="tip"></span>
+								<span>{{it1.title}}</span>
+							</p>
+							<p class="getTime" ng-click="startTime($index)">
+								<i class="iconfont icon-weibiaoti519" ng-show="it1.time"></i>
+								<i class="iconfont icon-play_fill" ng-show="!it1.time"></i>
+								<span class="setTime">{{it1.time}}</span>
+							</p>
+						</div>
+						<form class="sep_field">
+							<fieldset class="level3t retract" ng-repeat="item in it1.cxt track by $index">
+								<legend ng-click="showAddPart($index)">{{item.nm}}</legend>
+								<div class="level3Sel" style="margin:10px 0 0 15px;">
+									<span ng-click="select(thr,item.classCode)" style="margin-right:10px;" ng-repeat="thr in item.classCode track by $index">
+										<input id="{{thr.id}}" ng-model="thr.df" style="margin-right:5px;position:relative;top:2px;" ng-checked="thr.df==1" name="{{item.classCode}}"
+										    type="radio" />
+										<label for="{{thr.id}}">{{thr.nm}}</label>
+									</span>
+									<!-- <span ng-if="thr.optionType==1" style="margin-right:10px;cursor:pointer;" ng-click="select(thr)">
+											<input type="checkbox" style="margin-right:5px;position:relative;top:2px;" ng-checked="thr.isDefault==1" />
+											<label>{{thr.nm}}</label>
+										</span> -->
+									</span>
+								</div>
+							</fieldset>
+						</form>
+					</div>
+				</div>
+				<!-- <div class="level3 level" ng-show="active8!=-1">
+					<div class="title">
+						<span>{{level9Title}}</span>
+					</div>
+					<div class="level3t" ng-repeat="item in level9 track by $index">
+						<img src="img/cjzb/green.png" />
+						<span>{{item.text}}</span>
+						<div class="level3Sel" style="margin:10px 0 0 15px;">
+							<span ng-repeat="thr in item[item.classCode] track by $index">
+								<span ng-if="thr.optionType==0" ng-click="select(thr,item[item.classCode])" style="margin-right:10px;">
+									<input id="{{thr.optionCode}}" ng-model="thr.isDefault" style="margin-right:5px;position:relative;top:2px;" ng-checked="thr.isDefault==1"
+									    name="{{item.classCode}}" type="radio" />
+									<label for="{{thr.optionCode}}">{{thr.optionName}}</label>
+								</span>
+								<span ng-if="thr.optionType==1" style="margin-right:10px;">
+									<input ng-click="select(thr)" ng-model="thr.isDefault" type="checkbox" style="margin-right:5px;position:relative;top:2px;"
+									    ng-checked="thr.isDefault==1" />
+									<label ng-click="select(thr)">{{thr.optionName}}</label>
+								</span>
+							</span>
+						</div>
+					</div>
+				</div> -->
+			</div>
+		</div>
+	</div>
+	<!--删除弹出框-->
+	<div ng-show="dialog1" class="dialogMask">
+		<div class="dialogBox animate1">
+			<div class="title1">删除</div>
+			<div class="content">
+				<span style="display:block;margin-top:30px;">是否确认删除？</span>
+			</div>
+			<div class="dialog-btn">
+				<button class="cancel" ng-click="No1()">取消</button>
+				<button class="sure" ng-click="Yes1()">确定</button>
+			</div>
+		</div>
+	</div>
+	<!-- 添加指标时的弹出框 -->
+	<div ng-show="addStatus" class="dialogMask">
+		<div class="dialogBox animate1">
+			<div class="title1">{{addObj.addTitle}}</div>
+			<div class="content">
+				<ul class="copyList">
+					<li ng-class="{'addIndexActive':$index==addObj.curIndex}" ng-repeat="addIndex in addObj.addIndexList track by $index" ng-click="getaddList($index)">{{addIndex.className}}</li>
+				</ul>
+			</div>
+			<div class="dialog-btn">
+				<button class="cancel" ng-click="addCancle()">取消</button>
+				<button class="sure" ng-click="addSure()">确定</button>
+			</div>
+		</div>
+	</div>
+</div>

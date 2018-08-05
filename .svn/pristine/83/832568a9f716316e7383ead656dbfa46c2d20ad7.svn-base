@@ -1,0 +1,371 @@
+<div min-height class="main add-class" ng-controller="detailClassCtrl" style="	overflow:auto;min-height: 100%;display: flex;flex-flow: column;">
+    <div class="top">
+        <div class="tabset">
+            <div class="add-title">编辑讲课</div>
+            <div class="add-btn orange position" ng-click="goBack()">返回</div>
+        </div>
+    </div>
+    <div class="middle-contain" style="flex: 1;min-height: calc(100% + 130px);position: relative;">
+        <div ng-show="process === 1" style="min-height: 100%;">
+            <!--<div class="process-img process1"></div>-->
+            <div class="addJindu" style="">
+
+            	<div class="jinduLine">
+            		
+            	</div>
+            	<div class="jinduRac">
+            		
+            	</div>  
+            	<div class="jinduRac" style="left: 50%;background: #f0f1f1;">
+            		
+            	</div>
+            	<div class="jinduRac" style="left: 100%;background: #f0f1f1;">
+            		
+            	</div>  
+            	<p class="jinduRacFont" style="top: 40px;left: -15px;color: #1E70E9;">
+            		讲课信息
+            	</p>  
+            	<p class="jinduRacFont" style="left: 49%;top: 40px;">
+            		班级信息
+            	</p>
+            	<p class="jinduRacFont" style="right:-50px;top: 40px;">
+            		生成二维码
+            	</p> 
+            </div>            
+            <div class="input-box">
+                <ul>
+                    <!--<li>
+                        <span>标题</span>
+                        <input type="text" placeholder="输入课堂标题" ng-model="ktgcTitle" maxlength="20">
+                    </li>-->
+                    <li>
+                        <span>学科</span>
+                        <select name="" id="" placeholder="学科名称" class="subjectName" ng-model="subjectName">
+                            <option value="学科名称">学科名称</option> 
+			                <option value="1" title="语文">语文</option>
+			                <option value="2" title="语文">数学</option>
+			                <option value="3" title="语文">英语</option>
+			                <option value="4" title="语文">政治</option>
+			                <option value="5" title="语文">历史</option>
+			                <option value="6" title="语文">地理</option>
+			                <option value="7" title="语文">物理</option>
+			                <option value="8" title="语文">化学</option>
+			                <option value="9" title="语文">生物</option>
+                        </select>
+                    </li>
+                    <li>
+                        <span>学段</span>
+                        <select name="" id="" placeholder="执教学段" class="periodName" ng-change="lessonType()" ng-model="periodName">
+                            <option value="执教学段">执教学段</option>
+			                <option value="1" title="高中段">高中段</option>
+			                <option value="2" title="初中段">初中段</option>
+			                <option value="3" title="小学高段">小学高段</option>
+			                <!--<option value="4" title="小学中段">小学中年级</option>-->
+			                <option value="4" title="小学低段">小学低段</option>
+                        </select>
+                    </li>
+                    <!--<li>
+                        <span>课型</span>
+                        <select name="" id="" placeholder="执教课型" class="lessonName" ng-model="lessonName">
+                            <option value="执教课型">执教课型</option>
+                            <option value="{{item.code}}" title="{{item.code}}" ng-repeat="item in lessonList">{{item.name}}</option>
+                        </select>
+                    </li>-->
+                    <li>
+                        <span>年级</span>
+                        <select name="" id="" placeholder="执教年级" class="gradeName" ng-model="gradeName" >
+                            <option value="执教年级">执教年级</option>
+                            <option value="1">一年级</option>
+                            <option value="2">二年级</option>
+                            <option value="3">三年级</option>
+                        </select>
+                    </li>
+                    <li>
+                        <span>班级</span>
+                        <select name="" id="" placeholder="执教班级" ng-model="className">
+                            <option value="执教班级">执教班级</option>
+                            <option value="1">(1)班</option>
+                            <option value="2">(2)班</option>
+                            <option value="3">(3)班</option>
+                            <option value="4">(4)班</option>
+                            <option value="5">(5)班</option>
+                            <option value="6">(6)班</option>
+                            <option value="7">(7)班</option>
+                            <option value="8">(8)班</option>
+                            <option value="9">(9)班</option>
+                        </select>
+                    </li>
+                    <li>
+                        <span>标题</span>
+                        <input type="text" placeholder="输入课堂标题" ng-model="ktgcTitle" maxlength="20">
+                    </li>
+                    <li>
+                        <span>课型</span>
+                        <select name="" id="" placeholder="执教课型" class="lessonName" ng-model="lessonName">
+                            <option value="执教课型">执教课型</option>
+                            <option value="{{item.code}}" title="{{item.code}}" ng-repeat="item in lessonList">{{item.name}}</option>
+                        </select>
+                    </li>
+                    <!--<li>
+				        <div class="layui-form" style="width: 100%;">
+						  <div class="layui-form-item">
+						    <div class="layui-inline" style="width: 100%;">
+						      <div class="layui-input-inline"  style="width: 100%;">
+						      	<span  style="float: left;height: 36px;line-height: 36px;">时间</span>
+				                <input style="float: left;" type="text" class="layui-input time-input" id="test6" placeholder="讲课时间" readonly="readonly">
+				                
+						      </div>
+						    </div>
+						   </div>
+				       </div>   
+                    </li>-->
+                    <li>
+				        <div class="layui-form" style="width: 100%;">
+						  <div class="layui-form-item">
+						    <div class="layui-inline" style="width: 100%;">
+						      <div class="layui-input-inline"  style="width: 100%;">
+						      	<span  style="float: left;height: 36px;line-height: 36px;">日期</span>
+				                <input style="float: left;" type="text" class="layui-input time-input" id="test6" placeholder="讲课日期" readonly="readonly">
+				                
+						      </div>
+						    </div>
+						   </div>
+				       </div>   
+                    </li>
+                    <li>
+				        <div class="layui-form" style="width: 100%;">
+						  <div class="layui-form-item">
+						    <div class="layui-inline" style="width: 100%;">
+						      <div class="layui-input-inline"  style="width: 100%;">
+						      	<span  style="float: left;height: 36px;line-height: 36px;margin-left:-33px;">开始时间</span>
+				                <input style="float: left;" type="text" class="layui-input time-input" id="test7" placeholder="讲课开始时间" readonly="readonly">
+				                
+						      </div>
+						    </div>
+						   </div>
+				       </div>   
+                    </li>
+                    <li>
+				        <div class="layui-form" style="width: 100%;">
+						  <div class="layui-form-item">
+						    <div class="layui-inline" style="width: 100%;">
+						      <div class="layui-input-inline"  style="width: 100%;">
+						      	<span  style="float: left;height: 36px;line-height: 36px;margin-left:-33px;">结束时间</span>
+				                <input style="float: left;" type="text" class="layui-input time-input" id="test8" placeholder="讲课结束时间" readonly="readonly">
+						      </div>
+						    </div>
+						   </div>
+				       </div>   
+                    </li>
+                </ul>
+            </div>
+            <div class="next-content clearfix">
+                <div class="next-btn blue" ng-click="next()">下一步</div>
+            </div>
+        </div>
+        <div ng-show="process === 2"  style="min-height: 100%;">
+            <!--<div class="process-img process2" style="height: 80px;"></div>-->
+            <div class="addJindu" style="">
+
+            	<div class="jinduLine">
+            		
+            	</div>
+            	<div class="jinduLine" style="width: 50%;background: #1E70E9;">
+            		
+            	</div>
+            	<div class="jinduRac">
+            		
+            	</div>  
+            	<div class="jinduRac" style="left: 50%;background: #1E70E9;">
+            		
+            	</div>
+            	<div class="jinduRac" style="left: 100%;background: #f0f1f1;">
+            		
+            	</div>  
+            	<p class="jinduRacFont" style="top: 40px;left: -15px;color: #1E70E9;">
+            		讲课信息
+            	</p>  
+            	<p class="jinduRacFont" style="left: 49%;top: 40px;color: #1E70E9;">
+            		班级信息
+            	</p>
+            	<p class="jinduRacFont" style="right:-50px;top: 40px;">
+            		生成二维码
+            	</p> 
+            </div>             
+            <div class="info-content" style="min-height: 100%;">
+                <div class="clearfix">
+                    <div class="fl">
+                        <div style="margin-bottom:15px;">
+                            <div>学生人数</div>
+                            <input type="text" style="background: #eee;" placeholder="学生人数" ng-model="studentNum" class="studentNum" readonly="readonly">
+                        </div>
+                        <div>
+                            <div>座位形式</div>
+                            <!--<select name="" id="" placeholder="学科名称" ng-model="subjectType" ng-init="subjectType='1'" ng-change="zwCheck()">
+                                <option value="1">40单人式</option>
+                                <option value="2">40剧院式</option>
+                                <option value="3">40马蹄式</option>
+                                <option value="4">40四方式</option>
+                                <option value="5">40小组式</option>
+                                <option value="6">40圆环式</option>
+                            </select>-->
+                            <input type="text" style="background: #eee;" placeholder="座位形式" ng-model="subjectTypeName" dataId="{{subjectType}}" class="subjectType" readonly="readonly">
+                        </div>
+                    </div>
+                    <div class="fr">
+                        <div style="margin-bottom:15px;">
+                            <div>男生人数</div>
+                            <input type="text" style="background: #eee;" placeholder="男生人数" value="" ng-model="boyNum" class="boyNum" readonly="readonly">
+                        </div>
+                        <div>
+                            <div>女生人数</div>
+                            <input type="text" style="background: #eee;" placeholder="女生人数" value="" ng-model="girlNum" class="girlNum" readonly="readonly">
+                        </div>
+                    </div>
+                    <ul>
+                        <li>
+
+                        </li>
+                        <li>
+
+                        </li>
+                    </ul>
+
+                </div>
+                <div>
+                    <div style="line-height:80px;text-align:center;color: #434549;">座位表</div>
+                    <!--40单人式-->
+                    <div ng-show="zwType=='1'">
+                        <ul class="clearfix">
+                            <li class="seat" ng-repeat="item in seatList track by $index">
+                                <div data="{{item.siteCode}}" class="imgchec">
+                                    <img src="img/home/hui.png" class="imgH" style="width: 20px;height: 16px;" alt="" ng-show="item.siteCode=='0'">
+                                    <img src="img/home/lan.png" class="imgH" style="width: 20px;height: 16px;" alt="" ng-show="item.siteCode!='0'">
+                                </div>
+                                <div style="font-size: 12px;"  class="fontH tsha{{$index}}">{{item.name}}</div>
+                            </li>
+                        </ul>
+                    </div>
+                    <!--40剧院式-->
+                    <div ng-show="zwType=='4'">
+                        <ul class="clearfix" style="">
+                            <li class="seat seat1" ng-repeat="item in seatList track by $index">
+                                <div data="{{item.siteCode}}" class="imgchec">
+                                    <img src="img/home/hui.png" class="imgH" style="width: 20px;height: 16px;" alt="" ng-show="item.siteCode=='0'">
+                                    <img src="img/home/lan.png" class="imgH" style="width: 20px;height: 16px;" alt="" ng-show="item.siteCode!='0'">
+                                </div>
+                                <div style="font-size: 12px;"  class="fontH tsha{{$index}}">{{item.name}}</div>
+                            </li>
+                        </ul>
+                    </div>
+                    <!--40马蹄式-->
+                    <div ng-show="zwType=='3'">
+                        <ul class="clearfix" style="">
+                            <li class="seat seat2" ng-repeat="item in seatList track by $index">
+                                <div data="{{item.siteCode}}" class="imgchec">
+                                    <img src="img/home/hui.png" class="imgH" style="width: 20px;height: 16px;" alt="" ng-show="item.siteCode=='0'">
+                                    <img src="img/home/lan.png" class="imgH" style="width: 20px;height: 16px;" alt="" ng-show="item.siteCode!='0'">
+                                </div>
+                                <div style="font-size: 12px;"  class="fontH tsha{{$index}}">{{item.name}}</div>
+                            </li>
+                        </ul>
+                    </div>                    
+                    <!--40四方式-->
+                    <div ng-show="zwType=='2'">
+                        <ul class="clearfix" style="">
+                            <li class="seat seat3" ng-repeat="item in seatList track by $index">
+                                <div data="{{item.siteCode}}" class="imgchec">
+                                    <img src="img/home/hui.png" class="imgH" style="width: 20px;height: 16px;" alt="" ng-show="item.siteCode=='0'">
+                                    <img src="img/home/lan.png" class="imgH" style="width: 20px;height: 16px;" alt="" ng-show="item.siteCode!='0'">
+                                </div>
+                                <div style="font-size: 12px;"  class="fontH tsha{{$index}}">{{item.name}}</div>
+                            </li>
+                        </ul>
+                    </div>  
+                    <!--40小组式-->
+                    <div ng-show="zwType=='5'">
+                        <ul class="clearfix" style="">
+                            <li class="seat seat4" ng-repeat="item in seatList track by $index">
+                                <div data="{{item.siteCode}}" class="imgchec">
+                                    <img src="img/home/hui.png" class="imgH" style="width: 20px;height: 16px;" alt="" ng-show="item.siteCode=='0'">
+                                    <img src="img/home/lan.png" class="imgH" style="width: 20px;height: 16px;" alt="" ng-show="item.siteCode!='0'">
+                                </div>
+                                <div style="font-size: 12px;"  class="fontH tsha{{$index}}">{{item.name}}</div>
+                            </li>
+                        </ul>
+                    </div>  
+                    <!--40圆环式-->
+                    <div ng-show="zwType=='6'">
+                        <ul class="clearfix" style="">
+                            <li class="seat seat5" ng-repeat="item in seatList track by $index">
+                                <div data="{{item.siteCode}}" class="imgchec">
+                                    <img src="img/home/hui.png" class="imgH" style="width: 20px;height: 16px;" alt="" ng-show="item.siteCode=='0'">
+                                    <img src="img/home/lan.png" class="imgH" style="width: 20px;height: 16px;" alt="" ng-show="item.siteCode!='0'">
+                                </div>
+                                <div style="font-size: 12px;"  class="fontH tsha{{$index}}">{{item.name}}</div>
+                            </li>
+                        </ul>
+                    </div> 
+
+
+                </div>
+            </div>
+                        
+            <div class="next-content clearfix">
+                <div class="next-btn green" ng-click="pre()">上一步</div>
+                <div class="next-btn blue" ng-click="next()">完成创建</div>
+            </div>
+        </div>
+        <div ng-show="process === 3"   style="min-height: 100%;">
+                <!--<div class="process-img process3"></div>-->
+	            <div class="addJindu" style="">
+	
+	            	<div class="jinduLine">
+	            		
+	            	</div>
+	            	<div class="jinduLine" style="width: 100%;background: #1E70E9;">
+	            		
+	            	</div>
+	            	<div class="jinduRac">
+	            		
+	            	</div>  
+	            	<div class="jinduRac" style="left: 50%;background: #1E70E9;">
+	            		
+	            	</div>
+	            	<div class="jinduRac" style="left: 100%;background: #1E70E9;">
+	            		
+	            	</div>  
+	            	<p class="jinduRacFont" style="top: 40px;left: -15px;color: #1E70E9;">
+	            		讲课信息
+	            	</p>  
+	            	<p class="jinduRacFont" style="left: 49%;top: 40px;color: #1E70E9;">
+	            		班级信息
+	            	</p>
+	            	<p class="jinduRacFont" style="right:-50px;top: 40px;color: #1E70E9;">
+	            		生成二维码
+	            	</p> 
+	            </div>                 
+                <div class="share-content">
+                    <img ng-Src="{{imgqd}}" alt="" style="display: block;margin: 0 auto;">
+                    
+                    <div class="share-btn" ng-click="showShare()" style="width: 50%;text-align: center;margin:20px auto;">分享讲课</div>
+                </div>
+                <div class="next-content clearfix">
+                        <!--<div class="next-btn green" ng-click="pre()">上一步</div>-->
+                        <div class="next-btn blue" ng-click="finish()">关闭</div>
+                    </div>
+            </div>
+    </div>
+    <div ng-include="'html/blocks/footer.html'"></div>
+	<div class="shareDailog" style="display: none;">
+		<div class="shareDailogImg">
+			分享讲课
+		</div>
+		<div class="imgFloat">
+			<img class="shareImg1" src="img/ktgc/qq.png" style="width: 60px;height: 60px;cursor: pointer;"/>
+			<img class="shareImg2" src="img/ktgc/qweib.png"  style="width: 60px;height: 60px;cursor: pointer;" />
+			<img class="shareImg3" src="img/ktgc/qwh.png"  style="width: 60px;height: 60px;cursor: pointer;"/>
+		</div>
+		<div class="chslas">关闭</div>
+	</div>    
+</div>

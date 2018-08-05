@@ -1,0 +1,71 @@
+<div min-height class="main" ng-controller="pjbgCtr">
+    <div class="pjbg">
+        <table border="" cellspacing="" cellpadding="" >
+        	<thead>
+        		<tr style="background: #fff;">
+        			<td style="width: {{item.width}};cursor: pointer;font-size: 16px;font-weight: bold;" ng-repeat="item in theadList" ng-class="{active:item.trImg==true}" ng-click="boxShow($index)">{{item.name}}
+<!-- 						<div class="selUpDailog" ng-show="selUpDailog{{$index+1}}==true" style="position: absolute;top: 150px;padding: 0;"> -->
+<!-- 							<div class="selUpDailogImg1"></div> -->
+<!-- 							<div class="selUpDailogCheck" ng-show="selUpDailogCheck1 == true"> -->
+<!-- 								<div class="selUpDailogScroll"> -->
+<!-- 									<div class="toProvince" data="{{provinceLength}}" dataId="{{item.cityCode}}" ng-repeat="item in provinceList" ng-click="provinceClick($index,$event)" ng-class="{active:blueClick{{$index}}==true}" class="province{{$index}}"> -->
+<!-- 										{{item.cityName}} -->
+<!-- 									</div>								 -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+<!-- 							<div class="jsTop jsTop1" ng-show="showHide==true" style="top:{{boxTop}}px;left:{{boxLeft}}px;"> -->
+<!-- 								<div class="toProvince" data="{{cityLength}}" dataId="{{item.cityCode}}" ng-class="{active:blueClickc{{$index}}==true}" ng-repeat="item in cityList" ng-click="cityClick($index,$event)"> -->
+<!-- 									{{item.cityName}} -->
+<!-- 								</div> -->
+<!-- 						    </div> -->
+						
+<!-- 							<div class="jsTop jsTop2" ng-show="showHide1==true" style="top:{{boxTop}}px;left:{{boxLeft1}}px;"> -->
+<!-- 									<div class="toProvince" data="{{areaLength}}" dataId="{{item.cityCode}}" ng-class="{active:blueClicka{{$index}}==true}" ng-repeat="item in areaList" ng-click="areaClick($index,$event)" > -->
+<!-- 										{{item.cityName}} -->
+<!-- 									</div> -->
+<!-- 							</div> -->
+<!-- 							<div class="selUpDailogCheck" ng-show="selUpDailogCheck2 == true"> -->
+<!-- 								<div class="elUpDailogFont"> -->
+<!-- 									全部 -->
+<!-- 								</div> -->
+<!-- 								<div class="elUpDailogFont"> -->
+<!-- 									近三天 -->
+<!-- 								</div> -->
+<!-- 								<div class="elUpDailogFont"> -->
+<!-- 									近一周 -->
+<!-- 								</div> -->
+<!-- 							</div> -->
+<!-- 						</div>        			 -->
+        			</td>
+
+        		</tr>
+        	</thead>
+        	
+        	<tr ng-repeat="item in tbodyList">
+        		<td>{{$index+1}}</td>
+        		<td>{{item.areaCode}}</td>
+        		<td>{{item.schoolName}}</td>
+        		<td>{{item.periodCode}}</td>
+        		<td>{{item.name}}</td>
+        		<td>{{item.teachLs}}</td>
+<!--         		<td>{{item.name7}}</td> -->
+        		<td>{{item.teachTime}}</td>
+        		<td>{{item.score}}</td>
+        		<td>
+        			<img class="imgD{{$index+1}}" src="img/pjbg/look.png" ng-mouseover="mouseDailog($index)" style="margin-right: 5px;cursor: pointer;" ng-click="toCpbg(item.teachId,item.listenTeacherId,'1')"/>
+<!--         			<img src="img/pjbg/dele.png" style="margin-left: 5px;cursor: pointer;"/> -->
+        		</td>
+        	</tr>
+
+        </table>
+        
+        <div class="pjbgFooter">
+		    <div class="pager" style="float:right;margin-right:5%;">
+	              <pager page-count="pageCountError" current-page="errorPage"
+	               on-page-change="onPageError()"></pager>
+	        </div>        	
+        </div>
+
+        
+    </div>
+</div>

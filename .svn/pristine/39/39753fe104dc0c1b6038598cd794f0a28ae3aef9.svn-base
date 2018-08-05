@@ -1,0 +1,244 @@
+<div  class="home" style="min-height: 100%;background: #fff;" ng-controller="classInfoCtr">
+    <div class="top">
+        <div class="tabset">
+            <div class="add-title">班级信息</div>
+            <div class="add-btn orange position" ng-click="goBack()">返回</div>
+        </div>
+    </div>
+    <div class="contain1">
+    	<div class="add-class">
+			<div class="" style="overflow: hidden;clear: both;margin-bottom: 10px;">
+				<div id="" style="float: right;margin-right: 35px;">
+					<p class="inpFont" >座位形式</p>
+                    <select name="" id="" placeholder="座位形式" ng-model="subjectType" ng-init="subjectType='座位形式'" ng-change="zwCheck()">
+                        <option value="座位形式">座位形式</option>
+                        <!--<option value="1">40单人式</option>
+                        <option value="4">40剧院式</option>
+                        <option value="3">40马蹄式</option>
+                        <option value="2">40四方式</option>
+                        <option value="5">40小组式</option>
+                        <option value="6">40圆环式</option>-->
+                        <option value="{{item.id}}" ng-repeat="item in opList">{{item.name}}</option>
+                    </select>
+	
+				</div>
+				<div id="" style="float: left;">
+					<p class="inpFont" >班级</p>
+					<select name="" id="" ng-model="schoolInit" ng-init="schoolInit='请选择班级'" ng-change="checkClass()">
+						<option value="请选择班级">请选择班级</option>
+						<option value="{{item.id}}" ng-repeat="item in infor">{{item.subjectName}}/{{item.periodName}}/{{item.gradeName}}/{{item.className}}</option>
+					</select>
+				</div>	
+				
+				
+			</div>
+			<div class="" style="overflow: hidden;clear: both;margin-bottom: 10px;">
+				<!--<div id="" style="float: right;margin-right: 35px;">
+		    		<p class="inpFont">男生人数</p>
+		    		<input style="width: 120px;" type="text" placeholder="男生人数" ng-change="maleNum()"  onKeyUp="value=value.replace(/[^\d]/g,'')" ng-model="ktgcTitle1"><br><br>	
+				</div>-->
+				<div id="" style="float: left;">
+		    		<p class="inpFont">学生人数</p>
+		    		<input style="width: 170px;" type="text" placeholder="学生人数" ng-change="allNum()" onKeyUp="value=value.replace(/[^\d]/g,'')" ng-model="ktgcTitle2"><br><br>	
+				</div>
+				<div id="" style="float: left;margin-left: 33px;">
+		    		<p class="inpFont">男生人数</p>
+		    		<input style="width: 170px;" type="text" placeholder="男生人数" ng-change="maleNum()"  onKeyUp="value=value.replace(/[^\d]/g,'')" ng-model="ktgcTitle1"><br><br>	
+				</div>	
+				<div id="" style="float: left;margin-left: 33px;">
+		    		<p class="inpFont">女生人数</p>
+		    		<input style="width: 170px;" type="text" placeholder="女生人数" ng-change="femaleNum()" ng-model="ktgcTitle3" onKeyUp="value=value.replace(/[^\d]/g,'')"><br><br>	
+				</div>					
+			</div>
+<!--列表-->
+			<!--<div class="" style="overflow: hidden;clear: both;margin-bottom: 10px;margin-top: -10px;">
+					
+				<div id="" style="float: left;">
+		    		<p class="inpFont">女生人数</p>
+		    		<input type="text" placeholder="女生人数" ng-change="femaleNum()" ng-model="ktgcTitle3" onKeyUp="value=value.replace(/[^\d]/g,'')"><br><br>	
+				</div>				
+			</div>-->
+
+<!--座位表--><div class="add-class" style="width: 580px;margin: 0 auto;">
+                <div class="info-content" style="width: 580px;">
+                    
+                    <!--40单人式-->
+                    <div ng-show="zwType=='1'" class="showType1">
+                    	<div style="line-height:80px;width:60px;margin-left:45%;color: #434549;">座位表</div>
+                        <ul class="clearfix">
+                            <li class="seat aseat" style="margin: 0 5px 10px 0;" ng-repeat="item in seatList track by $index">
+                                <div data="{{item.siteCode}}" class="imgchec">
+                                    <img src="img/home/hui.png" class="imgH" style="width: 20px;height: 16px;" alt="" ng-show="item.siteCode=='0'">
+                                    <img src="img/home/lan.png" class="imgH" style="width: 20px;height: 16px;" alt="" ng-show="item.siteCode!='0'">
+                                </div>
+                                <div style="font-size: 12px;" ng-mouseover="mouseDailog($index,item.name)"  class="fontH fontH1 tsha1{{$index}}">{{item.name}}</div>
+                                <div style="font-size: 12px;"  class="fontH fontH2 tshay1{{$index}}">{{item.jobName}}</div>
+		 						<div class="selUpDailog" style="position: absolute;padding: 0;margin-left: -60px;display: none;margin-top: 15px;"> 
+		 							<div class="selUpDailogImg1"></div> 
+		 							<div class="selUpDailogCheck"> 
+	 									<p>学生姓名</p>
+	 									<input type="text" class="tshas1{{$index}}" name="" id="" value="" style="width: 120px;height: 30px;margin-top: 10px;"/>
+	 									<p style="margin-top: 10px;">职位信息</p>
+	 									<input type="text" class="tshasy1{{$index}}" name="" id="" value="" style="width: 120px;height: 30px;margin-top: 10px;"/>
+	 									<div class="confirm " dataMark="1" data="{{$index}}" style="width: 80px;height: 30px;color: #fff;background: #1E70E9;margin: 20px auto;line-height: 30px;text-align: center;">
+	 										确定
+	 									</div>
+
+		 							</div> 
+		 						</div>
+                            </li>
+                        </ul>
+						<div class="next-btn blue" style="height:40px;margin: 0px auto;display: block;text-align: center;" ng-click="finish()">
+							完成
+						</div>                        
+                    </div>
+                    <!--40剧院式-->
+                    <div ng-show="zwType=='2'" class="showType2">
+                    	<div style="line-height:80px;width:60px;margin-left:45%;color: #434549;">座位表</div>
+                        <ul class="clearfix" style="">
+                            <li class="seatz seat11" style="" ng-repeat="item in seatList track by $index">
+                                <div data="{{item.siteCode}}" class="imgchec">
+                                    <img src="img/home/hui.png" class="imgH" style="width: 20px;height: 16px;" alt="" ng-show="item.siteCode=='0'">
+                                    <img src="img/home/lan.png" class="imgH" style="width: 20px;height: 16px;" alt="" ng-show="item.siteCode!='0'">
+                                </div>
+                                <div style="font-size: 12px;"  ng-mouseover="mouseDailog($index,item.name)" class="fontH fontH1 tsha2{{$index}}">{{item.name}}</div>
+                                <div style="font-size: 12px;"  class="fontH fontH2 tshay2{{$index}}">{{item.jobName}}</div>
+		 						<div class="selUpDailog" style="position: absolute;padding: 0;margin-left: -60px;display: none;margin-top: 15px;"> 
+		 							<div class="selUpDailogImg1"></div> 
+		 							<div class="selUpDailogCheck"> 
+	 									<p>学生姓名</p>
+	 									<input type="text" class="tshas2{{$index}}" name="" id="" value="" style="width: 120px;height: 30px;margin-top: 10px;"/>
+	 									<p style="margin-top: 10px;">职位信息</p>
+	 									<input type="text" class="tshasy2{{$index}}" name="" id="" value="" style="width: 120px;height: 30px;margin-top: 10px;"/>
+	 									<div class="confirm " dataMark="2" data="{{$index}}" style="width: 80px;height: 30px;color: #fff;background: #1E70E9;margin: 20px auto;line-height: 30px;text-align: center;">
+	 										确定
+	 									</div>
+
+		 							</div> 
+		 						</div>
+                            </li>                            
+                        </ul>
+                        <div class="next-btn blue" style="height:40px;margin: 0px auto;display: block;text-align: center;" ng-click="finish()">
+							完成
+						</div> 
+                    </div>
+                    <!--40马蹄式-->
+                    <div ng-show="zwType=='3'" class="showType3">
+                    	<div style="line-height:80px;width:60px;margin-left:45%;color: #434549;">座位表</div>
+                        <ul class="clearfix" style="">
+                            <li class="seatz seat22" style="width: 46px;" ng-repeat="item in seatList track by $index">
+                                <div data="{{item.siteCode}}" class="imgchec">
+                                    <img src="img/home/hui.png" class="imgH" style="width: 20px;height: 16px;" alt="" ng-show="item.siteCode=='0'">
+                                    <img src="img/home/lan.png" class="imgH" style="width: 20px;height: 16px;" alt="" ng-show="item.siteCode!='0'">
+                                </div>
+                                <div style="font-size: 12px;"  ng-mouseover="mouseDailog($index,item.name)" class="fontH fontH1 tsha3{{$index}}">{{item.name}}</div>
+                                <div style="font-size: 12px;"  class="fontH fontH2 tshay3{{$index}}">{{item.jobName}}</div>
+		 						<div class="selUpDailog" style="position: absolute;padding: 0;margin-left: -60px;display: none;margin-top: 15px;"> 
+		 							<div class="selUpDailogImg1"></div> 
+		 							<div class="selUpDailogCheck"> 
+	 									<p>学生姓名</p>
+	 									<input type="text" class="tshas3{{$index}}" name="" id="" value="" style="width: 120px;height: 30px;margin-top: 10px;"/>
+	 									<p style="margin-top: 10px;">职位信息</p>
+	 									<input type="text" class="tshasy3{{$index}}" name="" id="" value="" style="width: 120px;height: 30px;margin-top: 10px;"/>
+	 									<div class="confirm " dataMark="3" data="{{$index}}" style="width: 80px;height: 30px;color: #fff;background: #1E70E9;margin: 20px auto;line-height: 30px;text-align: center;">
+	 										确定
+	 									</div>
+
+		 							</div> 
+		 						</div>
+                            </li> 
+                        </ul>
+                        <div class="next-btn blue" style="height:40px;margin: 0px auto;display: block;text-align: center;" ng-click="finish()">
+							完成
+						</div> 
+                    </div>                    
+                    <!--40四方式-->
+                    <div ng-show="zwType=='4'" class="showType4">
+                    	<div style="line-height:80px;width:60px;margin-left:45%;color: #434549;">座位表</div>
+                        <ul class="clearfix" style="">
+                            <li class="seatz seat33" style="width: 69px;" ng-repeat="item in seatList track by $index">
+                                <div data="{{item.siteCode}}" class="imgchec">
+                                    <img src="img/home/hui.png" class="imgH" style="width: 20px;height: 16px;" alt="" ng-show="item.siteCode=='0'">
+                                    <img src="img/home/lan.png" class="imgH" style="width: 20px;height: 16px;" alt="" ng-show="item.siteCode!='0'">
+                                </div>
+                                <div style="font-size: 12px;"  ng-mouseover="mouseDailog($index,item.name)" class="fontH fontH1 tsha4{{$index}}">{{item.name}}</div>
+                                <div style="font-size: 12px;"  class="fontH fontH2 tshay4{{$index}}">{{item.jobName}}</div>
+		 						<div class="selUpDailog" style="position: absolute;padding: 0;margin-left: -60px;display: none;margin-top: 15px;"> 
+		 							<div class="selUpDailogImg1"></div> 
+		 							<div class="selUpDailogCheck"> 
+	 									<p>学生姓名</p>
+	 									<input type="text" class="tshas4{{$index}}" name="" id="" value="" style="width: 120px;height: 30px;margin-top: 10px;"/>
+	 									<p style="margin-top: 10px;">职位信息</p>
+	 									<input type="text" class="tshasy4{{$index}}" name="" id="" value="" style="width: 120px;height: 30px;margin-top: 10px;"/>
+	 									<div class="confirm" dataMark="4" data="{{$index}}" style="width: 80px;height: 30px;color: #fff;background: #1E70E9;margin: 20px auto;line-height: 30px;text-align: center;">
+	 										确定
+	 									</div>
+
+		 							</div> 
+		 						</div>
+                            </li> 
+                        </ul>
+                        <div class="next-btn blue" style="height:40px;margin: 0px auto;display: block;text-align: center;" ng-click="finish()">
+							完成
+						</div> 
+                    </div>  
+                    <!--40小组式-->
+                    <div ng-show="zwType=='5'" class="showType5">
+                    	<div style="line-height:80px;width:60px;margin-left:45%;color: #434549;">座位表</div>
+                        <ul class="clearfix" style="">
+                            <li class="seatz seat44" style="" ng-repeat="item in seatList track by $index">
+                                <div data="{{item.siteCode}}" class="imgchec">
+                                    <img src="img/home/hui.png" class="imgH" style="width: 20px;height: 16px;" alt="" ng-show="item.siteCode=='0'">
+                                    <img src="img/home/lan.png" class="imgH" style="width: 20px;height: 16px;" alt="" ng-show="item.siteCode!='0'">
+                                </div>
+                                <div style="font-size: 12px;"  ng-mouseover="mouseDailog($index,item.name)" class="fontH fontH1 tsha5{{$index}}">{{item.name}}</div>
+                                <div style="font-size: 12px;"  class="fontH fontH2 tshay5{{$index}}">{{item.jobName}}</div>
+		 						<div class="selUpDailog" style="position: absolute;padding: 0;margin-left: -60px;display: none;margin-top: 15px;"> 
+		 							<div class="selUpDailogImg1"></div> 
+		 							<div class="selUpDailogCheck"> 
+	 									<p>学生姓名</p>
+	 									<input type="text" class="tshas5{{$index}}" name="" id="" value="" style="width: 120px;height: 30px;margin-top: 10px;"/>
+	 									<p style="margin-top: 10px;">职位信息</p>
+	 									<input type="text" class="tshasy5{{$index}}" name="" id="" value="" style="width: 120px;height: 30px;margin-top: 10px;"/>
+	 									<div class="confirm " dataMark="5" data="{{$index}}" style="width: 80px;height: 30px;color: #fff;background: #1E70E9;margin: 20px auto;line-height: 30px;text-align: center;">
+	 										确定
+	 									</div>
+
+		 							</div> 
+		 						</div>
+                            </li> 
+                        </ul>
+                        <div class="next-btn blue" style="height:40px;margin: 0px auto;display: block;text-align: center;" ng-click="finish()">
+							完成
+						</div> 
+                    </div>  
+                    <!--40圆环式-->
+                    <div ng-show="zwType=='6'">
+                    	<div style="line-height:80px;width:60px;margin-left:45%;color: #434549;">座位表</div>
+                        <ul class="clearfix" style="">
+                            <li class="seat seat5" ng-repeat="item in seatList track by $index">
+                                <div>
+                                    <img src="img/home/hui.png" alt="">
+                                </div>
+                                <div>张三丰</div>
+                            </li>
+                        </ul>
+                        <div class="next-btn blue" style="height:40px;margin: 0px auto;display: block;text-align: center;" ng-click="finish()">
+							完成
+						</div> 
+                        
+                    </div> 
+
+
+                </div>
+            </div>
+
+			<!--<div class="next-btn blue" style="margin: -10px auto;display: block;text-align: center;" ng-click="finish()">
+				完成
+			</div>-->
+			
+    	</div>
+    </div>
+    <div ng-include="'html/blocks/footer.html'" class="foot">
+    </div>
+</div>
